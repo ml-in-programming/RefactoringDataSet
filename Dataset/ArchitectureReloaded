@@ -1,0 +1,2435 @@
+{
+  "repository": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+  "detectedRefactorings": [
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "5ead40685742c83be62e8fbf585d77408fbe90e3",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.utils.RefactoringUtil",
+      "originalMethodName": "toMap",
+      "movedMethodName": "toMap",
+      "originalParamsClassesQualifiedNames": [
+        "List\u003cCalculatedRefactoring\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "List\u003cCalculatedRefactoring\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "a1c034c51a795767e7aec5b9dab0c5859c01e368",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.utils.PSIUtil",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.utils.PsiSearchUtil",
+      "originalMethodName": "getHumanReadableName",
+      "movedMethodName": "getHumanReadableName",
+      "originalParamsClassesQualifiedNames": [
+        "PsiElement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiElement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "a1c034c51a795767e7aec5b9dab0c5859c01e368",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.ui.ClassRefactoringPanel",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.utils.PsiSearchUtil",
+      "originalMethodName": "openDefinition",
+      "movedMethodName": "openDefinition",
+      "originalParamsClassesQualifiedNames": [
+        "PsiMember",
+        "AnalysisScope"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiMember",
+        "AnalysisScope"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "feba50f4b45e1d6795cc391e66703e9bf9795cf6",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.refactoring.MoveToClassRefactoring",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.refactoring.Refactoring",
+      "originalMethodName": "getEntity",
+      "movedMethodName": "getEntity",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "feba50f4b45e1d6795cc391e66703e9bf9795cf6",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.refactoring.MoveToClassRefactoring",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.refactoring.Refactoring",
+      "originalMethodName": "getEntityName",
+      "movedMethodName": "getEntityName",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "feba50f4b45e1d6795cc391e66703e9bf9795cf6",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.refactoring.MoveToClassRefactoring",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.refactoring.Refactoring",
+      "originalMethodName": "getTargetName",
+      "movedMethodName": "getTargetName",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "feba50f4b45e1d6795cc391e66703e9bf9795cf6",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.refactoring.MoveToClassRefactoring",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.refactoring.Refactoring",
+      "originalMethodName": "equals",
+      "movedMethodName": "equals",
+      "originalParamsClassesQualifiedNames": [
+        "Object"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Object"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "feba50f4b45e1d6795cc391e66703e9bf9795cf6",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.refactoring.MoveToClassRefactoring",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.refactoring.Refactoring",
+      "originalMethodName": "hashCode",
+      "movedMethodName": "hashCode",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "feba50f4b45e1d6795cc391e66703e9bf9795cf6",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.refactoring.MoveToClassRefactoring",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.refactoring.Refactoring",
+      "originalMethodName": "toString",
+      "movedMethodName": "toString",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "cacb622514216124d8990737185af3b0ea4c1a7d",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.CCDA.Executor",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.CCDA",
+      "originalMethodName": "init",
+      "movedMethodName": "init",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "cacb622514216124d8990737185af3b0ea4c1a7d",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.CCDA.Executor",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.CCDA",
+      "originalMethodName": "buildGraph",
+      "movedMethodName": "buildGraph",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "cacb622514216124d8990737185af3b0ea4c1a7d",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.CCDA.Executor",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.CCDA",
+      "originalMethodName": "max",
+      "movedMethodName": "max",
+      "originalParamsClassesQualifiedNames": [
+        "Holder",
+        "Holder"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Holder",
+        "Holder"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "cacb622514216124d8990737185af3b0ea4c1a7d",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.CCDA.Executor",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.CCDA",
+      "originalMethodName": "calculateQualityIndex",
+      "movedMethodName": "calculateQualityIndex",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "2f755d0116831d32673f9daf0f41e44e4eadcc04",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.refactoring.CalculatedRefactoring",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.refactoring.Refactoring",
+      "originalMethodName": "getAccuracy",
+      "movedMethodName": "getAccuracy",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "1ff51c77751b8387111fc7fe776b4f17b394d2bd",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.HAC.HACExecutor",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.HAC",
+      "originalMethodName": "findTriples",
+      "movedMethodName": "findTriples",
+      "originalParamsClassesQualifiedNames": [
+        "Community",
+        "List\u003cTriple\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Community",
+        "List\u003cTriple\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "1ff51c77751b8387111fc7fe776b4f17b394d2bd",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.HAC.HACExecutor",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.HAC",
+      "originalMethodName": "mergeCommunities",
+      "movedMethodName": "mergeCommunities",
+      "originalParamsClassesQualifiedNames": [
+        "Community",
+        "Community"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Community",
+        "Community"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "1ff51c77751b8387111fc7fe776b4f17b394d2bd",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.HAC.HACExecutor",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.HAC",
+      "originalMethodName": "getDistance",
+      "movedMethodName": "getDistance",
+      "originalParamsClassesQualifiedNames": [
+        "Triple"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Triple"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "1ff51c77751b8387111fc7fe776b4f17b394d2bd",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.HAC.HACExecutor",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.HAC",
+      "originalMethodName": "getTripleID",
+      "movedMethodName": "getTripleID",
+      "originalParamsClassesQualifiedNames": [
+        "Community",
+        "Community"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Community",
+        "Community"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "1ff51c77751b8387111fc7fe776b4f17b394d2bd",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.HAC.HACExecutor",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.HAC",
+      "originalMethodName": "insertTriple",
+      "movedMethodName": "insertTriple",
+      "originalParamsClassesQualifiedNames": [
+        "Triple"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Triple"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "1ff51c77751b8387111fc7fe776b4f17b394d2bd",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.HAC.HACExecutor",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.HAC",
+      "originalMethodName": "insertTripleIfNecessary",
+      "movedMethodName": "insertTripleIfNecessary",
+      "originalParamsClassesQualifiedNames": [
+        "double",
+        "Community",
+        "Community"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "double",
+        "Community",
+        "Community"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "1ff51c77751b8387111fc7fe776b4f17b394d2bd",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.HAC.HACExecutor",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.HAC",
+      "originalMethodName": "invalidateTriple",
+      "movedMethodName": "invalidateTriple",
+      "originalParamsClassesQualifiedNames": [
+        "Triple"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Triple"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "2035f7fda9aa106262e9fd7f62e52a7344ec4698",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.attributes.ClassInnerEntityAttributes",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.attributes.FieldAttributes",
+      "originalMethodName": "getContainingClassAttributes",
+      "movedMethodName": "getContainingClassAttributes",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "2035f7fda9aa106262e9fd7f62e52a7344ec4698",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.attributes.ClassInnerEntityAttributes",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.attributes.MethodAttributes",
+      "originalMethodName": "getContainingClassAttributes",
+      "movedMethodName": "getContainingClassAttributes",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "34ed260fffd893eeb6b60e2734df2baa82fb1cc4",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.entity.ClassInnerEntity",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.entity.FieldEntity",
+      "originalMethodName": "getContainingClass",
+      "movedMethodName": "getContainingClass",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "34ed260fffd893eeb6b60e2734df2baa82fb1cc4",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.entity.ClassInnerEntity",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.entity.MethodEntity",
+      "originalMethodName": "getContainingClass",
+      "movedMethodName": "getContainingClass",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "3cc81b991fbeeb63921f0908b5a29882ad75cf63",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.extraction.refactoring.JBRefactoringTextRepresentation",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.extraction.refactoring.RefactoringTextRepresentation",
+      "originalMethodName": "isOfGivenMethod",
+      "movedMethodName": "isOfGivenMethod",
+      "originalParamsClassesQualifiedNames": [
+        "PsiMethod"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiMethod"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "3cc81b991fbeeb63921f0908b5a29882ad75cf63",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.extraction.refactoring.JBRefactoringTextRepresentation",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.extraction.refactoring.RefactoringTextRepresentation",
+      "originalMethodName": "isToGivenPsiClass",
+      "movedMethodName": "isToGivenPsiClass",
+      "originalParamsClassesQualifiedNames": [
+        "PsiClass"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiClass"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "3cc81b991fbeeb63921f0908b5a29882ad75cf63",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.extraction.refactoring.JMoveRefactoringTextRepresentation",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.extraction.refactoring.RefactoringTextRepresentation",
+      "originalMethodName": "isToGivenPsiClass",
+      "movedMethodName": "isToGivenPsiClass",
+      "originalParamsClassesQualifiedNames": [
+        "PsiClass"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiClass"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "3cc81b991fbeeb63921f0908b5a29882ad75cf63",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.extraction.refactoring.RefactoringUtils",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.extraction.refactoring.RefactoringTextRepresentation",
+      "originalMethodName": "getRefactoringsToGivenClass",
+      "movedMethodName": "getRefactoringsToGivenClass",
+      "originalParamsClassesQualifiedNames": [
+        "List\u003cRefactoringTextRepresentation\u003e",
+        "PsiClass"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "List\u003cRefactoringTextRepresentation\u003e",
+        "PsiClass"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "67beee3d7e842cc0ca849c71e7d091240e5a88d3",
+      "targetClassQualifiedName": "com.sixrr.metrics.utils.MethodUtils",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.utils.MethodUtils",
+      "originalMethodName": "isPublic",
+      "movedMethodName": "isPublic",
+      "originalParamsClassesQualifiedNames": [
+        "PsiMethod"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiMethod"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "67beee3d7e842cc0ca849c71e7d091240e5a88d3",
+      "targetClassQualifiedName": "com.sixrr.metrics.utils.MethodUtils",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.utils.MethodUtils",
+      "originalMethodName": "extractMethodDeclaration",
+      "movedMethodName": "extractMethodDeclaration",
+      "originalParamsClassesQualifiedNames": [
+        "PsiMethod"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiMethod"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "6fbaac2ae2ccc3c1cf7118bbaef4f20544770caa",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.ScopeAbstractTest",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "getTestDataPath",
+      "movedMethodName": "getTestDataPath",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "6fbaac2ae2ccc3c1cf7118bbaef4f20544770caa",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.ScopeAbstractTest",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "createScope",
+      "movedMethodName": "createScope",
+      "originalParamsClassesQualifiedNames": [
+        "String[]"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "String[]"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "6fbaac2ae2ccc3c1cf7118bbaef4f20544770caa",
+      "targetClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.ScopeAbstractTest",
+      "originalClassQualifiedName": "org.jetbrains.research.groups.ml_methods.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "loadFile",
+      "movedMethodName": "loadFile",
+      "originalParamsClassesQualifiedNames": [
+        "String"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "String"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "c3c57080345896a0e999f397d9d4a48a164b3e70",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.refactoring.MoveToClassRefactoring",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.refactoring.MoveFieldRefactoring",
+      "originalMethodName": "getTargetClass",
+      "movedMethodName": "getTargetClass",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "c3c57080345896a0e999f397d9d4a48a164b3e70",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.refactoring.MoveToClassRefactoring",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.refactoring.MoveMethodRefactoring",
+      "originalMethodName": "getTargetClass",
+      "movedMethodName": "getTargetClass",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "628d157991b86051cc03f34a8126623e1035b64b",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.ClassEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.attributes.ClassAttributes",
+      "originalMethodName": "isMovable",
+      "movedMethodName": "isMovable",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "628d157991b86051cc03f34a8126623e1035b64b",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.FieldEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.attributes.FieldAttributes",
+      "originalMethodName": "isMovable",
+      "movedMethodName": "isMovable",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "628d157991b86051cc03f34a8126623e1035b64b",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.FieldEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.attributes.MethodAttributes",
+      "originalMethodName": "isMovable",
+      "movedMethodName": "isMovable",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.ClassOldEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.ClassEntity",
+      "originalMethodName": "getClassName",
+      "movedMethodName": "getClassName",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.ClassOldEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.ClassEntity",
+      "originalMethodName": "removeFromClass",
+      "movedMethodName": "removeFromClass",
+      "originalParamsClassesQualifiedNames": [
+        "String"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "String"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.ClassOldEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.ClassEntity",
+      "originalMethodName": "addToClass",
+      "movedMethodName": "addToClass",
+      "originalParamsClassesQualifiedNames": [
+        "String"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "String"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.ClassOldEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.ClassEntity",
+      "originalMethodName": "isField",
+      "movedMethodName": "isField",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.FieldOldEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.FieldEntity",
+      "originalMethodName": "getCategory",
+      "movedMethodName": "getCategory",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.FieldOldEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.FieldEntity",
+      "originalMethodName": "getClassName",
+      "movedMethodName": "getClassName",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.FieldOldEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.FieldEntity",
+      "originalMethodName": "isField",
+      "movedMethodName": "isField",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.MethodOldEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.MethodEntity",
+      "originalMethodName": "getClassName",
+      "movedMethodName": "getClassName",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.ClassOldEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.MethodEntity",
+      "originalMethodName": "isField",
+      "movedMethodName": "isField",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.ClassEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.EntitiesStorage.ClassEntity",
+      "originalMethodName": "getIdentifier",
+      "movedMethodName": "getIdentifier",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.ClassEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.EntitiesStorage.ClassEntity",
+      "originalMethodName": "getPsiClass",
+      "movedMethodName": "getPsiClass",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.FieldEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.EntitiesStorage.FieldEntity",
+      "originalMethodName": "getIdentifier",
+      "movedMethodName": "getIdentifier",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.FieldEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.EntitiesStorage.FieldEntity",
+      "originalMethodName": "getMetricCategory",
+      "movedMethodName": "getMetricCategory",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.FieldEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.EntitiesStorage.FieldEntity",
+      "originalMethodName": "getPsiField",
+      "movedMethodName": "getPsiField",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.MethodEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.EntitiesStorage.MethodEntity",
+      "originalMethodName": "getIdentifier",
+      "movedMethodName": "getIdentifier",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d08056a53229cd4f684522a6de057c1876a28962",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.MethodEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.EntitiesStorage.MethodEntity",
+      "originalMethodName": "getPsiMethod",
+      "movedMethodName": "getPsiMethod",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "07e1df9d91c94d767cb42810a47ffd2aadcf8050",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.AbstractAlgorithm",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.Algorithm",
+      "originalMethodName": "Algorithm",
+      "movedMethodName": "AbstractAlgorithm",
+      "originalParamsClassesQualifiedNames": [
+        "String",
+        "boolean"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "String",
+        "boolean"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "07e1df9d91c94d767cb42810a47ffd2aadcf8050",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.AbstractAlgorithm",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.Algorithm",
+      "originalMethodName": "execute",
+      "movedMethodName": "oldExecute",
+      "originalParamsClassesQualifiedNames": [
+        "EntitySearchResult",
+        "ExecutorService",
+        "boolean"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "EntitySearchResult",
+        "ExecutorService",
+        "boolean"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "07e1df9d91c94d767cb42810a47ffd2aadcf8050",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.AbstractAlgorithm",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.Algorithm",
+      "originalMethodName": "reportProgress",
+      "movedMethodName": "reportProgress",
+      "originalParamsClassesQualifiedNames": [
+        "double",
+        "ExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "double",
+        "ExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "07e1df9d91c94d767cb42810a47ffd2aadcf8050",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.AbstractAlgorithm",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.Algorithm",
+      "originalMethodName": "runParallel",
+      "movedMethodName": "runParallel",
+      "originalParamsClassesQualifiedNames": [
+        "List\u003cV\u003e",
+        "ExecutionContext",
+        "Supplier\u003cA\u003e",
+        "BiFunction\u003cV,A,A\u003e",
+        "BinaryOperator\u003cA\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "List\u003cV\u003e",
+        "ExecutionContext",
+        "Supplier\u003cA\u003e",
+        "BiFunction\u003cV,A,A\u003e",
+        "BinaryOperator\u003cA\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "07e1df9d91c94d767cb42810a47ffd2aadcf8050",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.AbstractAlgorithm",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.Algorithm",
+      "originalMethodName": "splitValues",
+      "movedMethodName": "splitValues",
+      "originalParamsClassesQualifiedNames": [
+        "List\u003cT\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "List\u003cT\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "07e1df9d91c94d767cb42810a47ffd2aadcf8050",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.AbstractAlgorithm",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.Algorithm",
+      "originalMethodName": "getResult",
+      "movedMethodName": "getResult",
+      "originalParamsClassesQualifiedNames": [
+        "Future\u003cT\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Future\u003cT\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "1d728909dbf8c434aa6d9f59caaa05a1b662b292",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.methodCalculators.ExplicitModifierMethodCalculator",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.methodCalculators.IsStaticMethodCalculator",
+      "originalMethodName": "createVisitor",
+      "movedMethodName": "createVisitor",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkStructure",
+      "movedMethodName": "checkStructure",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext",
+        "int",
+        "int",
+        "int"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext",
+        "int",
+        "int",
+        "int"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkMoveMethod",
+      "movedMethodName": "checkMoveMethod",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkCallFromNested",
+      "movedMethodName": "checkCallFromNested",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkCircularDependency",
+      "movedMethodName": "checkCircularDependency",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkCrossReferencesMethods",
+      "movedMethodName": "checkCrossReferencesMethods",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkDontMoveAbstract",
+      "movedMethodName": "checkDontMoveAbstract",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkDontMoveConstructor",
+      "movedMethodName": "checkDontMoveConstructor",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkDontMoveOverridden",
+      "movedMethodName": "checkDontMoveOverridden",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkMoveField",
+      "movedMethodName": "checkMoveField",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkMoveTogether",
+      "movedMethodName": "checkMoveTogether",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkPriority",
+      "movedMethodName": "checkPriority",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkRecursiveMethod",
+      "movedMethodName": "checkRecursiveMethod",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkReferencesOnly",
+      "movedMethodName": "checkReferencesOnly",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkTriangularDependence",
+      "movedMethodName": "checkTriangularDependence",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkMobilePhoneNoFeatureEnvy",
+      "movedMethodName": "checkMobilePhoneNoFeatureEnvy",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkMobilePhoneWithFeatureEnvy",
+      "movedMethodName": "checkMobilePhoneWithFeatureEnvy",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkMovieRentalStoreNoFeatureEnvy",
+      "movedMethodName": "checkMovieRentalStoreNoFeatureEnvy",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkMovieRentalStoreWithFeatureEnvy",
+      "movedMethodName": "checkMovieRentalStoreWithFeatureEnvy",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkCallFromLambda",
+      "movedMethodName": "checkCallFromLambda",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkStaticFactoryMethods",
+      "movedMethodName": "checkStaticFactoryMethods",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "05c56cbc911f3ddbb67086e6a0df675167cae369",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.TestCasesCheckers",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.AlgorithmAbstractTest",
+      "originalMethodName": "checkStaticFactoryMethodsWeak",
+      "movedMethodName": "checkStaticFactoryMethodsWeak",
+      "originalParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "RefactoringExecutionContext"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d6cf89175c15e25046b397c39960ff0e58b96f20",
+      "targetClassQualifiedName": "org.ml_methods_group.utils.AlgorithmsUtil",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.Algorithm",
+      "originalMethodName": "combineMaps",
+      "movedMethodName": "combineMaps",
+      "originalParamsClassesQualifiedNames": [
+        "Map\u003cK,V\u003e",
+        "Map\u003cK,V\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Map\u003cK,V\u003e",
+        "Map\u003cK,V\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d6cf89175c15e25046b397c39960ff0e58b96f20",
+      "targetClassQualifiedName": "org.ml_methods_group.utils.AlgorithmsUtil",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.Algorithm",
+      "originalMethodName": "combineLists",
+      "movedMethodName": "combineLists",
+      "originalParamsClassesQualifiedNames": [
+        "List\u003cV\u003e",
+        "List\u003cV\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "List\u003cV\u003e",
+        "List\u003cV\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "c9ea0f0d4d006cbc7c5054488fd95bf2b2ccfca0",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.properties.finder_strategy.NewStrategy",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.PropertiesFinder.EntityVisitor",
+      "originalMethodName": "isRelation",
+      "movedMethodName": "isRelation",
+      "originalParamsClassesQualifiedNames": [
+        "PsiElement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiElement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "12f1a56501d251b35c90bafdf279f065931ffc5a",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.ClassEntity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.Entity",
+      "originalMethodName": "removeFromClass",
+      "movedMethodName": "removeFromClass",
+      "originalParamsClassesQualifiedNames": [
+        "String"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "String"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "de45c62be0abe174e2e2c55eb87af3636a566acc",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.Algorithm",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.ARI",
+      "originalMethodName": "combineMaps",
+      "movedMethodName": "combineMaps",
+      "originalParamsClassesQualifiedNames": [
+        "Map\u003cK,V\u003e",
+        "Map\u003cK,V\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Map\u003cK,V\u003e",
+        "Map\u003cK,V\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "de45c62be0abe174e2e2c55eb87af3636a566acc",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.Algorithm",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.HAC",
+      "originalMethodName": "combineLists",
+      "movedMethodName": "combineLists",
+      "originalParamsClassesQualifiedNames": [
+        "List\u003cT\u003e",
+        "List\u003cT\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "List\u003cV\u003e",
+        "List\u003cV\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "f7e5d9b0c5d10b18314399a0073eb1738da8fd14",
+      "targetClassQualifiedName": "org.ml_methods_group.algorithm.entity.Entity",
+      "originalClassQualifiedName": "org.ml_methods_group.algorithm.entity.MethodEntity",
+      "originalMethodName": "isOverriding",
+      "movedMethodName": "isMovable",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "ba91117831a766415f230a452784f17a34583941",
+      "targetClassQualifiedName": "org.ml_methods_group.utils.PsiSearchUtil",
+      "originalClassQualifiedName": "org.ml_methods_group.utils.RefactoringUtil",
+      "originalMethodName": "getHumanReadableName",
+      "movedMethodName": "getHumanReadableName",
+      "originalParamsClassesQualifiedNames": [
+        "PsiElement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiElement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "93e055951de8976dddd1a08235474a64fa376e32",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.MethodsCohesionUtils",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.classCalculators.LackOfCohesionOfMethodsClassCalculator",
+      "originalMethodName": "calculateComponents",
+      "movedMethodName": "calculateComponents",
+      "originalParamsClassesQualifiedNames": [
+        "Set\u003cPsiMethod\u003e",
+        "Map\u003cPsiMethod,Set\u003cPsiField\u003e\u003e",
+        "Map\u003cPsiMethod,Set\u003cPsiMethod\u003e\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Set\u003cPsiMethod\u003e",
+        "Map\u003cPsiMethod,Set\u003cPsiField\u003e\u003e",
+        "Map\u003cPsiMethod,Set\u003cPsiMethod\u003e\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "93e055951de8976dddd1a08235474a64fa376e32",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.MethodsCohesionUtils",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.classCalculators.LackOfCohesionOfMethodsClassCalculator",
+      "originalMethodName": "calculateFieldUsage",
+      "movedMethodName": "calculateFieldUsage",
+      "originalParamsClassesQualifiedNames": [
+        "Set\u003cPsiMethod\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Set\u003cPsiMethod\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "93e055951de8976dddd1a08235474a64fa376e32",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.MethodsCohesionUtils",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.classCalculators.LackOfCohesionOfMethodsClassCalculator",
+      "originalMethodName": "calculateUsedFields",
+      "movedMethodName": "calculateUsedFields",
+      "originalParamsClassesQualifiedNames": [
+        "PsiMethod"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiMethod"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "93e055951de8976dddd1a08235474a64fa376e32",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.MethodsCohesionUtils",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.classCalculators.LackOfCohesionOfMethodsClassCalculator",
+      "originalMethodName": "calculateMethodLinkage",
+      "movedMethodName": "calculateMethodLinkage",
+      "originalParamsClassesQualifiedNames": [
+        "Set\u003cPsiMethod\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Set\u003cPsiMethod\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "93e055951de8976dddd1a08235474a64fa376e32",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.MethodsCohesionUtils",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.classCalculators.LackOfCohesionOfMethodsClassCalculator",
+      "originalMethodName": "calculateLinkedMethods",
+      "movedMethodName": "calculateLinkedMethods",
+      "originalParamsClassesQualifiedNames": [
+        "PsiMethod",
+        "Set\u003cPsiMethod\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiMethod",
+        "Set\u003cPsiMethod\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "d8fd6888ed17a0bfce4b01d7c65b318fe005d05c",
+      "targetClassQualifiedName": "vector.model.entity.Entity",
+      "originalClassQualifiedName": "vector.model.entity.MethodEntity",
+      "originalMethodName": "processEntity",
+      "movedMethodName": "processEntity",
+      "originalParamsClassesQualifiedNames": [
+        "String",
+        "MetricCategory",
+        "MetricsResult",
+        "MetricsRun",
+        "double[]"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "String",
+        "MetricCategory",
+        "MetricsResult",
+        "MetricsRun",
+        "double[]"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "9730e7362175ece29fecb7aebc7f03c673a0a016",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.classCalculators.MethodPairsCountClassCalculator",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.classCalculators.TightClassCouplingCalculator",
+      "originalMethodName": "createVisitor",
+      "movedMethodName": "createVisitor",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "e17ec6a6a3564935366e2bc2c667ed1c697d3daf",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.classCalculators.FanClassCalculator",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.classCalculators.FanInClassCalculator",
+      "originalMethodName": "endMetricsRun",
+      "movedMethodName": "endMetricsRun",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "e17ec6a6a3564935366e2bc2c667ed1c697d3daf",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.classCalculators.FanClassCalculator",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.classCalculators.FanOutClassCalculator",
+      "originalMethodName": "endMetricsRun",
+      "movedMethodName": "endMetricsRun",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "e846871c29811ee95d579cebf77a4087be73ef30",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependencyMapImpl",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependentsMapImpl",
+      "originalMethodName": "calculateDependents",
+      "movedMethodName": "calculateDependents",
+      "originalParamsClassesQualifiedNames": [
+        "PsiClass"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiClass"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "e846871c29811ee95d579cebf77a4087be73ef30",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependencyMapImpl",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependentsMapImpl",
+      "originalMethodName": "getStrengthForDependent",
+      "movedMethodName": "getStrengthForDependent",
+      "originalParamsClassesQualifiedNames": [
+        "PsiClass",
+        "PsiClass"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiClass",
+        "PsiClass"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "e846871c29811ee95d579cebf77a4087be73ef30",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependencyMapImpl",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependentsMapImpl",
+      "originalMethodName": "calculatePackageDependents",
+      "movedMethodName": "calculatePackageDependents",
+      "originalParamsClassesQualifiedNames": [
+        "PsiClass"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiClass"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "e846871c29811ee95d579cebf77a4087be73ef30",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependencyMapImpl",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependentsMapImpl",
+      "originalMethodName": "calculatePackageToPackageDependents",
+      "movedMethodName": "calculatePackageToPackageDependents",
+      "originalParamsClassesQualifiedNames": [
+        "PsiPackage"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiPackage"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "e846871c29811ee95d579cebf77a4087be73ef30",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependencyMapImpl",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependentsMapImpl",
+      "originalMethodName": "getStrengthForPackageDependent",
+      "movedMethodName": "getStrengthForPackageDependent",
+      "originalParamsClassesQualifiedNames": [
+        "PsiClass",
+        "PsiPackage"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiClass",
+        "PsiPackage"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "e846871c29811ee95d579cebf77a4087be73ef30",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependencyMapImpl",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependentsMapImpl",
+      "originalMethodName": "calculateTransitiveDependents",
+      "movedMethodName": "calculateTransitiveDependents",
+      "originalParamsClassesQualifiedNames": [
+        "PsiClass"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiClass"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "e846871c29811ee95d579cebf77a4087be73ef30",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependencyMapImpl",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependentsMapImpl",
+      "originalMethodName": "calculateTransitivePackageDependents",
+      "movedMethodName": "calculateTransitivePackageDependents",
+      "originalParamsClassesQualifiedNames": [
+        "PsiPackage"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiPackage"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "a585ba740a54aba3eb3eeec3f1a5c4b7fedd00e2",
+      "targetClassQualifiedName": "com.sixrr.metrics.profile.MetricsProfileRepository",
+      "originalClassQualifiedName": "com.sixrr.metrics.plugin.MetricsPluginApplicationImpl",
+      "originalMethodName": "getExportFiles",
+      "movedMethodName": "getExportFiles",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "a585ba740a54aba3eb3eeec3f1a5c4b7fedd00e2",
+      "targetClassQualifiedName": "com.sixrr.metrics.profile.MetricsProfileRepository",
+      "originalClassQualifiedName": "com.sixrr.metrics.plugin.MetricsPluginApplicationImpl",
+      "originalMethodName": "getPresentableName",
+      "movedMethodName": "getPresentableName",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "6f162bda8fc895c3975aac2827871ae756e35fa5",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.fileTypeMetrics.ElementCountFileTypeCalculator",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.fileTypeMetrics.LinesOfCodeFileTypeMetric.LinesOfCodeFileTypeCalculator",
+      "originalMethodName": "endMetricsRun",
+      "movedMethodName": "endMetricsRun",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "6f162bda8fc895c3975aac2827871ae756e35fa5",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.fileTypeMetrics.ElementCountFileTypeCalculator",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.fileTypeMetrics.NumFilesFileTypeMetric.NumFilesFileTypeCalculator",
+      "originalMethodName": "endMetricsRun",
+      "movedMethodName": "endMetricsRun",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "5f9804c6878e1124d1a23fd24ef00eec0afc1303",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.JavaMetricProvider",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.DefaultMetricProvider",
+      "originalMethodName": "initializeClassMetrics",
+      "movedMethodName": "initializeClassMetrics",
+      "originalParamsClassesQualifiedNames": [
+        "Collection\u003cMetric\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Collection\u003cMetric\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "5f9804c6878e1124d1a23fd24ef00eec0afc1303",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.JavaMetricProvider",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.DefaultMetricProvider",
+      "originalMethodName": "initializeInterfaceMetrics",
+      "movedMethodName": "initializeInterfaceMetrics",
+      "originalParamsClassesQualifiedNames": [
+        "Collection\u003cMetric\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Collection\u003cMetric\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "5f9804c6878e1124d1a23fd24ef00eec0afc1303",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.JavaMetricProvider",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.DefaultMetricProvider",
+      "originalMethodName": "initializeMethodMetrics",
+      "movedMethodName": "initializeMethodMetrics",
+      "originalParamsClassesQualifiedNames": [
+        "Collection\u003cMetric\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Collection\u003cMetric\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "5f9804c6878e1124d1a23fd24ef00eec0afc1303",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.JavaMetricProvider",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.DefaultMetricProvider",
+      "originalMethodName": "initializePackageMetrics",
+      "movedMethodName": "initializePackageMetrics",
+      "originalParamsClassesQualifiedNames": [
+        "Collection\u003cMetric\u003e"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "Collection\u003cMetric\u003e"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "24bb57e93009d17388335a67568cdca3d8c93214",
+      "targetClassQualifiedName": "com.sixrr.metrics.utils.JavaTestUtils",
+      "originalClassQualifiedName": "com.sixrr.metrics.utils.TestUtils",
+      "originalMethodName": "isJUnitTestCase",
+      "movedMethodName": "isJUnitTestCase",
+      "originalParamsClassesQualifiedNames": [
+        "PsiClass"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiClass"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "24bb57e93009d17388335a67568cdca3d8c93214",
+      "targetClassQualifiedName": "com.sixrr.metrics.utils.JavaTestUtils",
+      "originalClassQualifiedName": "com.sixrr.metrics.utils.TestUtils",
+      "originalMethodName": "isJUnitTestMethod",
+      "movedMethodName": "isJUnitTestMethod",
+      "originalParamsClassesQualifiedNames": [
+        "PsiMethod"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiMethod"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "24bb57e93009d17388335a67568cdca3d8c93214",
+      "targetClassQualifiedName": "com.sixrr.metrics.utils.JavaTestUtils",
+      "originalClassQualifiedName": "com.sixrr.metrics.utils.TestUtils",
+      "originalMethodName": "isJUnitAssertCall",
+      "movedMethodName": "isJUnitAssertCall",
+      "originalParamsClassesQualifiedNames": [
+        "PsiMethodCallExpression"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiMethodCallExpression"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "4644f6b5aca86a10a14d7a8edf3fa9a8a551522c",
+      "targetClassQualifiedName": "com.sixrr.metrics.profile.MetricsProfileRepository",
+      "originalClassQualifiedName": "com.sixrr.metrics.profile.MetricsProfileTemplate",
+      "originalMethodName": "loadMetricsFromProviders",
+      "movedMethodName": "loadMetricsFromProviders",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "4644f6b5aca86a10a14d7a8edf3fa9a8a551522c",
+      "targetClassQualifiedName": "com.sixrr.metrics.profile.MetricsProfileRepository",
+      "originalClassQualifiedName": "com.sixrr.metrics.profile.MetricsProfileTemplate",
+      "originalMethodName": "reconcile",
+      "movedMethodName": "reconcile",
+      "originalParamsClassesQualifiedNames": [
+        "MetricsProfile"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "MetricsProfile"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "4644f6b5aca86a10a14d7a8edf3fa9a8a551522c",
+      "targetClassQualifiedName": "com.sixrr.metrics.profile.MetricsProfileRepository",
+      "originalClassQualifiedName": "com.sixrr.metrics.profile.MetricsProfileTemplate",
+      "originalMethodName": "printMetricsDescriptions",
+      "movedMethodName": "printMetricsDescriptions",
+      "originalParamsClassesQualifiedNames": [],
+      "movedParamsClassesQualifiedNames": []
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.methodCalculators.ComplexityCalculator.Visitor",
+      "originalMethodName": "visitForStatement",
+      "movedMethodName": "visitForStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiForStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiForStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.AverageCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitForStatement",
+      "movedMethodName": "visitForStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiForStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiForStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.TotalCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitForStatement",
+      "movedMethodName": "visitForStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiForStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiForStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.AverageCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitForStatement",
+      "movedMethodName": "visitForStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiForStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiForStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.TotalCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitForStatement",
+      "movedMethodName": "visitForStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiForStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiForStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.projectCalculators.AverageCyclomaticComplexityProjectCalculator.Visitor",
+      "originalMethodName": "visitForStatement",
+      "movedMethodName": "visitForStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiForStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiForStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.projectCalculators.TotalCyclomaticComplexityProjectCalculator.Visitor",
+      "originalMethodName": "visitForStatement",
+      "movedMethodName": "visitForStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiForStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiForStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.methodCalculators.ComplexityCalculator.Visitor",
+      "originalMethodName": "visitForeachStatement",
+      "movedMethodName": "visitForeachStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiForeachStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiForeachStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.AverageCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitForeachStatement",
+      "movedMethodName": "visitForeachStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiForeachStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiForeachStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.TotalCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitForeachStatement",
+      "movedMethodName": "visitForeachStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiForeachStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiForeachStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.AverageCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitForeachStatement",
+      "movedMethodName": "visitForeachStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiForeachStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiForeachStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.TotalCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitForeachStatement",
+      "movedMethodName": "visitForeachStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiForeachStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiForeachStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.projectCalculators.AverageCyclomaticComplexityProjectCalculator.Visitor",
+      "originalMethodName": "visitForeachStatement",
+      "movedMethodName": "visitForeachStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiForeachStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiForeachStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.projectCalculators.TotalCyclomaticComplexityProjectCalculator.Visitor",
+      "originalMethodName": "visitForeachStatement",
+      "movedMethodName": "visitForeachStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiForeachStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiForeachStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.methodCalculators.ComplexityCalculator.Visitor",
+      "originalMethodName": "visitIfStatement",
+      "movedMethodName": "visitIfStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiIfStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiIfStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.AverageCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitIfStatement",
+      "movedMethodName": "visitIfStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiIfStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiIfStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.TotalCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitIfStatement",
+      "movedMethodName": "visitIfStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiIfStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiIfStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.AverageCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitIfStatement",
+      "movedMethodName": "visitIfStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiIfStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiIfStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.TotalCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitIfStatement",
+      "movedMethodName": "visitIfStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiIfStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiIfStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.projectCalculators.AverageCyclomaticComplexityProjectCalculator.Visitor",
+      "originalMethodName": "visitIfStatement",
+      "movedMethodName": "visitIfStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiIfStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiIfStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.projectCalculators.TotalCyclomaticComplexityProjectCalculator.Visitor",
+      "originalMethodName": "visitIfStatement",
+      "movedMethodName": "visitIfStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiIfStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiIfStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.methodCalculators.ComplexityCalculator.Visitor",
+      "originalMethodName": "visitDoWhileStatement",
+      "movedMethodName": "visitDoWhileStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiDoWhileStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiDoWhileStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.AverageCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitDoWhileStatement",
+      "movedMethodName": "visitDoWhileStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiDoWhileStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiDoWhileStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.TotalCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitDoWhileStatement",
+      "movedMethodName": "visitDoWhileStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiDoWhileStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiDoWhileStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.AverageCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitDoWhileStatement",
+      "movedMethodName": "visitDoWhileStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiDoWhileStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiDoWhileStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.TotalCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitDoWhileStatement",
+      "movedMethodName": "visitDoWhileStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiDoWhileStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiDoWhileStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.projectCalculators.AverageCyclomaticComplexityProjectCalculator.Visitor",
+      "originalMethodName": "visitDoWhileStatement",
+      "movedMethodName": "visitDoWhileStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiDoWhileStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiDoWhileStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.projectCalculators.TotalCyclomaticComplexityProjectCalculator.Visitor",
+      "originalMethodName": "visitDoWhileStatement",
+      "movedMethodName": "visitDoWhileStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiDoWhileStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiDoWhileStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.methodCalculators.ComplexityCalculator.Visitor",
+      "originalMethodName": "visitConditionalExpression",
+      "movedMethodName": "visitConditionalExpression",
+      "originalParamsClassesQualifiedNames": [
+        "PsiConditionalExpression"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiConditionalExpression"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.AverageCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitConditionalExpression",
+      "movedMethodName": "visitConditionalExpression",
+      "originalParamsClassesQualifiedNames": [
+        "PsiConditionalExpression"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiConditionalExpression"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.TotalCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitConditionalExpression",
+      "movedMethodName": "visitConditionalExpression",
+      "originalParamsClassesQualifiedNames": [
+        "PsiConditionalExpression"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiConditionalExpression"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.AverageCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitConditionalExpression",
+      "movedMethodName": "visitConditionalExpression",
+      "originalParamsClassesQualifiedNames": [
+        "PsiConditionalExpression"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiConditionalExpression"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.TotalCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitConditionalExpression",
+      "movedMethodName": "visitConditionalExpression",
+      "originalParamsClassesQualifiedNames": [
+        "PsiConditionalExpression"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiConditionalExpression"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.projectCalculators.AverageCyclomaticComplexityProjectCalculator.Visitor",
+      "originalMethodName": "visitConditionalExpression",
+      "movedMethodName": "visitConditionalExpression",
+      "originalParamsClassesQualifiedNames": [
+        "PsiConditionalExpression"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiConditionalExpression"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.projectCalculators.TotalCyclomaticComplexityProjectCalculator.Visitor",
+      "originalMethodName": "visitConditionalExpression",
+      "movedMethodName": "visitConditionalExpression",
+      "originalParamsClassesQualifiedNames": [
+        "PsiConditionalExpression"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiConditionalExpression"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.methodCalculators.ComplexityCalculator.Visitor",
+      "originalMethodName": "visitSwitchStatement",
+      "movedMethodName": "visitSwitchStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiSwitchStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiSwitchStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.AverageCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitSwitchStatement",
+      "movedMethodName": "visitSwitchStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiSwitchStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiSwitchStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.TotalCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitSwitchStatement",
+      "movedMethodName": "visitSwitchStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiSwitchStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiSwitchStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.AverageCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitSwitchStatement",
+      "movedMethodName": "visitSwitchStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiSwitchStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiSwitchStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.TotalCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitSwitchStatement",
+      "movedMethodName": "visitSwitchStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiSwitchStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiSwitchStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.projectCalculators.AverageCyclomaticComplexityProjectCalculator.Visitor",
+      "originalMethodName": "visitSwitchStatement",
+      "movedMethodName": "visitSwitchStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiSwitchStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiSwitchStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.projectCalculators.TotalCyclomaticComplexityProjectCalculator.Visitor",
+      "originalMethodName": "visitSwitchStatement",
+      "movedMethodName": "visitSwitchStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiSwitchStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiSwitchStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.methodCalculators.ComplexityCalculator.Visitor",
+      "originalMethodName": "visitWhileStatement",
+      "movedMethodName": "visitWhileStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiWhileStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiWhileStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.AverageCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitWhileStatement",
+      "movedMethodName": "visitWhileStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiWhileStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiWhileStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.TotalCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitWhileStatement",
+      "movedMethodName": "visitWhileStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiWhileStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiWhileStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.AverageCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitWhileStatement",
+      "movedMethodName": "visitWhileStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiWhileStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiWhileStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.TotalCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitWhileStatement",
+      "movedMethodName": "visitWhileStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiWhileStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiWhileStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.projectCalculators.AverageCyclomaticComplexityProjectCalculator.Visitor",
+      "originalMethodName": "visitWhileStatement",
+      "movedMethodName": "visitWhileStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiWhileStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiWhileStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.projectCalculators.TotalCyclomaticComplexityProjectCalculator.Visitor",
+      "originalMethodName": "visitWhileStatement",
+      "movedMethodName": "visitWhileStatement",
+      "originalParamsClassesQualifiedNames": [
+        "PsiWhileStatement"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiWhileStatement"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.methodCalculators.ComplexityCalculator.Visitor",
+      "originalMethodName": "visitCatchSection",
+      "movedMethodName": "visitCatchSection",
+      "originalParamsClassesQualifiedNames": [
+        "PsiCatchSection"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiCatchSection"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.AverageCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitCatchSection",
+      "movedMethodName": "visitCatchSection",
+      "originalParamsClassesQualifiedNames": [
+        "PsiCatchSection"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiCatchSection"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.AverageCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitCatchSection",
+      "movedMethodName": "visitCatchSection",
+      "originalParamsClassesQualifiedNames": [
+        "PsiCatchSection"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiCatchSection"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.methodCalculators.ComplexityCalculator.Visitor",
+      "originalMethodName": "visitPolyadicExpression",
+      "movedMethodName": "visitPolyadicExpression",
+      "originalParamsClassesQualifiedNames": [
+        "PsiPolyadicExpression"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiPolyadicExpression"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.AverageCyclomaticComplexityModuleCalculator.Visitor",
+      "originalMethodName": "visitPolyadicExpression",
+      "movedMethodName": "visitPolyadicExpression",
+      "originalParamsClassesQualifiedNames": [
+        "PsiPolyadicExpression"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiPolyadicExpression"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "68d4cced0a1ad513bf6a4af7cf622e836f76921b",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.utils.CyclomaticComplexityUtil.ComplexityVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.AverageCyclomaticComplexityPackageCalculator.Visitor",
+      "originalMethodName": "visitPolyadicExpression",
+      "movedMethodName": "visitPolyadicExpression",
+      "originalParamsClassesQualifiedNames": [
+        "PsiPolyadicExpression"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiPolyadicExpression"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "b69c8a03c683cdca5bc6568d8d4dc09f94d4dab8",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.classCalculators.NumTestMethodsClassCalculator.Visitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.classCalculators.NumTestMethodsClassCalculator",
+      "originalMethodName": "visitMethod",
+      "movedMethodName": "visitMethod",
+      "originalParamsClassesQualifiedNames": [
+        "PsiMethod"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiMethod"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "bee54b0c3946632f682f373fdfe90a25b7e71b75",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.EncapsulationRatioModuleCalculator.Visitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.moduleCalculators.EncapsulationRatioModuleCalculator",
+      "originalMethodName": "isInternal",
+      "movedMethodName": "isInternal",
+      "originalParamsClassesQualifiedNames": [
+        "PsiClass"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiClass"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "2f4b972e255bc20efaf0737e5c503f01c84927d5",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependentsMapImpl.DependenciesVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependentsMapImpl",
+      "originalMethodName": "addDependent",
+      "movedMethodName": "addDependent",
+      "originalParamsClassesQualifiedNames": [
+        "PsiClass",
+        "PsiClass",
+        "PsiPackage"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiClass",
+        "PsiClass",
+        "PsiPackage"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "cf20ddd80488c0366b31dad3b394b5bcbc1da088",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependencyMapImpl.DependenciesVisitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.dependency.DependencyMapImpl",
+      "originalMethodName": "addDependency",
+      "movedMethodName": "addDependency",
+      "originalParamsClassesQualifiedNames": [
+        "PsiClass",
+        "PsiClass",
+        "PsiPackage"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiClass",
+        "PsiClass",
+        "PsiPackage"
+      ]
+    },
+    {
+      "repositoryURL": "https://github.com/ml-in-programming/ArchitectureReloaded.git",
+      "commitHash": "f90966b35db25d760d1b6102edf2aecef711c7e4",
+      "targetClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.EncapsulationRatioPackageCalculator.Visitor",
+      "originalClassQualifiedName": "com.sixrr.stockmetrics.packageCalculators.EncapsulationRatioPackageCalculator",
+      "originalMethodName": "isInternal",
+      "movedMethodName": "isInternal",
+      "originalParamsClassesQualifiedNames": [
+        "PsiClass"
+      ],
+      "movedParamsClassesQualifiedNames": [
+        "PsiClass"
+      ]
+    }
+  ]
+}

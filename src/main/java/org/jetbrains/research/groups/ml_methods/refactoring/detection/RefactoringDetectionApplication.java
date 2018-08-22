@@ -12,13 +12,14 @@ public class RefactoringDetectionApplication {
     private static final String DEFAULT_DETECTION_TOOL_NAME = "RMiner";
 
     public static void main(@NotNull String[] args) {
-        if (args.length != 2 && args.length != 1) {
+        if (args.length != 3 && args.length != 2) {
             printUsage();
             return;
         }
 
         Path pathToRepositoriesFile = Paths.get(args[0]);
-        String detectionToolName = args.length == 2 ? args[1] : DEFAULT_DETECTION_TOOL_NAME;
+        Path outputDirPath = Paths.get(args[1]);
+        String detectionToolName = args.length == 3 ? args[2] : DEFAULT_DETECTION_TOOL_NAME;
         RefactoringDetectionTool refactoringDetectionTool;
         switch (detectionToolName) {
             case "RMiner":
@@ -38,12 +39,39 @@ public class RefactoringDetectionApplication {
             System.err.println("Application terminated.");
             return;
         }
-        List<MoveMethodRefactoringFromVCS> detectedRefactorings = refactoringDetectionTool.detect(repositories);
-        System.out.println("Detected " + detectedRefactorings.size() + " move method refactorings");
-        detectedRefactorings.forEach(System.out::println);
+        List<DetectedRefactoringsInRepository> detectedRefactorings;
+        try {
+            detectedRefactorings = refactoringDetectionTool.detect(repositories);
+        } catch (Exception e) {
+            System.err.println("Error occurred during refactoring detection.");
+            System.err.println("Reason: " + e.getMessage());
+            System.err.println("Application terminated.");
+            return;
+        }
+        for (DetectedRefactoringsInRepository detectedRefactoringsInRepository : detectedRefactorings) {
+            String projectName = ParsingUtils.getProjectName(detectedRefactoringsInRepository.getRepository());
+            Path outputFilePath = outputDirPath.resolve(projectName);
+            try {
+                detectedRefactoringsInRepository.write(outputFilePath);
+            } catch (IOException e) {
+                System.err.println("Error occurred during writing to " + outputFilePath + " file.");
+                System.err.println("Reason: " + e.getMessage());
+                System.err.println("Refactorings of " + projectName + " project can be corrupted.");
+            }
+        }
+        System.out.println("====================STATISTIC====================");
+        for (DetectedRefactoringsInRepository detectedRefactoringsInRepository : detectedRefactorings) {
+            System.out.println("--------------------------------");
+            System.out.println("Project: " + ParsingUtils.getProjectName(detectedRefactoringsInRepository.getRepository()));
+            System.out.println("Detected: " + detectedRefactoringsInRepository.getDetectedRefactorings().size());
+        }
+        System.out.println("--------------------------------");
+        System.out.println("=================================================");
     }
 
     private static void printUsage() {
-        System.out.println("Usage: refactoring-detection <path to file with repositories list> <detection tool (optional)>");
+        System.out.println("Usage: refactoring-detection <path to file with repositories list>" +
+                " <path to directory where to save detected refactorings>" +
+                " <detection tool (optional)>");
     }
 }

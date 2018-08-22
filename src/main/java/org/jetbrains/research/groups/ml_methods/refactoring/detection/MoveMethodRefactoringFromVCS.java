@@ -9,22 +9,36 @@ class MoveMethodRefactoringFromVCS {
     private final URL repositoryURL;
     private final String commitHash;
     private final String targetClassQualifiedName;
-    private final String sourceClassQualifiedName;
-    private final String methodName;
-    private final List<String> paramsClassesQualifiedNames;
+    private final String originalClassQualifiedName;
+    private final String originalMethodName;
+    private final String movedMethodName;
+    private final List<String> originalParamsClassesQualifiedNames;
+    private final List<String> movedParamsClassesQualifiedNames;
 
-    public MoveMethodRefactoringFromVCS(@NotNull URL repositoryURL,
-                                        @NotNull String commitHash,
-                                        @NotNull String targetClassQualifiedName,
-                                        @NotNull String sourceClassQualifiedName,
-                                        @NotNull String methodName,
-                                        @NotNull List<String> paramsClassesQualifiedNames) {
+    MoveMethodRefactoringFromVCS(@NotNull URL repositoryURL,
+                                 @NotNull String commitHash,
+                                 @NotNull String targetClassQualifiedName,
+                                 @NotNull String originalClassQualifiedName,
+                                 @NotNull String originalMethodName,
+                                 @NotNull String movedMethodName,
+                                 @NotNull List<String> originalParamsClassesQualifiedNames,
+                                 @NotNull List<String> movedParamsClassesQualifiedNames) {
         this.repositoryURL = repositoryURL;
         this.commitHash = commitHash;
         this.targetClassQualifiedName = targetClassQualifiedName;
-        this.sourceClassQualifiedName = sourceClassQualifiedName;
-        this.methodName = methodName;
-        this.paramsClassesQualifiedNames = paramsClassesQualifiedNames;
+        this.originalClassQualifiedName = originalClassQualifiedName;
+        this.originalMethodName = originalMethodName;
+        this.movedMethodName = movedMethodName;
+        this.originalParamsClassesQualifiedNames = originalParamsClassesQualifiedNames;
+        this.movedParamsClassesQualifiedNames = movedParamsClassesQualifiedNames;
+    }
+
+    public List<String> getMovedParamsClassesQualifiedNames() {
+        return movedParamsClassesQualifiedNames;
+    }
+
+    public String getMovedMethodName() {
+        return movedMethodName;
     }
 
     public URL getRepositoryURL() {
@@ -39,15 +53,15 @@ class MoveMethodRefactoringFromVCS {
         return targetClassQualifiedName;
     }
 
-    public String getSourceClassQualifiedName() {
-        return sourceClassQualifiedName;
+    public String getOriginalClassQualifiedName() {
+        return originalClassQualifiedName;
     }
 
-    public String getMethodName() {
-        return methodName;
+    public String getOriginalMethodName() {
+        return originalMethodName;
     }
 
-    public List<String> getParamsClassesQualifiedNames() {
-        return paramsClassesQualifiedNames;
+    public List<String> getOriginalParamsClassesQualifiedNames() {
+        return originalParamsClassesQualifiedNames;
     }
 }
