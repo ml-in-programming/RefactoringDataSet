@@ -22,6 +22,9 @@ class DetectedRefactoringsInRepository implements Writable {
 
     @Override
     public void write(Path outputFilePath) throws IOException {
+        if (!outputFilePath.getParent().toFile().mkdirs()) {
+            throw new IOException("Cannot create all directories from output file path");
+        }
         Files.write(outputFilePath, Collections.singleton(JSON_CONVERTER.toJson(this)));
     }
 
