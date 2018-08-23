@@ -21,7 +21,7 @@ class DetectedRefactoringsInRepository {
     private final List<MoveMethodRefactoringFromVCS> detectedRefactorings;
     @Nullable
     private final Exception exception;
-    @NotNull
+    @Nullable
     private String branch;
 
     DetectedRefactoringsInRepository(@NotNull URL repository,
@@ -33,7 +33,7 @@ class DetectedRefactoringsInRepository {
     }
 
     DetectedRefactoringsInRepository(@NotNull URL repository,
-                                     @NotNull String branch,
+                                     @Nullable String branch,
                                      @NotNull Exception exception) {
         this.repository = repository;
         this.branch = branch;
@@ -65,7 +65,7 @@ class DetectedRefactoringsInRepository {
         return exception;
     }
 
-    @NotNull
+    @Nullable
     String getBranch() {
         return branch;
     }

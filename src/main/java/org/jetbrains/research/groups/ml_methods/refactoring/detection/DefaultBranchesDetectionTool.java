@@ -1,9 +1,12 @@
 package org.jetbrains.research.groups.ml_methods.refactoring.detection;
 
 import org.apache.log4j.Logger;
+import org.eclipse.egit.github.core.RepositoryId;
+import org.eclipse.egit.github.core.service.RepositoryService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.Logging;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +14,19 @@ import java.util.stream.Collectors;
 
 import static org.jetbrains.research.groups.ml_methods.refactoring.detection.RefactoringDetectionApplication.printExceptionInformation;
 
-abstract class AbstractDetectionTool implements RefactoringDetectionTool {
-    private static final Logger LOGGER = Logging.getLogger(AbstractDetectionTool.class);
-    private static final String DEFAULT_BRANCH = "master";
+abstract class DefaultBranchesDetectionTool implements RefactoringDetectionTool {
+    @NotNull
+    private static final Logger LOGGER = Logging.getLogger(DefaultBranchesDetectionTool.class);
+
+    @NotNull
+    private static String getDefaultBranch(URL repositoryUrl) throws IOException {
+        RepositoryId repositoryId = RepositoryId.createFromUrl(ParsingUtils.getHttpLink(repositoryUrl));
+        return new RepositoryService().getRepository(repositoryId.getOwner(), repositoryId.getName()).getMasterBranch();
+    }
 
     @NotNull
     @Override
-    public List<DetectedRefactoringsInRepository> detect(@NotNull List<URL> repositoryUrls, String branch) {
+    public List<DetectedRefactoringsInRepository> detect(@NotNull List<URL> repositoryUrls) {
         String passedProjects = repositoryUrls.stream()
                 .map(ParsingUtils::getProjectName)
                 .collect(Collectors.joining(", "));
@@ -26,8 +35,10 @@ abstract class AbstractDetectionTool implements RefactoringDetectionTool {
         int passedRepositories = 0;
         for (URL repositoryUrl : repositoryUrls) {
             System.out.println("Processed repositories: " + passedRepositories++ + " / " + repositoryUrls.size());
+            String branch = null;
             DetectedRefactoringsInRepository detectedRefactorings;
             try {
+                branch = getDefaultBranch(repositoryUrl);
                 detectedRefactorings = detect(repositoryUrl, branch);
             } catch (Exception e) {
                 String errorDescription = "Error occurred during refactoring detection for repository: " + repositoryUrl;
@@ -40,17 +51,5 @@ abstract class AbstractDetectionTool implements RefactoringDetectionTool {
         }
         LOGGER.info("Ended detection for projects: " + passedProjects);
         return detected;
-    }
-
-    @NotNull
-    @Override
-    public DetectedRefactoringsInRepository detect(@NotNull URL repositoryUrl) throws Exception {
-        return detect(repositoryUrl, DEFAULT_BRANCH);
-    }
-
-    @NotNull
-    @Override
-    public List<DetectedRefactoringsInRepository> detect(@NotNull List<URL> repositoryUrls) {
-        return detect(repositoryUrls, DEFAULT_BRANCH);
     }
 }

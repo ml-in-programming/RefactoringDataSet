@@ -8,12 +8,7 @@ class ParsingUtils {
         return splitBySlash[splitBySlash.length - 1].split("\\.")[0];
     }
 
-    static String getClassNameFromQualifiedName(String qualifiedClassName) {
-        String[] splitByDot = qualifiedClassName.split("\\.");
-        return splitByDot[splitByDot.length - 1];
-    }
-
-    static String getClassPackageFromQualifiedName(String qualifiedClassName) {
-        return qualifiedClassName.substring(0, qualifiedClassName.lastIndexOf("."));
+    static String getHttpLink(URL repositoryUrl) {
+        return repositoryUrl.toString().substring(0, repositoryUrl.toString().lastIndexOf("."));
     }
 }

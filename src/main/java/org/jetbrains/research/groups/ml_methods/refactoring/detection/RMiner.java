@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 import static org.refactoringminer.api.RefactoringType.MOVE_OPERATION;
 
-class RMiner extends AbstractDetectionTool {
+class RMiner extends DefaultBranchesDetectionTool {
     private static final Logger LOGGER = Logging.getLogger(RMiner.class);
     private static final RefactoringType[] interestingRefactoringsTypes = {
             MOVE_OPERATION,
