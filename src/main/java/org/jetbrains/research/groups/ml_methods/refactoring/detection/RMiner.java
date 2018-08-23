@@ -21,9 +21,8 @@ import java.util.stream.Collectors;
 
 import static org.refactoringminer.api.RefactoringType.MOVE_OPERATION;
 
-class RMiner implements RefactoringDetectionTool {
-    private static final Logger LOGGER = Logging.getLogger(RefactoringDetectionTool.class);
-    private static final String DEFAULT_BRANCH = "master";
+class RMiner extends AbstractDetectionTool {
+    private static final Logger LOGGER = Logging.getLogger(RMiner.class);
     private static final RefactoringType[] interestingRefactoringsTypes = {
             MOVE_OPERATION,
             RefactoringType.PULL_UP_OPERATION,
@@ -83,35 +82,6 @@ class RMiner implements RefactoringDetectionTool {
                 }
             }
         });
-        return new DetectedRefactoringsInRepository(repositoryUrl, detectedRefactorings);
-    }
-
-    @NotNull
-    @Override
-    public List<DetectedRefactoringsInRepository> detect(@NotNull List<URL> repositoryUrls, String branch) throws Exception {
-        String passedProjects = repositoryUrls.stream()
-                .map(ParsingUtils::getProjectName)
-                .collect(Collectors.joining(", "));
-        LOGGER.info("Started detection for projects: " + passedProjects);
-        List<DetectedRefactoringsInRepository> detected = new ArrayList<>();
-        int passedRepositories = 0;
-        for (URL repositoryUrl : repositoryUrls) {
-            System.out.println("Processed repositories: " + passedRepositories++ + " / " + repositoryUrls.size());
-            detected.add(detect(repositoryUrl, branch));
-        }
-        LOGGER.info("Ended detection for projects: " + passedProjects);
-        return detected;
-    }
-
-    @NotNull
-    @Override
-    public DetectedRefactoringsInRepository detect(@NotNull URL repositoryUrl) throws Exception {
-        return detect(repositoryUrl, DEFAULT_BRANCH);
-    }
-
-    @NotNull
-    @Override
-    public List<DetectedRefactoringsInRepository> detect(@NotNull List<URL> repositoryUrls) throws Exception {
-        return detect(repositoryUrls, DEFAULT_BRANCH);
+        return new DetectedRefactoringsInRepository(repositoryUrl, branch, detectedRefactorings);
     }
 }

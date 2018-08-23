@@ -9,6 +9,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 
 import static java.lang.System.exit;
 
@@ -62,11 +63,26 @@ public class RefactoringDetectionApplication {
                 System.err.println("Refactorings of " + projectName + " project can be corrupted.");
             }
         }
+        printResults(detectedRefactorings);
+    }
+
+    private static void printResults(List<DetectedRefactoringsInRepository> detectedRefactorings) {
         System.out.println("====================STATISTIC====================");
         for (DetectedRefactoringsInRepository detectedRefactoringsInRepository : detectedRefactorings) {
             System.out.println("--------------------------------");
             System.out.println("Project: " + ParsingUtils.getProjectName(detectedRefactoringsInRepository.getRepository()));
-            System.out.println("Detected: " + detectedRefactoringsInRepository.getDetectedRefactorings().size());
+            System.out.println("Branch: " + detectedRefactoringsInRepository.getBranch());
+            if (detectedRefactoringsInRepository.isSuccess()) {
+                System.out.println("Result: success");
+                System.out.println("Detected: " +
+                        Objects.requireNonNull(detectedRefactoringsInRepository.getDetectedRefactorings()).size());
+            } else {
+                System.out.println("Result: failed");
+                System.out.println("Error type: " +
+                        Objects.requireNonNull(detectedRefactoringsInRepository.getException()).getClass().getCanonicalName());
+                System.out.println("Reason: " +
+                        Objects.requireNonNull(detectedRefactoringsInRepository.getException()).getMessage());
+            }
         }
         System.out.println("--------------------------------");
         System.out.println("=================================================");
@@ -86,7 +102,7 @@ public class RefactoringDetectionApplication {
         exit(-1);
     }
 
-    private static void printExceptionInformation(Throwable e) {
+    static void printExceptionInformation(Throwable e) {
         System.err.println("Error type: " + e.getClass().getCanonicalName());
         System.err.println("Reason: " + e.getMessage());
     }
