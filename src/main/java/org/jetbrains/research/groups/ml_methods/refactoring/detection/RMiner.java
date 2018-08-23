@@ -14,6 +14,8 @@ import org.refactoringminer.rm1.GitHistoryRefactoringMinerImpl;
 import org.refactoringminer.util.GitServiceImpl;
 
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -41,8 +43,9 @@ class RMiner extends AbstractDetectionTool {
         miner.setRefactoringTypesToConsider(interestingRefactoringsTypes);
 
         String tmpDir = System.getProperty("java.io.tmpdir");
+        Path downloadRepositoryPath = Paths.get(tmpDir, projectName);
         Repository repository = gitService.cloneIfNotExists(
-                tmpDir + "/" + projectName,
+                downloadRepositoryPath.toAbsolutePath().toString(),
                 repositoryUrl.toString());
         List<MoveMethodRefactoringFromVCS> detectedRefactorings = new ArrayList<>();
         int commitsNumber = gitService.countCommits(repository, branch);
