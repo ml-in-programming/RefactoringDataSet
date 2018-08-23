@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 
-class DetectedRefactoringsInRepository implements Writable {
+class DetectedRefactoringsInRepository {
     @NotNull
     private static final Gson JSON_CONVERTER = new GsonBuilder().setPrettyPrinting().create();
     @NotNull
@@ -41,8 +41,7 @@ class DetectedRefactoringsInRepository implements Writable {
         this.exception = exception;
     }
 
-    @Override
-    public void write(Path outputFilePath) throws IOException {
+    void write(Path outputFilePath) throws IOException {
         outputFilePath.getParent().toFile().mkdirs();
         Files.write(outputFilePath, Collections.singleton(JSON_CONVERTER.toJson(this)));
     }
