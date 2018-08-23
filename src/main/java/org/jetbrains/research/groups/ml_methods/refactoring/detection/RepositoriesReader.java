@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 class RepositoriesReader {
+    @NotNull
     static List<URL> read(@NotNull Path repositoriesFilePath) throws IOException {
         List<String> repositoryUrls = Files.lines(repositoriesFilePath).collect(Collectors.toList());
         List<URL> repositories = new ArrayList<>();
