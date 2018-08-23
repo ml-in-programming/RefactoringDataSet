@@ -39,7 +39,6 @@ class RMiner extends DefaultBranchesDetectionTool {
         System.out.println("Started detection for " + projectName + " project");
         GitService gitService = new GitServiceImpl();
         GitHistoryRefactoringMinerImpl miner = new GitHistoryRefactoringMinerImpl();
-        // TODO: decide if we want to add RefactoringType.EXTRACT_AND_MOVE_OPERATION
         miner.setRefactoringTypesToConsider(interestingRefactoringsTypes);
 
         String tmpDir = System.getProperty("java.io.tmpdir");
