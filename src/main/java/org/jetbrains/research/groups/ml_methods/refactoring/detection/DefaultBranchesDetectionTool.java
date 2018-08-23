@@ -19,24 +19,24 @@ abstract class DefaultBranchesDetectionTool implements RefactoringDetectionTool 
     private static final Logger LOGGER = Logging.getLogger(DefaultBranchesDetectionTool.class);
 
     @NotNull
-    private static String getDefaultBranch(URL repositoryUrl) throws IOException {
+    private static String getDefaultBranch(@NotNull URL repositoryUrl) throws IOException {
         RepositoryId repositoryId = RepositoryId.createFromUrl(ParsingUtils.getHttpLink(repositoryUrl));
         return new RepositoryService().getRepository(repositoryId.getOwner(), repositoryId.getName()).getMasterBranch();
     }
 
     @NotNull
     @Override
-    public List<DetectedRefactoringsInRepository> detect(@NotNull List<URL> repositoryUrls) {
+    public List<RepositoryDetectedRefactorings> detect(@NotNull List<URL> repositoryUrls) {
         String passedProjects = repositoryUrls.stream()
                 .map(ParsingUtils::getProjectName)
                 .collect(Collectors.joining(", "));
         LOGGER.info("Started detection for projects: " + passedProjects);
-        List<DetectedRefactoringsInRepository> detected = new ArrayList<>();
+        List<RepositoryDetectedRefactorings> detected = new ArrayList<>();
         int passedRepositories = 0;
         for (URL repositoryUrl : repositoryUrls) {
             System.out.println("Processed repositories: " + passedRepositories++ + " / " + repositoryUrls.size());
             String branch = null;
-            DetectedRefactoringsInRepository detectedRefactorings;
+            RepositoryDetectedRefactorings detectedRefactorings;
             try {
                 branch = getDefaultBranch(repositoryUrl);
                 detectedRefactorings = detect(repositoryUrl, branch);
@@ -45,7 +45,7 @@ abstract class DefaultBranchesDetectionTool implements RefactoringDetectionTool 
                 LOGGER.error(errorDescription, e);
                 System.err.println(errorDescription);
                 printExceptionInformation(e);
-                detectedRefactorings = new DetectedRefactoringsInRepository(repositoryUrl, branch, e);
+                detectedRefactorings = new RepositoryDetectedRefactorings(repositoryUrl, branch, e);
             }
             detected.add(detectedRefactorings);
         }

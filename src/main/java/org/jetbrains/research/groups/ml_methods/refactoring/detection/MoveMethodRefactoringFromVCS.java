@@ -6,13 +6,21 @@ import java.net.URL;
 import java.util.List;
 
 class MoveMethodRefactoringFromVCS {
+    @NotNull
     private final URL repositoryURL;
+    @NotNull
     private final String commitHash;
+    @NotNull
     private final String targetClassQualifiedName;
+    @NotNull
     private final String originalClassQualifiedName;
+    @NotNull
     private final String originalMethodName;
+    @NotNull
     private final String movedMethodName;
+    @NotNull
     private final List<String> originalParamsClassesQualifiedNames;
+    @NotNull
     private final List<String> movedParamsClassesQualifiedNames;
 
     MoveMethodRefactoringFromVCS(@NotNull URL repositoryURL,
@@ -33,34 +41,42 @@ class MoveMethodRefactoringFromVCS {
         this.movedParamsClassesQualifiedNames = movedParamsClassesQualifiedNames;
     }
 
+    @NotNull
     public List<String> getMovedParamsClassesQualifiedNames() {
         return movedParamsClassesQualifiedNames;
     }
 
+    @NotNull
     public String getMovedMethodName() {
         return movedMethodName;
     }
 
+    @NotNull
     public URL getRepositoryURL() {
         return repositoryURL;
     }
 
+    @NotNull
     public String getCommitHash() {
         return commitHash;
     }
 
+    @NotNull
     public String getTargetClassQualifiedName() {
         return targetClassQualifiedName;
     }
 
+    @NotNull
     public String getOriginalClassQualifiedName() {
         return originalClassQualifiedName;
     }
 
+    @NotNull
     public String getOriginalMethodName() {
         return originalMethodName;
     }
 
+    @NotNull
     public List<String> getOriginalParamsClassesQualifiedNames() {
         return originalParamsClassesQualifiedNames;
     }

@@ -12,31 +12,37 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 
-class DetectedRefactoringsInRepository {
+class RepositoryDetectedRefactorings {
     @NotNull
     private static final Gson JSON_CONVERTER = new GsonBuilder().setPrettyPrinting().create();
     @NotNull
     private final URL repository;
     @Nullable
+    private final RefactoringDetectionExecutionInfo executionInfo;
+    @Nullable
+    private String branch;
+    @Nullable
     private final List<MoveMethodRefactoringFromVCS> detectedRefactorings;
     @Nullable
     private final Exception exception;
-    @Nullable
-    private String branch;
 
-    DetectedRefactoringsInRepository(@NotNull URL repository,
-                                     @NotNull String branch, @NotNull List<MoveMethodRefactoringFromVCS> detectedRefactorings) {
+    RepositoryDetectedRefactorings(@NotNull URL repository,
+                                   @NotNull String branch,
+                                   @NotNull RefactoringDetectionExecutionInfo executionInfo,
+                                   @NotNull List<MoveMethodRefactoringFromVCS> detectedRefactorings) {
         this.repository = repository;
         this.branch = branch;
         this.detectedRefactorings = detectedRefactorings;
+        this.executionInfo = executionInfo;
         this.exception = null;
     }
 
-    DetectedRefactoringsInRepository(@NotNull URL repository,
-                                     @Nullable String branch,
-                                     @NotNull Exception exception) {
+    RepositoryDetectedRefactorings(@NotNull URL repository,
+                                   @Nullable String branch,
+                                   @NotNull Exception exception) {
         this.repository = repository;
         this.branch = branch;
+        this.executionInfo = null;
         this.detectedRefactorings = null;
         this.exception = exception;
     }
@@ -68,5 +74,10 @@ class DetectedRefactoringsInRepository {
     @Nullable
     String getBranch() {
         return branch;
+    }
+
+    @Nullable
+    RefactoringDetectionExecutionInfo getExecutionInfo() {
+        return executionInfo;
     }
 }

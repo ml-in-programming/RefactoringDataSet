@@ -14,7 +14,9 @@ import java.util.Objects;
 import static java.lang.System.exit;
 
 public class RefactoringDetectionApplication {
+    @NotNull
     private static final String DEFAULT_DETECTION_TOOL_NAME = "RMiner";
+    @NotNull
     private static final Logger LOGGER = Logging.getLogger(RefactoringDetectionApplication.class);
 
     public static void main(@NotNull String[] args) {
@@ -44,7 +46,7 @@ public class RefactoringDetectionApplication {
             exitWithError(errorDescription, e);
             return;
         }
-        List<DetectedRefactoringsInRepository> detectedRefactorings;
+        List<RepositoryDetectedRefactorings> detectedRefactorings;
         try {
             detectedRefactorings = refactoringDetectionTool.detect(repositories);
         } catch (Exception e) {
@@ -52,11 +54,11 @@ public class RefactoringDetectionApplication {
             exitWithError(errorDescription, e);
             return;
         }
-        for (DetectedRefactoringsInRepository detectedRefactoringsInRepository : detectedRefactorings) {
-            String projectName = ParsingUtils.getProjectName(detectedRefactoringsInRepository.getRepository());
+        for (RepositoryDetectedRefactorings repositoryDetectedRefactorings : detectedRefactorings) {
+            String projectName = ParsingUtils.getProjectName(repositoryDetectedRefactorings.getRepository());
             Path outputFilePath = outputDirPath.resolve(projectName);
             try {
-                detectedRefactoringsInRepository.write(outputFilePath);
+                repositoryDetectedRefactorings.write(outputFilePath);
             } catch (IOException e) {
                 System.err.println("Error occurred during writing to " + outputFilePath + " file.");
                 printExceptionInformation(e);
@@ -66,22 +68,28 @@ public class RefactoringDetectionApplication {
         printResults(detectedRefactorings);
     }
 
-    private static void printResults(List<DetectedRefactoringsInRepository> detectedRefactorings) {
+    private static void printResults(@NotNull List<RepositoryDetectedRefactorings> detectedRefactorings) {
         System.out.println("====================STATISTIC====================");
-        for (DetectedRefactoringsInRepository detectedRefactoringsInRepository : detectedRefactorings) {
+        for (RepositoryDetectedRefactorings repositoryDetectedRefactorings : detectedRefactorings) {
             System.out.println("--------------------------------");
-            System.out.println("Project: " + ParsingUtils.getProjectName(detectedRefactoringsInRepository.getRepository()));
-            System.out.println("Branch: " + detectedRefactoringsInRepository.getBranch());
-            if (detectedRefactoringsInRepository.isSuccess()) {
+            System.out.println("Project: " + ParsingUtils.getProjectName(repositoryDetectedRefactorings.getRepository()));
+            System.out.println("Branch: " + repositoryDetectedRefactorings.getBranch());
+            if (repositoryDetectedRefactorings.isSuccess()) {
                 System.out.println("Result: success");
+                System.out.println("Processed commits: " +
+                        Objects.requireNonNull(repositoryDetectedRefactorings.getExecutionInfo()).getProcessedCommitsNumber());
+                System.out.println("Processed commits with refactorings: " +
+                        Objects.requireNonNull(repositoryDetectedRefactorings.getExecutionInfo()).getProcessedCommitsWithRefactoringsNumber());
+                System.out.println("Median of number of refactorings in commits (only for commits that contain refactorings): " +
+                        Objects.requireNonNull(repositoryDetectedRefactorings.getExecutionInfo()).getMedianOfNotNullRefactoringsNumbers());
                 System.out.println("Detected: " +
-                        Objects.requireNonNull(detectedRefactoringsInRepository.getDetectedRefactorings()).size());
+                        Objects.requireNonNull(repositoryDetectedRefactorings.getDetectedRefactorings()).size());
             } else {
                 System.out.println("Result: failed");
                 System.out.println("Error type: " +
-                        Objects.requireNonNull(detectedRefactoringsInRepository.getException()).getClass().getCanonicalName());
+                        Objects.requireNonNull(repositoryDetectedRefactorings.getException()).getClass().getCanonicalName());
                 System.out.println("Reason: " +
-                        Objects.requireNonNull(detectedRefactoringsInRepository.getException()).getMessage());
+                        Objects.requireNonNull(repositoryDetectedRefactorings.getException()).getMessage());
             }
         }
         System.out.println("--------------------------------");

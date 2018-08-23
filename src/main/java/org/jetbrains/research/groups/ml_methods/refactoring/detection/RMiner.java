@@ -18,13 +18,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static org.refactoringminer.api.RefactoringType.MOVE_OPERATION;
 
 class RMiner extends DefaultBranchesDetectionTool {
+    @NotNull
     private static final Logger LOGGER = Logging.getLogger(RMiner.class);
+    @NotNull
     private static final RefactoringType[] interestingRefactoringsTypes = {
             MOVE_OPERATION,
             RefactoringType.PULL_UP_OPERATION,
@@ -33,7 +34,7 @@ class RMiner extends DefaultBranchesDetectionTool {
 
     @NotNull
     @Override
-    public DetectedRefactoringsInRepository detect(@NotNull URL repositoryUrl, @NotNull String branch) throws Exception {
+    public RepositoryDetectedRefactorings detect(@NotNull URL repositoryUrl, @NotNull String branch) throws Exception {
         String projectName = ParsingUtils.getProjectName(repositoryUrl);
         LOGGER.info("Started detection for " + projectName + " project");
         System.out.println("Started detection for " + projectName + " project");
@@ -47,13 +48,17 @@ class RMiner extends DefaultBranchesDetectionTool {
                 downloadRepositoryPath.toAbsolutePath().toString(),
                 repositoryUrl.toString());
         List<MoveMethodRefactoringFromVCS> detectedRefactorings = new ArrayList<>();
-        int commitsNumber = gitService.countCommits(repository, branch);
-        final AtomicInteger processedCommitsNumber = new AtomicInteger(0);
+        int commitsNumber = gitService.countCommits(repository, branch) - 1;
+        List<Integer> refactoringsNumbersInCommit = new ArrayList<>();
         miner.detectAll(repository, branch, new RefactoringHandler() {
+            private int processedCommitsNumber = 0;
+
             @Override
             public void handle(RevCommit commitData, List<Refactoring> refactorings) {
-                System.out.println("Processed commits: " + processedCommitsNumber.getAndIncrement() + " / " + commitsNumber);
                 LOGGER.info("Processing new commit. Commit hash: " + commitData.getId().getName());
+                if (refactorings.size() != 0) {
+                    refactoringsNumbersInCommit.add(refactorings.size());
+                }
                 for (Refactoring refactoring : refactorings) {
                     LOGGER.info("Refactoring: " + refactoring.toString());
                     MoveOperationRefactoring moveOperationRefactoring = (MoveOperationRefactoring) refactoring;
@@ -82,8 +87,15 @@ class RMiner extends DefaultBranchesDetectionTool {
                             )
                     );
                 }
+                processedCommitsNumber++;
+                System.out.println("Processed commits: " + processedCommitsNumber + " / " + commitsNumber);
             }
         });
-        return new DetectedRefactoringsInRepository(repositoryUrl, branch, detectedRefactorings);
+        RefactoringDetectionExecutionInfo executionInfo =
+                new RefactoringDetectionExecutionInfo(
+                        commitsNumber,
+                        refactoringsNumbersInCommit
+                );
+        return new RepositoryDetectedRefactorings(repositoryUrl, branch, executionInfo, detectedRefactorings);
     }
 }
