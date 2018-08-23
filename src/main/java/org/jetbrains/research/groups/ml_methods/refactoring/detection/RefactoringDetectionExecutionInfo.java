@@ -35,4 +35,16 @@ class RefactoringDetectionExecutionInfo {
                         refactoringsNumbersInProcessedCommits.get(middleIndex)) / 2
                 : refactoringsNumbersInProcessedCommits.get(middleIndex);
     }
+
+    double getMaxCommitRefactoringsNumber() {
+        if (refactoringsNumbersInProcessedCommits.size() == 0) {
+            return Double.NaN;
+        }
+        return refactoringsNumbersInProcessedCommits.get(refactoringsNumbersInProcessedCommits.size() - 1);
+    }
+
+    @NotNull
+    List<Integer> getRefactoringsNumbersInProcessedCommits() {
+        return refactoringsNumbersInProcessedCommits;
+    }
 }
