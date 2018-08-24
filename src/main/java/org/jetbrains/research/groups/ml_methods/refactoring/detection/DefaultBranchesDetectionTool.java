@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.service.RepositoryService;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.research.groups.ml_methods.Logging;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,7 +15,7 @@ import static org.jetbrains.research.groups.ml_methods.refactoring.detection.Ref
 
 abstract class DefaultBranchesDetectionTool implements RefactoringDetectionTool {
     @NotNull
-    private static final Logger LOGGER = Logging.getLogger(DefaultBranchesDetectionTool.class);
+    private static final Logger LOGGER = Logger.getLogger(DefaultBranchesDetectionTool.class);
 
     @NotNull
     private static String getDefaultBranch(@NotNull URL repositoryUrl) throws IOException {

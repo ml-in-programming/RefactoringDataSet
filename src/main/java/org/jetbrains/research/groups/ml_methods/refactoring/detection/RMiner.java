@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.research.groups.ml_methods.Logging;
 import org.refactoringminer.api.GitService;
 import org.refactoringminer.api.Refactoring;
 import org.refactoringminer.api.RefactoringHandler;
@@ -24,7 +23,7 @@ import static org.refactoringminer.api.RefactoringType.MOVE_OPERATION;
 
 class RMiner extends DefaultBranchesDetectionTool {
     @NotNull
-    private static final Logger LOGGER = Logging.getLogger(RMiner.class);
+    private static final Logger LOGGER = Logger.getLogger(RMiner.class);
     @NotNull
     private static final RefactoringType[] interestingRefactoringsTypes = {
             MOVE_OPERATION,

@@ -2,7 +2,6 @@ package org.jetbrains.research.groups.ml_methods.refactoring.detection;
 
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.research.groups.ml_methods.Logging;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,7 +15,7 @@ public class RefactoringDetectionApplication {
     @NotNull
     private static final String DEFAULT_DETECTION_TOOL_NAME = "RMiner";
     @NotNull
-    private static final Logger LOGGER = Logging.getLogger(RefactoringDetectionApplication.class);
+    private static final Logger LOGGER = Logger.getLogger(RefactoringDetectionApplication.class);
 
     public static void main(@NotNull String[] args) {
         try {
