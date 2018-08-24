@@ -20,56 +20,81 @@ public class RefactoringDetectionApplication {
 
     public static void main(@NotNull String[] args) {
         try {
-            if (args.length != 3 && args.length != 2) {
-                printUsage();
-                return;
-            }
-
-            Path pathToRepositoriesFile = Paths.get(args[0]);
-            Path outputDirPath = Paths.get(args[1]);
-            String detectionToolName = args.length == 3 ? args[2] : DEFAULT_DETECTION_TOOL_NAME;
-            RefactoringDetectionTool refactoringDetectionTool;
-            switch (detectionToolName) {
-                case "RMiner":
-                    refactoringDetectionTool = RefactoringDetectionToolFactory.createRMiner();
-                    break;
-                default:
-                    System.out.println("No such tool. Try again.");
-                    printUsage();
-                    return;
-            }
-            List<URL> repositories;
-            try {
-                repositories = RepositoriesReader.read(pathToRepositoriesFile);
-            } catch (IOException e) {
-                String errorDescription = "Error occurred during parsing passed repository urls.";
-                exitWithError(errorDescription, e);
-                return;
-            }
-            List<RepositoryDetectionResult> detectedRefactorings;
-            try {
-                detectedRefactorings = refactoringDetectionTool.detect(repositories);
-            } catch (Exception e) {
-                String errorDescription = "Error occurred during refactoring detection.";
-                exitWithError(errorDescription, e);
-                return;
-            }
-            for (RepositoryDetectionResult repositoryDetectionResult : detectedRefactorings) {
-                if (repositoryDetectionResult instanceof RepositoryDetectionSuccess) {
-                    String projectName = ParsingUtils.getProjectName(repositoryDetectionResult.getRepository());
-                    Path outputFilePath = outputDirPath.resolve(projectName);
-                    try {
-                        repositoryDetectionResult.write(outputFilePath);
-                    } catch (IOException e) {
-                        System.err.println("Error occurred during writing to " + outputFilePath + " file.");
-                        printExceptionInformation(e);
-                        System.err.println("Refactorings of " + projectName + " project can be corrupted.");
-                    }
-                }
-            }
-            printResults(detectedRefactorings);
+            RefactoringDetectionApplication application = new RefactoringDetectionApplication();
+            application.run(parseArguments(args));
         } catch (Throwable e) {
             exitWithError("Unexpected exception occurred", e);
+        }
+    }
+
+    private static RefactoringDetectionApplicationArgumentsHolder parseArguments(@NotNull String[] args) {
+        if (args.length != 3 && args.length != 2) {
+            printUsage();
+            exit(-1);
+        }
+
+        Path pathToRepositoriesFile = Paths.get(args[0]);
+        Path outputDirPath = Paths.get(args[1]);
+        String detectionToolName = args.length == 3 ? args[2] : DEFAULT_DETECTION_TOOL_NAME;
+        RefactoringDetectionTool refactoringDetectionTool = null;
+        switch (detectionToolName) {
+            case "RMiner":
+                refactoringDetectionTool = RefactoringDetectionToolFactory.createRMiner();
+                break;
+            default:
+                System.out.println("No such tool. Try again.");
+                printUsage();
+                exit(-1);
+        }
+        return new RefactoringDetectionApplicationArgumentsHolder(pathToRepositoriesFile,
+                outputDirPath, refactoringDetectionTool);
+    }
+
+    private void run(RefactoringDetectionApplicationArgumentsHolder argumentsHolder) {
+        List<URL> repositories;
+        try {
+            repositories = RepositoriesReader.read(argumentsHolder.pathToRepositoriesFile);
+        } catch (IOException e) {
+            String errorDescription = "Error occurred during parsing passed repository urls.";
+            exitWithError(errorDescription, e);
+            return;
+        }
+        List<RepositoryDetectionResult> detectedRefactorings;
+        try {
+            detectedRefactorings = argumentsHolder.refactoringDetectionTool.detect(repositories);
+        } catch (Exception e) {
+            String errorDescription = "Error occurred during refactoring detection.";
+            exitWithError(errorDescription, e);
+            return;
+        }
+        for (RepositoryDetectionResult repositoryDetectionResult : detectedRefactorings) {
+            if (repositoryDetectionResult instanceof RepositoryDetectionSuccess) {
+                String projectName = ParsingUtils.getProjectName(repositoryDetectionResult.getRepository());
+                Path outputFilePath = argumentsHolder.outputDirPath.resolve(projectName);
+                try {
+                    repositoryDetectionResult.write(outputFilePath);
+                } catch (IOException e) {
+                    System.err.println("Error occurred during writing to " + outputFilePath + " file.");
+                    printExceptionInformation(e);
+                    System.err.println("Refactorings of " + projectName + " project can be corrupted.");
+                }
+            }
+        }
+        printResults(detectedRefactorings);
+    }
+
+    private static class RefactoringDetectionApplicationArgumentsHolder {
+        private final Path pathToRepositoriesFile;
+        private final Path outputDirPath;
+        private final RefactoringDetectionTool refactoringDetectionTool;
+
+        private RefactoringDetectionApplicationArgumentsHolder(
+                @NotNull Path pathToRepositoriesFile,
+                @NotNull Path outputDirPath,
+                @NotNull RefactoringDetectionTool refactoringDetectionTool) {
+            this.pathToRepositoriesFile = pathToRepositoriesFile;
+            this.outputDirPath = outputDirPath;
+            this.refactoringDetectionTool = refactoringDetectionTool;
         }
     }
 
