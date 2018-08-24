@@ -55,7 +55,7 @@ class RMiner extends DefaultBranchesDetectionTool {
 
             @Override
             public void handle(RevCommit commitData, List<Refactoring> refactorings) {
-                LOGGER.info("Processing new commit. Commit hash: " + commitData.getId().getName());
+                LOGGER.info("Processed new commit. Commit hash: " + commitData.getId().getName());
                 if (refactorings.size() != 0) {
                     refactoringsNumbersInCommit.add(refactorings.size());
                 }
