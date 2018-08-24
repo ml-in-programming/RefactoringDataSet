@@ -70,7 +70,7 @@ public class RefactoringDetectionApplication {
     }
 
     private static void printResults(@NotNull List<RepositoryDetectedRefactorings> detectedRefactorings) {
-        System.out.println("====================STATISTIC====================");
+        System.out.println("====================STATISTICS====================");
         int successNumber = 0;
         int totalProcessedCommitsNumber = 0;
         int totalNumberOfDetectedRefactorings = 0;
@@ -103,7 +103,7 @@ public class RefactoringDetectionApplication {
                         executionInfo.getMedianOfNotNullRefactoringsNumbers());
                 System.out.println("Max number of refactorings in one commit: " +
                         executionInfo.getMaxCommitRefactoringsNumber());
-                System.out.println("Detected: " + numberOfDetectedRefactorings);
+                System.out.println("Detected refactorings: " + numberOfDetectedRefactorings);
             } else {
                 System.out.println("Result: failed");
                 System.out.println("Error type: " +

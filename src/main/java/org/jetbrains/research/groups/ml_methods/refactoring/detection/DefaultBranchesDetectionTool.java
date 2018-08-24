@@ -34,7 +34,6 @@ abstract class DefaultBranchesDetectionTool implements RefactoringDetectionTool 
         List<RepositoryDetectedRefactorings> detected = new ArrayList<>();
         int passedRepositories = 0;
         for (URL repositoryUrl : repositoryUrls) {
-            System.out.println("Processed repositories: " + passedRepositories++ + " / " + repositoryUrls.size());
             String branch = null;
             RepositoryDetectedRefactorings detectedRefactorings;
             try {
@@ -48,6 +47,8 @@ abstract class DefaultBranchesDetectionTool implements RefactoringDetectionTool 
                 detectedRefactorings = new RepositoryDetectedRefactorings(repositoryUrl, branch, e);
             }
             detected.add(detectedRefactorings);
+            passedRepositories++;
+            System.out.println("Processed repositories: " + passedRepositories + " / " + repositoryUrls.size());
         }
         LOGGER.info("Ended detection for projects: " + passedProjects);
         return detected;
