@@ -1,18 +1,23 @@
 package org.jetbrains.research.groups.ml_methods.github_repos_searcher;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.research.groups.ml_methods.github_repos_searcher.properties.DefaultProperties;
+import org.jetbrains.research.groups.ml_methods.github_repos_searcher.properties.Properties;
 import org.kohsuke.github.*;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class GitHubReposSearcherApplication {
     private static final int maxPageSize = 100; // https://developer.github.com/v3/search/#search-repositories
 
     private static final int maxSizeOfResult = 1000; // https://developer.github.com/v3/search/#about-the-search-api
+
+    private static final @NotNull String destinationFileName = "repositories";
 
     public static void main(String[] args) {
         try {
@@ -32,15 +37,13 @@ public class GitHubReposSearcherApplication {
             return;
         }
 
-        PagedSearchIterable<GHRepository> iterable = createIterable(github);
+        PagedSearchIterable<GHRepository> iterable = createIterable(github, DefaultProperties.getInstance());
         printIterableInfo(iterable);
 
         List<String> repositoriesUrl = extractRepositories(iterable);
 
-        final String fileName = "repositories";
-
         try {
-            saveResultsInFile(fileName, repositoriesUrl);
+            saveResultsInFile(destinationFileName, repositoriesUrl);
         } catch (IOException e) {
             reportException(e, "Failed to save repositories into file!");
             return;
@@ -49,10 +52,13 @@ public class GitHubReposSearcherApplication {
         System.out.println("done");
     }
 
-    private @NotNull PagedSearchIterable<GHRepository> createIterable(final @NotNull GitHub github) {
-        final String language = "Java";
-        final String mustBeUpdatedSince = "2018-01-01";
-        final int stars = 1000;
+    private @NotNull PagedSearchIterable<GHRepository> createIterable(
+        final @NotNull GitHub github,
+        final @NotNull Properties properties
+    ) {
+        final String language = properties.getLanguage();
+        final String mustBeUpdatedSinceDate = properties.getMustBeUpdatedSinceDate();
+        final int starsLowerBound = properties.getStarsLowerBound();
 
         System.out.printf(
             "Searching for public repositories with\n" +
@@ -60,15 +66,15 @@ public class GitHubReposSearcherApplication {
             "last update at least on %s,\n" +
             "at least %s stars...\n\n",
             language,
-            mustBeUpdatedSince,
-            stars
+            mustBeUpdatedSinceDate,
+            starsLowerBound
         );
 
         return github.searchRepositories()
                      .language(language)
                      .q("is:public") // repository is public
-                     .pushed(">=" + mustBeUpdatedSince)
-                     .stars(">=" + stars)
+                     .pushed(">=" + mustBeUpdatedSinceDate)
+                     .stars(">=" + starsLowerBound)
                      .sort(GHRepositorySearchBuilder.Sort.STARS)
                      .order(GHDirection.DESC)
                      .list().withPageSize(maxPageSize);
@@ -94,8 +100,26 @@ public class GitHubReposSearcherApplication {
     }
 
     private @NotNull List<String> extractRepositories(final @NotNull PagedSearchIterable<GHRepository> iterable) {
+        int totalNumberOfRepositories = Math.min(iterable.getTotalCount(), maxSizeOfResult);
         List<String> repositoriesUrl = new ArrayList<>();
-        iterable.forEach(ghRepository -> repositoriesUrl.add(ghRepository.getHttpTransportUrl()));
+
+        System.out.printf("0 / %s", totalNumberOfRepositories);
+
+        iterable.forEach(
+            new Consumer<GHRepository>() {
+                int numberOfCollectedRepositories = 0;
+
+                @Override
+                public void accept(GHRepository ghRepository) {
+                    repositoriesUrl.add(ghRepository.getHttpTransportUrl());
+                    numberOfCollectedRepositories++;
+
+                    System.out.printf("\r%s / %s", numberOfCollectedRepositories, totalNumberOfRepositories);
+                }
+            }
+        );
+
+        System.out.print("\r");
 
         return repositoriesUrl;
     }
@@ -105,9 +129,7 @@ public class GitHubReposSearcherApplication {
         final @NotNull List<String> repositoriesUrl
     ) throws IOException {
         System.out.printf("Writing results into file named \"%s\"...\n", fileName);
-        try (PrintWriter printWriter = new PrintWriter(new FileWriter(fileName))) {
-            repositoriesUrl.forEach(printWriter::println);
-        }
+        Files.write(Paths.get(fileName), repositoriesUrl);
     }
 
     private static void reportException(final @NotNull Exception exception, final @NotNull String message) {
