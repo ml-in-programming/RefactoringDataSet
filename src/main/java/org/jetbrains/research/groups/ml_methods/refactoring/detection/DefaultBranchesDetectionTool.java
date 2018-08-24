@@ -21,6 +21,9 @@ abstract class DefaultBranchesDetectionTool implements RefactoringDetectionTool 
     @NotNull
     private static String getDefaultBranch(@NotNull URL repositoryUrl) throws IOException {
         RepositoryId repositoryId = RepositoryId.createFromUrl(ParsingUtils.getHttpLink(repositoryUrl));
+        if (repositoryId == null) {
+            throw new IllegalArgumentException(repositoryUrl + " repository url format is incorrect");
+        }
         return new RepositoryService().getRepository(repositoryId.getOwner(), repositoryId.getName()).getMasterBranch();
     }
 

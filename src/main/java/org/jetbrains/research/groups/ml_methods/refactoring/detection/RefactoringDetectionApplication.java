@@ -77,6 +77,7 @@ public class RefactoringDetectionApplication {
         List<Integer> totalRefactoringsNumbersInProcessedCommits = new ArrayList<>();
         for (RepositoryDetectedRefactorings repositoryDetectedRefactorings : detectedRefactorings) {
             System.out.println("--------------------------------");
+            System.out.println("Repository url: " + repositoryDetectedRefactorings.getRepository());
             System.out.println("Project: " +
                     ParsingUtils.getProjectName(repositoryDetectedRefactorings.getRepository()));
             System.out.println("Branch: " + repositoryDetectedRefactorings.getBranch());
