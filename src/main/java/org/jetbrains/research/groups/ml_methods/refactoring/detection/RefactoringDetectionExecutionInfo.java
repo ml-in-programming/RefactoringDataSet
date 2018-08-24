@@ -18,14 +18,11 @@ class RefactoringDetectionExecutionInfo {
     }
 
     int getProcessedCommitsWithRefactoringsNumber() {
-        return refactoringsNumbersInProcessedCommits.size();
-    }
-
-    int getProcessedCommitsNumber() {
-        return processedCommitsNumber;
+        return getRefactoringsNumbersInProcessedCommits().size();
     }
 
     double getMedianOfNotNullRefactoringsNumbers() {
+        final List<Integer> refactoringsNumbersInProcessedCommits = getRefactoringsNumbersInProcessedCommits();
         if (refactoringsNumbersInProcessedCommits.size() == 0) {
             return Double.NaN;
         }
@@ -37,14 +34,34 @@ class RefactoringDetectionExecutionInfo {
     }
 
     double getMaxCommitRefactoringsNumber() {
+        final List<Integer> refactoringsNumbersInProcessedCommits = getRefactoringsNumbersInProcessedCommits();
         if (refactoringsNumbersInProcessedCommits.size() == 0) {
             return Double.NaN;
         }
         return refactoringsNumbersInProcessedCommits.get(refactoringsNumbersInProcessedCommits.size() - 1);
     }
 
+    int getProcessedCommitsNumber() {
+        return processedCommitsNumber;
+    }
+
     @NotNull
     List<Integer> getRefactoringsNumbersInProcessedCommits() {
         return refactoringsNumbersInProcessedCommits;
+    }
+
+    @Override
+    public String toString() {
+        String out = "";
+        out += "Processed commits: " + processedCommitsNumber + "\n";
+        out += "Processed commits with refactorings: " + getProcessedCommitsWithRefactoringsNumber() + "\n";
+        out += "Median of number of refactorings in commits " +
+                "(only for commits that contain refactorings): " +
+                getMedianOfNotNullRefactoringsNumbers() + "\n";
+        out += "Max number of refactorings in one commit: " +
+                getMaxCommitRefactoringsNumber() + "\n";
+        out += "Detected refactorings: " +
+                refactoringsNumbersInProcessedCommits.stream().mapToInt(Integer::intValue).sum();
+        return out;
     }
 }

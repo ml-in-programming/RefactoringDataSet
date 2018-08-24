@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface RefactoringDetectionTool {
     @NotNull
-    RepositoryDetectedRefactorings detect(@NotNull URL repositoryUrl, @NotNull String branch) throws Exception;
+    RepositoryDetectionSuccess detect(@NotNull URL repositoryUrl, @NotNull String branch) throws Exception;
 
     @NotNull
-    List<RepositoryDetectedRefactorings> detect(@NotNull List<URL> repositoryUrls);
+    List<RepositoryDetectionResult> detect(@NotNull List<URL> repositoryUrls);
 }

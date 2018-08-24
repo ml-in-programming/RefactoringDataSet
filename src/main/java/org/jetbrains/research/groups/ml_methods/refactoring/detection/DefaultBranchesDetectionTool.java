@@ -29,16 +29,16 @@ abstract class DefaultBranchesDetectionTool implements RefactoringDetectionTool 
 
     @NotNull
     @Override
-    public List<RepositoryDetectedRefactorings> detect(@NotNull List<URL> repositoryUrls) {
+    public List<RepositoryDetectionResult> detect(@NotNull List<URL> repositoryUrls) {
         String passedProjects = repositoryUrls.stream()
                 .map(ParsingUtils::getProjectName)
                 .collect(Collectors.joining(", "));
         LOGGER.info("Started detection for projects: " + passedProjects);
-        List<RepositoryDetectedRefactorings> detected = new ArrayList<>();
+        List<RepositoryDetectionResult> detected = new ArrayList<>();
         int passedRepositories = 0;
         for (URL repositoryUrl : repositoryUrls) {
             String branch = null;
-            RepositoryDetectedRefactorings detectedRefactorings;
+            RepositoryDetectionResult detectedRefactorings;
             try {
                 branch = getDefaultBranch(repositoryUrl);
                 detectedRefactorings = detect(repositoryUrl, branch);
@@ -47,7 +47,7 @@ abstract class DefaultBranchesDetectionTool implements RefactoringDetectionTool 
                 LOGGER.error(errorDescription, e);
                 System.err.println(errorDescription);
                 printExceptionInformation(e);
-                detectedRefactorings = new RepositoryDetectedRefactorings(repositoryUrl, branch, e);
+                detectedRefactorings = new RepositoryDetectionFailed(repositoryUrl, branch, e);
             }
             detected.add(detectedRefactorings);
             passedRepositories++;

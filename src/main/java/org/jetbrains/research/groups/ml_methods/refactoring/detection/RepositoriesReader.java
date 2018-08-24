@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 class RepositoriesReader {
     @NotNull
-    private static final Logger LOGGER = Logging.getLogger(DefaultBranchesDetectionTool.class);
+    private static final Logger LOGGER = Logging.getLogger(RepositoriesReader.class);
 
     @NotNull
     static List<URL> read(@NotNull Path repositoriesFilePath) throws IOException {

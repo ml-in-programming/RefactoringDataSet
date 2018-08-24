@@ -8,9 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static java.lang.System.exit;
 
@@ -47,7 +45,7 @@ public class RefactoringDetectionApplication {
             exitWithError(errorDescription, e);
             return;
         }
-        List<RepositoryDetectedRefactorings> detectedRefactorings;
+        List<RepositoryDetectionResult> detectedRefactorings;
         try {
             detectedRefactorings = refactoringDetectionTool.detect(repositories);
         } catch (Exception e) {
@@ -55,11 +53,11 @@ public class RefactoringDetectionApplication {
             exitWithError(errorDescription, e);
             return;
         }
-        for (RepositoryDetectedRefactorings repositoryDetectedRefactorings : detectedRefactorings) {
-            String projectName = ParsingUtils.getProjectName(repositoryDetectedRefactorings.getRepository());
+        for (RepositoryDetectionResult repositoryDetectionSuccess : detectedRefactorings) {
+            String projectName = ParsingUtils.getProjectName(repositoryDetectionSuccess.getRepository());
             Path outputFilePath = outputDirPath.resolve(projectName);
             try {
-                repositoryDetectedRefactorings.write(outputFilePath);
+                repositoryDetectionSuccess.write(outputFilePath);
             } catch (IOException e) {
                 System.err.println("Error occurred during writing to " + outputFilePath + " file.");
                 printExceptionInformation(e);
@@ -69,65 +67,19 @@ public class RefactoringDetectionApplication {
         printResults(detectedRefactorings);
     }
 
-    private static void printResults(@NotNull List<RepositoryDetectedRefactorings> detectedRefactorings) {
+    private static void printResults(@NotNull List<RepositoryDetectionResult> detectedRefactorings) {
         System.out.println("====================STATISTICS====================");
-        int successNumber = 0;
-        int totalProcessedCommitsNumber = 0;
-        int totalNumberOfDetectedRefactorings = 0;
-        List<Integer> totalRefactoringsNumbersInProcessedCommits = new ArrayList<>();
-        for (RepositoryDetectedRefactorings repositoryDetectedRefactorings : detectedRefactorings) {
+        RepositoryDetectionResultCombiner repositoryDetectionResultCombiner =
+                new RepositoryDetectionResultCombiner();
+        for (RepositoryDetectionResult repositoryDetectionResult : detectedRefactorings) {
+            repositoryDetectionResultCombiner.add(repositoryDetectionResult);
             System.out.println("--------------------------------");
-            System.out.println("Repository url: " + repositoryDetectedRefactorings.getRepository());
-            System.out.println("Project: " +
-                    ParsingUtils.getProjectName(repositoryDetectedRefactorings.getRepository()));
-            System.out.println("Branch: " + repositoryDetectedRefactorings.getBranch());
-            if (repositoryDetectedRefactorings.isSuccess()) {
-                int processedCommitsNumber =
-                        Objects.requireNonNull(repositoryDetectedRefactorings.getExecutionInfo())
-                                .getProcessedCommitsNumber();
-                RefactoringDetectionExecutionInfo executionInfo =
-                        Objects.requireNonNull(repositoryDetectedRefactorings.getExecutionInfo());
-                int numberOfDetectedRefactorings =
-                        Objects.requireNonNull(repositoryDetectedRefactorings.getDetectedRefactorings())
-                                .size();
-                successNumber++;
-                totalProcessedCommitsNumber += processedCommitsNumber;
-                totalNumberOfDetectedRefactorings += numberOfDetectedRefactorings;
-                totalRefactoringsNumbersInProcessedCommits
-                        .addAll(executionInfo.getRefactoringsNumbersInProcessedCommits());
-                System.out.println("Result: success");
-                System.out.println("Processed commits: " + processedCommitsNumber);
-                System.out.println("Processed commits with refactorings: " +
-                        executionInfo.getProcessedCommitsWithRefactoringsNumber());
-                System.out.println("Median of number of refactorings in commits " +
-                        "(only for commits that contain refactorings): " +
-                        executionInfo.getMedianOfNotNullRefactoringsNumbers());
-                System.out.println("Max number of refactorings in one commit: " +
-                        executionInfo.getMaxCommitRefactoringsNumber());
-                System.out.println("Detected refactorings: " + numberOfDetectedRefactorings);
-            } else {
-                System.out.println("Result: failed");
-                System.out.println("Error type: " +
-                        Objects.requireNonNull(repositoryDetectedRefactorings.getException()).getClass().getCanonicalName());
-                System.out.println("Reason: " +
-                        Objects.requireNonNull(repositoryDetectedRefactorings.getException()).getMessage());
-            }
+            System.out.println(repositoryDetectionResult);
         }
         System.out.println("--------------------------------");
-        RefactoringDetectionExecutionInfo totalExecutionInfo =
-                new RefactoringDetectionExecutionInfo(totalProcessedCommitsNumber, totalRefactoringsNumbersInProcessedCommits);
+        RepositoriesDetectionResults totalRepositoriesResults = repositoryDetectionResultCombiner.combine();
         System.out.println("RESULTS FOR ALL REPOSITORIES");
-        System.out.println("Number of repositories: " + detectedRefactorings.size());
-        System.out.println("Success: " + successNumber + " / " + detectedRefactorings.size());
-        System.out.println("Processed commits: " + totalProcessedCommitsNumber);
-        System.out.println("Processed commits with refactorings: " +
-                totalExecutionInfo.getProcessedCommitsWithRefactoringsNumber());
-        System.out.println("Median of number of refactorings in commits " +
-                "(only for commits that contain refactorings): " +
-                totalExecutionInfo.getMedianOfNotNullRefactoringsNumbers());
-        System.out.println("Max number of refactorings in one commit: " +
-                totalExecutionInfo.getMaxCommitRefactoringsNumber());
-        System.out.println("Detected: " + totalNumberOfDetectedRefactorings);
+        System.out.println(totalRepositoriesResults);
         System.out.println("=================================================");
     }
 

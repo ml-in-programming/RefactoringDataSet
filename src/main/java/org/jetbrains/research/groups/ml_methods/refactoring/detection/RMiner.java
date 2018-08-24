@@ -34,7 +34,7 @@ class RMiner extends DefaultBranchesDetectionTool {
 
     @NotNull
     @Override
-    public RepositoryDetectedRefactorings detect(@NotNull URL repositoryUrl, @NotNull String branch) throws Exception {
+    public RepositoryDetectionSuccess detect(@NotNull URL repositoryUrl, @NotNull String branch) throws Exception {
         String projectName = ParsingUtils.getProjectName(repositoryUrl);
         LOGGER.info("Started detection for " + projectName + " project");
         System.out.println("Started detection for " + projectName + " project");
@@ -96,6 +96,6 @@ class RMiner extends DefaultBranchesDetectionTool {
                         commitsNumber,
                         refactoringsNumbersInCommit
                 );
-        return new RepositoryDetectedRefactorings(repositoryUrl, branch, executionInfo, detectedRefactorings);
+        return new RepositoryDetectionSuccess(repositoryUrl, branch, executionInfo, detectedRefactorings);
     }
 }
