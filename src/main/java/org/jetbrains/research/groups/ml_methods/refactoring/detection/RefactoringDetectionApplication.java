@@ -53,15 +53,17 @@ public class RefactoringDetectionApplication {
             exitWithError(errorDescription, e);
             return;
         }
-        for (RepositoryDetectionResult repositoryDetectionSuccess : detectedRefactorings) {
-            String projectName = ParsingUtils.getProjectName(repositoryDetectionSuccess.getRepository());
-            Path outputFilePath = outputDirPath.resolve(projectName);
-            try {
-                repositoryDetectionSuccess.write(outputFilePath);
-            } catch (IOException e) {
-                System.err.println("Error occurred during writing to " + outputFilePath + " file.");
-                printExceptionInformation(e);
-                System.err.println("Refactorings of " + projectName + " project can be corrupted.");
+        for (RepositoryDetectionResult repositoryDetectionResult : detectedRefactorings) {
+            if (repositoryDetectionResult instanceof RepositoryDetectionSuccess) {
+                String projectName = ParsingUtils.getProjectName(repositoryDetectionResult.getRepository());
+                Path outputFilePath = outputDirPath.resolve(projectName);
+                try {
+                    repositoryDetectionResult.write(outputFilePath);
+                } catch (IOException e) {
+                    System.err.println("Error occurred during writing to " + outputFilePath + " file.");
+                    printExceptionInformation(e);
+                    System.err.println("Refactorings of " + projectName + " project can be corrupted.");
+                }
             }
         }
         printResults(detectedRefactorings);
