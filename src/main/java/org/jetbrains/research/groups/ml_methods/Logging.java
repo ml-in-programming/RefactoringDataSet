@@ -16,8 +16,8 @@ public class Logging {
         final Logger logger = Logger.getLogger(aClass);
         logger.setLevel(Level.DEBUG);
         try {
-            logger.addAppender(new FileAppender(new PatternLayout("%p [%c.%M] - %m%n"),
-                    LOG_FILE_PATH.toAbsolutePath().toString()));
+            logger.addAppender(new RollingFileAppender(new PatternLayout("%p [%c.%M] - %m%n"),
+                    LOG_FILE_PATH.toAbsolutePath().toString(), false));
         } catch (IOException e) {
             System.err.println("Cannot open " + LOG_FILE_PATH.toAbsolutePath().toString() +
                     " file for logger. Reason: " + e.getMessage());
