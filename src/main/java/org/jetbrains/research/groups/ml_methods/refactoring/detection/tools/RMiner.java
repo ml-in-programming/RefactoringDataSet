@@ -7,12 +7,12 @@ import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.research.groups.ml_methods.refactoring.detection.RefactoringDetectionApplication;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodCommitRefactorings;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodRefactoring;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodRefactoring.RefactoringFilePaths;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RefactoringDetectionExecutionInfo;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionSuccess;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ErrorReporter;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ParsingUtils;
 import org.refactoringminer.api.GitService;
 import org.refactoringminer.api.Refactoring;
@@ -135,9 +135,7 @@ class RMiner extends DefaultBranchesDetectionTool {
                                 " for refactorings file paths to " +
                                 (isOriginal ? "original" : "moved") +
                                 " classes in current commit";
-                        LOGGER.error(errorMessage, e);
-                        System.err.println(errorMessage);
-                        RefactoringDetectionApplication.printExceptionInformation(e);
+                        ErrorReporter.reportError(errorMessage, e, RMiner.class);
                     }
                     return Optional.empty();
                 });
@@ -153,8 +151,9 @@ class RMiner extends DefaultBranchesDetectionTool {
         try {
             gitService.checkout(repository, commitId.getName());
         } catch (Exception e) {
-            System.err.println("Error occurred during checking out " + repository + " repository on commit: " + commitId.getName());
-            RefactoringDetectionApplication.printExceptionInformation(e);
+            String errorMessage = "Error occurred during checking out " +
+                    repository + " repository on commit: " + commitId.getName();
+            ErrorReporter.reportError(errorMessage, e, RMiner.class);
         }
         return refactorings.stream().collect(Collectors.toMap(Function.identity(), mappingFunction));
     }
@@ -180,6 +179,15 @@ class RMiner extends DefaultBranchesDetectionTool {
         List<Integer> refactoringsNumbersInCommit = new ArrayList<>();
         miner.detectAll(repository, branch, new RefactoringHandler() {
             private int processedCommitsNumber = 0;
+
+            @Override
+            public void handleException(String commitId, Exception e) {
+                super.handleException(commitId, e);
+                String errorMessage = "Error occurred during refactoring detection in " +
+                        commitId + " commmit for repository" + repositoryUrl;
+                ErrorReporter.reportError(errorMessage, e, this.getClass());
+                processedCommitsNumber++;
+            }
 
             @Override
             public void handle(RevCommit commitData, List<Refactoring> refactorings) {

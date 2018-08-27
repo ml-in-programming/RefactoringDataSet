@@ -8,6 +8,7 @@ import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.Re
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionSuccess;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.tools.RefactoringDetectionTool;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.tools.RefactoringDetectionToolFactory;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ErrorReporter;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ParsingUtils;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.RepositoriesReader;
 
@@ -30,7 +31,8 @@ public class RefactoringDetectionApplication {
             RefactoringDetectionApplication application = new RefactoringDetectionApplication();
             application.run(parseArguments(args));
         } catch (Throwable e) {
-            exitWithError("Unexpected exception occurred", e);
+            String errorMessage = "Unexpected exception occurred";
+            ErrorReporter.exitWithError(errorMessage, e, RefactoringDetectionApplication.class);
         }
     }
 
@@ -62,16 +64,16 @@ public class RefactoringDetectionApplication {
         try {
             repositories = RepositoriesReader.read(argumentsHolder.pathToRepositoriesFile);
         } catch (IOException e) {
-            String errorDescription = "Error occurred during parsing passed repository urls.";
-            exitWithError(errorDescription, e);
+            String errorMessage = "Error occurred during parsing passed repository urls.";
+            ErrorReporter.exitWithError(errorMessage, e, this.getClass());
             return;
         }
         List<RepositoryDetectionResult> detectedRefactorings;
         try {
             detectedRefactorings = argumentsHolder.refactoringDetectionTool.detect(repositories);
         } catch (Exception e) {
-            String errorDescription = "Error occurred during refactoring detection.";
-            exitWithError(errorDescription, e);
+            String errorMessage = "Error occurred during refactoring detection.";
+            ErrorReporter.exitWithError(errorMessage, e, this.getClass());
             return;
         }
         for (RepositoryDetectionResult repositoryDetectionResult : detectedRefactorings) {
@@ -81,8 +83,8 @@ public class RefactoringDetectionApplication {
                 try {
                     repositoryDetectionResult.write(outputFilePath);
                 } catch (IOException e) {
-                    System.err.println("Error occurred during writing to " + outputFilePath + " file.");
-                    printExceptionInformation(e);
+                    String errorMessage = "Error occurred during writing to " + outputFilePath + " file.";
+                    ErrorReporter.reportError(errorMessage, e, this.getClass());
                     System.err.println("Refactorings of " + projectName + " project can be corrupted.");
                 }
             }
@@ -125,18 +127,5 @@ public class RefactoringDetectionApplication {
         System.out.println("Usage: refactoring-detection <path to file with repositories list>" +
                 " <path to directory where to save detected refactorings>" +
                 " <detection tool (optional)>");
-    }
-
-    private static void exitWithError(@NotNull String errorDescription, @NotNull Throwable e) {
-        LOGGER.error(errorDescription, e);
-        System.err.println(errorDescription);
-        printExceptionInformation(e);
-        System.err.println("Application terminated.");
-        exit(-1);
-    }
-
-    public static void printExceptionInformation(Throwable e) {
-        System.err.println("Error type: " + e.getClass().getCanonicalName());
-        System.err.println("Reason: " + e.getMessage());
     }
 }
