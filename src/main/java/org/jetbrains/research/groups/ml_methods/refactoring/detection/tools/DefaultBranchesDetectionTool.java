@@ -6,6 +6,7 @@ import org.eclipse.egit.github.core.service.RepositoryService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionFailed;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionResult;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ErrorReporter;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ParsingUtils;
 
 import java.io.IOException;
@@ -13,8 +14,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.jetbrains.research.groups.ml_methods.refactoring.detection.RefactoringDetectionApplication.printExceptionInformation;
 
 abstract class DefaultBranchesDetectionTool implements RefactoringDetectionTool {
     @NotNull
@@ -45,10 +44,8 @@ abstract class DefaultBranchesDetectionTool implements RefactoringDetectionTool 
                 branch = getDefaultBranch(repositoryUrl);
                 detectedRefactorings = detect(repositoryUrl, branch);
             } catch (Exception e) {
-                String errorDescription = "Error occurred during refactoring detection for repository: " + repositoryUrl;
-                LOGGER.error(errorDescription, e);
-                System.err.println(errorDescription);
-                printExceptionInformation(e);
+                String errorMessage = "Error occurred during refactoring detection for repository: " + repositoryUrl;
+                ErrorReporter.reportError(errorMessage, e, this.getClass());
                 detectedRefactorings = new RepositoryDetectionFailed(repositoryUrl, branch, e);
             }
             detected.add(detectedRefactorings);
