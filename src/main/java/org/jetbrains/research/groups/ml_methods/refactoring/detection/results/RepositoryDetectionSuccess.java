@@ -9,12 +9,12 @@ public class RepositoryDetectionSuccess extends RepositoryDetectionResult {
     @NotNull
     private final RefactoringDetectionExecutionInfo executionInfo;
     @NotNull
-    private final List<MoveMethodRefactoringFromVCS> detectedRefactorings;
+    private final List<MoveMethodCommitRefactorings> detectedRefactorings;
 
     public RepositoryDetectionSuccess(@NotNull URL repository,
                                       @NotNull String branch,
                                       @NotNull RefactoringDetectionExecutionInfo executionInfo,
-                                      @NotNull List<MoveMethodRefactoringFromVCS> detectedRefactorings) {
+                                      @NotNull List<MoveMethodCommitRefactorings> detectedRefactorings) {
         super(repository, branch);
         this.detectedRefactorings = detectedRefactorings;
         this.executionInfo = executionInfo;
@@ -26,7 +26,7 @@ public class RepositoryDetectionSuccess extends RepositoryDetectionResult {
     }
 
     @NotNull
-    public List<MoveMethodRefactoringFromVCS> getDetectedRefactorings() {
+    public List<MoveMethodCommitRefactorings> getDetectedRefactorings() {
         return detectedRefactorings;
     }
 

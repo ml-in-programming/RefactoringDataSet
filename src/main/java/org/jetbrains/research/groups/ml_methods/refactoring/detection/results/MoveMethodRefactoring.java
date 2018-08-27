@@ -3,15 +3,10 @@ package org.jetbrains.research.groups.ml_methods.refactoring.detection.results;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.net.URL;
 import java.nio.file.Path;
 import java.util.List;
 
-public class MoveMethodRefactoringFromVCS {
-    @NotNull
-    private final URL repositoryURL;
-    @NotNull
-    private final String commitHash;
+public class MoveMethodRefactoring {
     @NotNull
     private final String targetClassQualifiedName;
     @NotNull
@@ -27,17 +22,13 @@ public class MoveMethodRefactoringFromVCS {
     @NotNull
     private final RefactoringFilePaths refactoringsFilePathsHolder;
 
-    public MoveMethodRefactoringFromVCS(@NotNull URL repositoryURL,
-                                        @NotNull String commitHash,
-                                        @NotNull String targetClassQualifiedName,
-                                        @NotNull String originalClassQualifiedName,
-                                        @NotNull String originalMethodName,
-                                        @NotNull String movedMethodName,
-                                        @NotNull List<String> originalParamsClassesQualifiedNames,
-                                        @NotNull List<String> movedParamsClassesQualifiedNames,
-                                        @NotNull RefactoringFilePaths refactoringsFilePathsHolder) {
-        this.repositoryURL = repositoryURL;
-        this.commitHash = commitHash;
+    public MoveMethodRefactoring(@NotNull String targetClassQualifiedName,
+                                 @NotNull String originalClassQualifiedName,
+                                 @NotNull String originalMethodName,
+                                 @NotNull String movedMethodName,
+                                 @NotNull List<String> originalParamsClassesQualifiedNames,
+                                 @NotNull List<String> movedParamsClassesQualifiedNames,
+                                 @NotNull RefactoringFilePaths refactoringsFilePathsHolder) {
         this.targetClassQualifiedName = targetClassQualifiedName;
         this.originalClassQualifiedName = originalClassQualifiedName;
         this.originalMethodName = originalMethodName;

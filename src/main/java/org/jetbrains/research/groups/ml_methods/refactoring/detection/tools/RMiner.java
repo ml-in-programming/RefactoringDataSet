@@ -7,8 +7,9 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.RefactoringDetectionApplication;
-import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodRefactoringFromVCS;
-import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodRefactoringFromVCS.RefactoringFilePaths;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodCommitRefactorings;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodRefactoring;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodRefactoring.RefactoringFilePaths;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RefactoringDetectionExecutionInfo;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionSuccess;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ParsingUtils;
@@ -24,10 +25,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -176,7 +174,7 @@ class RMiner extends DefaultBranchesDetectionTool {
                 downloadRepositoryPath.toAbsolutePath().toString(),
                 repositoryUrl.toString());
 
-        List<MoveMethodRefactoringFromVCS> detectedRefactorings = new ArrayList<>();
+        List<MoveMethodCommitRefactorings> detectedRefactorings = new ArrayList<>();
         int commitsNumber = gitService.countCommits(repository, branch) - 1;
         List<Integer> refactoringsNumbersInCommit = new ArrayList<>();
         miner.detectAll(repository, branch, new RefactoringHandler() {
@@ -185,14 +183,13 @@ class RMiner extends DefaultBranchesDetectionTool {
             @Override
             public void handle(RevCommit commitData, List<Refactoring> refactorings) {
                 LOGGER.info("Processed new commit. Commit hash: " + commitData.getId().getName());
-                List<MoveOperationRefactoring> moveOperationRefactorings = refactorings.stream()
-                        .map(refactoring -> (MoveOperationRefactoring) refactoring)
-                        .collect(Collectors.toList());
+                List<MoveOperationRefactoring> moveOperationRefactorings =
+                        Collections.unmodifiableList(refactorings.stream()
+                                .map(refactoring -> (MoveOperationRefactoring) refactoring)
+                                .collect(Collectors.toList()));
                 FilePathsForRefactoringMapper filePathsForRefactoringMapper =
                         findRefactoringsFilePaths(moveOperationRefactorings, gitService, repository, commitData);
-                if (moveOperationRefactorings.size() != 0) {
-                    refactoringsNumbersInCommit.add(moveOperationRefactorings.size());
-                }
+                List<MoveMethodRefactoring> commitRefactorings = new ArrayList<>();
                 for (MoveOperationRefactoring moveOperationRefactoring : moveOperationRefactorings) {
                     LOGGER.info("Refactoring: " + moveOperationRefactoring.toString());
 
@@ -223,11 +220,8 @@ class RMiner extends DefaultBranchesDetectionTool {
                                             null,
                                     filePathsForRefactoringMapper.getMovedAfter(moveOperationRefactoring)
                             );
-
-                    detectedRefactorings.add(
-                            new MoveMethodRefactoringFromVCS(
-                                    repositoryUrl,
-                                    commitData.getId().getName(),
+                    commitRefactorings.add(
+                            new MoveMethodRefactoring(
                                     targetClassQualifiedName,
                                     originalClassQualifiedName,
                                     originalMethodName,
@@ -235,6 +229,15 @@ class RMiner extends DefaultBranchesDetectionTool {
                                     originalParamsClassesQualifiedNames,
                                     movedParamsClassesQualifiedNames,
                                     refactoringFilePaths
+                            )
+                    );
+                }
+                if (moveOperationRefactorings.size() != 0) {
+                    refactoringsNumbersInCommit.add(moveOperationRefactorings.size());
+                    detectedRefactorings.add(
+                            new MoveMethodCommitRefactorings(
+                                    commitData.getId().getName(),
+                                    commitRefactorings
                             )
                     );
                 }
