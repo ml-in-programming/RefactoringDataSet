@@ -1,4 +1,4 @@
-package org.jetbrains.research.groups.ml_methods.refactoring.detection;
+package org.jetbrains.research.groups.ml_methods.refactoring.detection.results;
 
 import org.jetbrains.annotations.NotNull;
 

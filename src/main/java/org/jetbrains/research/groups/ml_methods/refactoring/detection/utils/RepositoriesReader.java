@@ -1,4 +1,4 @@
-package org.jetbrains.research.groups.ml_methods.refactoring.detection;
+package org.jetbrains.research.groups.ml_methods.refactoring.detection.utils;
 
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class RepositoriesReader {
+public class RepositoriesReader {
     @NotNull
     private static final Logger LOGGER = Logger.getLogger(RepositoriesReader.class);
 
     @NotNull
-    static List<URL> read(@NotNull Path repositoriesFilePath) throws IOException {
+    public static List<URL> read(@NotNull Path repositoriesFilePath) throws IOException {
         LOGGER.info("Started parsing repository urls file.");
         List<String> repositoryUrls = Files.lines(repositoriesFilePath).collect(Collectors.toList());
         List<URL> repositories = new ArrayList<>();

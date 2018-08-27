@@ -2,6 +2,14 @@ package org.jetbrains.research.groups.ml_methods.refactoring.detection;
 
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoriesDetectionResults;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionResult;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionResultCombiner;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionSuccess;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.tools.RefactoringDetectionTool;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.tools.RefactoringDetectionToolFactory;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ParsingUtils;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.RepositoriesReader;
 
 import java.io.IOException;
 import java.net.URL;
@@ -127,7 +135,7 @@ public class RefactoringDetectionApplication {
         exit(-1);
     }
 
-    static void printExceptionInformation(Throwable e) {
+    public static void printExceptionInformation(Throwable e) {
         System.err.println("Error type: " + e.getClass().getCanonicalName());
         System.err.println("Reason: " + e.getMessage());
     }

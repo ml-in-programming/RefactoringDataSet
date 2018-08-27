@@ -1,18 +1,18 @@
-package org.jetbrains.research.groups.ml_methods.refactoring.detection;
+package org.jetbrains.research.groups.ml_methods.refactoring.detection.results;
 
 import org.jetbrains.annotations.NotNull;
 
-class RepositoryDetectionResultCombiner {
+public class RepositoryDetectionResultCombiner {
     private final RepositoryRefactoringDetectionExecutionInfoCombiner executionInfoCombiner
             = new RepositoryRefactoringDetectionExecutionInfoCombiner();
     private int succeeded = 0;
     private int total = 0;
 
-    RepositoryDetectionResultCombiner() {
+    public RepositoryDetectionResultCombiner() {
     }
 
     @NotNull
-    RepositoryDetectionResultCombiner add(RepositoryDetectionResult repositoryDetectionResult) {
+    public RepositoryDetectionResultCombiner add(RepositoryDetectionResult repositoryDetectionResult) {
         if (repositoryDetectionResult instanceof RepositoryDetectionSuccess) {
             succeeded++;
             executionInfoCombiner.add(((RepositoryDetectionSuccess) repositoryDetectionResult).getExecutionInfo());
@@ -21,7 +21,7 @@ class RepositoryDetectionResultCombiner {
         return this;
     }
 
-    RepositoriesDetectionResults combine() {
+    public RepositoriesDetectionResults combine() {
         return new RepositoriesDetectionResults(succeeded, total, executionInfoCombiner.combine());
     }
 }

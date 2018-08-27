@@ -1,9 +1,12 @@
-package org.jetbrains.research.groups.ml_methods.refactoring.detection;
+package org.jetbrains.research.groups.ml_methods.refactoring.detection.tools;
 
 import org.apache.log4j.Logger;
 import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.service.RepositoryService;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionFailed;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionResult;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ParsingUtils;
 
 import java.io.IOException;
 import java.net.URL;

@@ -1,4 +1,4 @@
-package org.jetbrains.research.groups.ml_methods.refactoring.detection;
+package org.jetbrains.research.groups.ml_methods.refactoring.detection.results;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -9,7 +9,7 @@ public class RepositoryDetectionFailed extends RepositoryDetectionResult {
     @NotNull
     private final Exception exception;
 
-    RepositoryDetectionFailed(@NotNull URL repository, @Nullable String branch, @NotNull Exception exception) {
+    public RepositoryDetectionFailed(@NotNull URL repository, @Nullable String branch, @NotNull Exception exception) {
         super(repository, branch);
         this.exception = exception;
     }

@@ -1,8 +1,8 @@
-package org.jetbrains.research.groups.ml_methods.refactoring.detection;
+package org.jetbrains.research.groups.ml_methods.refactoring.detection.results;
 
 import org.jetbrains.annotations.NotNull;
 
-class RepositoriesDetectionResults {
+public class RepositoriesDetectionResults {
     private final int succeededRepositories;
     private final int totalRepositoriesNumber;
     @NotNull

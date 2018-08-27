@@ -1,27 +1,27 @@
-package org.jetbrains.research.groups.ml_methods.refactoring.detection;
+package org.jetbrains.research.groups.ml_methods.refactoring.detection.results;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
 
-class RefactoringDetectionExecutionInfo {
+public class RefactoringDetectionExecutionInfo {
     private final int processedCommitsNumber;
     @NotNull
     private final List<Integer> refactoringsNumbersInProcessedCommits;
 
-    RefactoringDetectionExecutionInfo(int processedCommitsNumber,
-                                      @NotNull List<Integer> refactoringsNumbersInProcessedCommits) {
+    public RefactoringDetectionExecutionInfo(int processedCommitsNumber,
+                                             @NotNull List<Integer> refactoringsNumbersInProcessedCommits) {
         this.processedCommitsNumber = processedCommitsNumber;
         this.refactoringsNumbersInProcessedCommits = refactoringsNumbersInProcessedCommits;
         Collections.sort(this.refactoringsNumbersInProcessedCommits);
     }
 
-    int getProcessedCommitsWithRefactoringsNumber() {
+    public int getProcessedCommitsWithRefactoringsNumber() {
         return getRefactoringsNumbersInProcessedCommits().size();
     }
 
-    double getMedianOfNotNullRefactoringsNumbers() {
+    public double getMedianOfNotNullRefactoringsNumbers() {
         final List<Integer> refactoringsNumbersInProcessedCommits = getRefactoringsNumbersInProcessedCommits();
         if (refactoringsNumbersInProcessedCommits.size() == 0) {
             return Double.NaN;
@@ -33,7 +33,7 @@ class RefactoringDetectionExecutionInfo {
                 : refactoringsNumbersInProcessedCommits.get(middleIndex);
     }
 
-    double getMaxCommitRefactoringsNumber() {
+    public double getMaxCommitRefactoringsNumber() {
         final List<Integer> refactoringsNumbersInProcessedCommits = getRefactoringsNumbersInProcessedCommits();
         if (refactoringsNumbersInProcessedCommits.size() == 0) {
             return Double.NaN;
@@ -41,12 +41,12 @@ class RefactoringDetectionExecutionInfo {
         return refactoringsNumbersInProcessedCommits.get(refactoringsNumbersInProcessedCommits.size() - 1);
     }
 
-    int getProcessedCommitsNumber() {
+    public int getProcessedCommitsNumber() {
         return processedCommitsNumber;
     }
 
     @NotNull
-    List<Integer> getRefactoringsNumbersInProcessedCommits() {
+    public List<Integer> getRefactoringsNumbersInProcessedCommits() {
         return refactoringsNumbersInProcessedCommits;
     }
 
