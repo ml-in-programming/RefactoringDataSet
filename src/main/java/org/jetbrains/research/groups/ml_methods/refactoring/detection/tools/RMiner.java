@@ -1,6 +1,7 @@
 package org.jetbrains.research.groups.ml_methods.refactoring.detection.tools;
 
 import gr.uom.java.xmi.diff.MoveOperationRefactoring;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
@@ -250,6 +251,7 @@ class RMiner extends DefaultBranchesDetectionTool {
                         commitsNumber,
                         refactoringsNumbersInCommit
                 );
+        FileUtils.deleteDirectory(downloadRepositoryPath.toFile());
         return new RepositoryDetectionSuccess(repositoryUrl, branch, executionInfo, detectedRefactorings);
     }
 
