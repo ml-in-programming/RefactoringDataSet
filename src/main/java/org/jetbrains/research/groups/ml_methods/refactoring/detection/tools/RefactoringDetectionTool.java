@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionResult;
 
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.List;
 
 public interface RefactoringDetectionTool {
@@ -12,4 +13,8 @@ public interface RefactoringDetectionTool {
 
     @NotNull
     List<RepositoryDetectionResult> detect(@NotNull List<URL> repositoryUrls);
+
+    @NotNull
+    List<RepositoryDetectionResult> detectAndSave(@NotNull List<URL> repositoryUrls,
+                                                  @NotNull Path outputDirPath);
 }

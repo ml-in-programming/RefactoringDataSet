@@ -4,11 +4,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoriesDetectionResults;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionResult;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionResultCombiner;
-import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionSuccess;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.tools.RefactoringDetectionTool;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.tools.RefactoringDetectionToolFactory;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ErrorReporter;
-import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ParsingUtils;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.RepositoriesReader;
 
 import java.io.IOException;
@@ -67,24 +65,12 @@ public class RefactoringDetectionApplication {
         }
         List<RepositoryDetectionResult> detectedRefactorings;
         try {
-            detectedRefactorings = argumentsHolder.refactoringDetectionTool.detect(repositories);
+            detectedRefactorings = argumentsHolder.refactoringDetectionTool
+                    .detectAndSave(repositories, argumentsHolder.outputDirPath);
         } catch (Exception e) {
             String errorMessage = "Error occurred during refactoring detection.";
             ErrorReporter.exitWithError(errorMessage, e, this.getClass());
             return;
-        }
-        for (RepositoryDetectionResult repositoryDetectionResult : detectedRefactorings) {
-            if (repositoryDetectionResult instanceof RepositoryDetectionSuccess) {
-                String projectName = ParsingUtils.getProjectName(repositoryDetectionResult.getRepository());
-                Path outputFilePath = argumentsHolder.outputDirPath.resolve(projectName);
-                try {
-                    repositoryDetectionResult.write(outputFilePath);
-                } catch (IOException e) {
-                    String errorMessage = "Error occurred during writing to " + outputFilePath + " file.";
-                    ErrorReporter.reportError(errorMessage, e, this.getClass());
-                    System.err.println("Refactorings of " + projectName + " project can be corrupted.");
-                }
-            }
         }
         printResults(detectedRefactorings);
     }
