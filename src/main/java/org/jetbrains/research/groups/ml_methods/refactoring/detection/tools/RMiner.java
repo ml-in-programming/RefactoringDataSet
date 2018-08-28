@@ -7,10 +7,10 @@ import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodCommitRefactorings;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.CommitDetectionFailed;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.CommitDetectionSuccess;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodRefactoring;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodRefactoring.RefactoringFilePaths;
-import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RefactoringDetectionExecutionInfo;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionSuccess;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ErrorReporter;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ParsingUtils;
@@ -174,9 +174,9 @@ class RMiner extends DefaultBranchesDetectionTool {
                 downloadRepositoryPath.toAbsolutePath().toString(),
                 repositoryUrl.toString());
 
-        List<MoveMethodCommitRefactorings> detectedRefactorings = new ArrayList<>();
+        List<CommitDetectionSuccess> commitDetectionSuccesses = new ArrayList<>();
+        List<CommitDetectionFailed> commitDetectionFailures = new ArrayList<>();
         int commitsNumber = gitService.countCommits(repository, branch) - 1;
-        List<Integer> refactoringsNumbersInCommit = new ArrayList<>();
         miner.detectAll(repository, branch, new RefactoringHandler() {
             private int processedCommitsNumber = 0;
 
@@ -184,9 +184,10 @@ class RMiner extends DefaultBranchesDetectionTool {
             public void handleException(String commitId, Exception e) {
                 super.handleException(commitId, e);
                 String errorMessage = "Error occurred during refactoring detection in " +
-                        commitId + " commmit for repository" + repositoryUrl;
+                        commitId + " commit for repository" + repositoryUrl;
                 ErrorReporter.reportError(errorMessage, e, this.getClass());
-                processedCommitsNumber++;
+                commitDetectionFailures.add(new CommitDetectionFailed(commitId, e));
+                processedNewCommit();
             }
 
             @Override
@@ -241,26 +242,22 @@ class RMiner extends DefaultBranchesDetectionTool {
                             )
                     );
                 }
-                if (moveOperationRefactorings.size() != 0) {
-                    refactoringsNumbersInCommit.add(moveOperationRefactorings.size());
-                    detectedRefactorings.add(
-                            new MoveMethodCommitRefactorings(
-                                    commitData.getId().getName(),
-                                    commitRefactorings
-                            )
-                    );
-                }
+                commitDetectionSuccesses.add(
+                        new CommitDetectionSuccess(
+                                commitData.getId().getName(),
+                                commitRefactorings
+                        )
+                );
+                processedNewCommit();
+            }
+
+            private void processedNewCommit() {
                 processedCommitsNumber++;
                 System.out.println("Processed commits: " + processedCommitsNumber + " / " + commitsNumber);
             }
         });
-        RefactoringDetectionExecutionInfo executionInfo =
-                new RefactoringDetectionExecutionInfo(
-                        commitsNumber,
-                        refactoringsNumbersInCommit
-                );
         FileUtils.deleteDirectory(downloadRepositoryPath.toFile());
-        return new RepositoryDetectionSuccess(repositoryUrl, branch, executionInfo, detectedRefactorings);
+        return new RepositoryDetectionSuccess(repositoryUrl, branch, commitDetectionSuccesses, commitDetectionFailures);
     }
 
     private static class FilePathsForRefactoringMapper {

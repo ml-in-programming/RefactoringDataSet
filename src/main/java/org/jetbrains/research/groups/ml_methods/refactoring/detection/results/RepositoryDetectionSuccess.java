@@ -7,31 +7,38 @@ import java.util.List;
 
 public class RepositoryDetectionSuccess extends RepositoryDetectionResult {
     @NotNull
-    private final RefactoringDetectionExecutionInfo executionInfo;
+    private transient final ResultsStatistics statistics;
     @NotNull
-    private final List<MoveMethodCommitRefactorings> detectedRefactorings;
+    private final List<CommitDetectionSuccess> commitDetectionSuccesses;
+    @NotNull
+    private final List<CommitDetectionFailed> commitDetectionFailures;
 
     public RepositoryDetectionSuccess(@NotNull URL repository,
                                       @NotNull String branch,
-                                      @NotNull RefactoringDetectionExecutionInfo executionInfo,
-                                      @NotNull List<MoveMethodCommitRefactorings> detectedRefactorings) {
+                                      @NotNull List<CommitDetectionSuccess> commitDetectionSuccesses,
+                                      @NotNull List<CommitDetectionFailed> commitDetectionFailures) {
         super(repository, branch);
-        this.detectedRefactorings = detectedRefactorings;
-        this.executionInfo = executionInfo;
+        this.commitDetectionSuccesses = commitDetectionSuccesses;
+        this.commitDetectionFailures = commitDetectionFailures;
+        statistics = new ResultsStatistics(commitDetectionSuccesses, commitDetectionFailures);
+    }
+
+    @NotNull
+    public List<CommitDetectionSuccess> getCommitDetectionSuccesses() {
+        return commitDetectionSuccesses;
+    }
+
+    @NotNull
+    public List<CommitDetectionFailed> getCommitDetectionFailures() {
+        return commitDetectionFailures;
     }
 
     @Override
     public String toString() {
-        return super.toString() + "Result: success\n" + executionInfo;
+        String out = super.toString();
+        out += "Result: success\n";
+        out += statistics;
+        return out;
     }
 
-    @NotNull
-    public List<MoveMethodCommitRefactorings> getDetectedRefactorings() {
-        return detectedRefactorings;
-    }
-
-    @NotNull
-    public RefactoringDetectionExecutionInfo getExecutionInfo() {
-        return executionInfo;
-    }
 }
