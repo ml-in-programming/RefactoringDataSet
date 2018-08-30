@@ -8,54 +8,54 @@ import java.util.List;
 
 public class MoveMethodRefactoring {
     @NotNull
-    private final String targetClassQualifiedName;
+    private final MethodRefactoringInfo originalMethodInfo;
     @NotNull
-    private final String originalClassQualifiedName;
-    @NotNull
-    private final String originalMethodName;
-    @NotNull
-    private final String movedMethodName;
-    @NotNull
-    private final List<String> originalParamsClassesQualifiedNames;
-    @NotNull
-    private final List<String> movedParamsClassesQualifiedNames;
-    @NotNull
-    private final RefactoringFilePaths refactoringsFilePathsHolder;
+    private final MethodRefactoringInfo movedMethodInfo;
 
-    public MoveMethodRefactoring(@NotNull String targetClassQualifiedName,
-                                 @NotNull String originalClassQualifiedName,
-                                 @NotNull String originalMethodName,
-                                 @NotNull String movedMethodName,
-                                 @NotNull List<String> originalParamsClassesQualifiedNames,
-                                 @NotNull List<String> movedParamsClassesQualifiedNames,
-                                 @NotNull RefactoringFilePaths refactoringsFilePathsHolder) {
-        this.targetClassQualifiedName = targetClassQualifiedName;
-        this.originalClassQualifiedName = originalClassQualifiedName;
-        this.originalMethodName = originalMethodName;
-        this.movedMethodName = movedMethodName;
-        this.originalParamsClassesQualifiedNames = originalParamsClassesQualifiedNames;
-        this.movedParamsClassesQualifiedNames = movedParamsClassesQualifiedNames;
-        this.refactoringsFilePathsHolder = refactoringsFilePathsHolder;
+    public MoveMethodRefactoring(@NotNull MethodRefactoringInfo originalMethodInfo,
+                                 @NotNull MethodRefactoringInfo movedMethodInfo) {
+        this.originalMethodInfo = originalMethodInfo;
+        this.movedMethodInfo = movedMethodInfo;
     }
 
-    public static class RefactoringFilePaths {
+    public static class MethodRefactoringInfo {
         @NotNull
-        private final String originalFilePathsBefore;
-        @Nullable
-        private final String movedFilePathsBefore;
-        @Nullable
-        private final String originalFilePathsAfter;
+        private final String classQualifiedName;
         @NotNull
-        private final String movedFilePathsAfter;
+        private final String methodName;
+        @Nullable
+        private final String returnType;
+        @NotNull
+        private final List<String> paramsClassesSimpleNames;
+        @NotNull
+        private final RefactoringFilePaths refactoringFilePaths;
+        private final int originalStatementsCount;
 
-        public RefactoringFilePaths(@NotNull Path originalFilePathsBefore,
-                                    @Nullable Path movedFilePathsBefore,
-                                    @Nullable Path originalFilePathsAfter,
-                                    @NotNull Path movedFilePathsAfter) {
-            this.originalFilePathsBefore = originalFilePathsBefore.toString();
-            this.movedFilePathsBefore = movedFilePathsBefore == null ? null : movedFilePathsBefore.toString();
-            this.originalFilePathsAfter = originalFilePathsAfter == null ? null : originalFilePathsAfter.toString();
-            this.movedFilePathsAfter = movedFilePathsAfter.toString();
+        public MethodRefactoringInfo(@NotNull String classQualifiedName,
+                                     @NotNull String methodName,
+                                     @Nullable String returnType,
+                                     @NotNull List<String> paramsClassesSimpleNames,
+                                     @NotNull RefactoringFilePaths refactoringFilePaths,
+                                     int originalStatementsCount) {
+            this.classQualifiedName = classQualifiedName;
+            this.methodName = methodName;
+            this.returnType = returnType;
+            this.paramsClassesSimpleNames = paramsClassesSimpleNames;
+            this.refactoringFilePaths = refactoringFilePaths;
+            this.originalStatementsCount = originalStatementsCount;
+        }
+
+        public static class RefactoringFilePaths {
+            @Nullable
+            private final String filePathBefore;
+            @Nullable
+            private final String filePathAfter;
+
+            public RefactoringFilePaths(@Nullable Path filePathBefore,
+                                        @Nullable Path filePathAfter) {
+                this.filePathBefore = filePathBefore == null ? null : filePathBefore.toString();
+                this.filePathAfter = filePathAfter == null ? null : filePathAfter.toString();
+            }
         }
     }
 }

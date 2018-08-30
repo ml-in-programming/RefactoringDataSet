@@ -1,5 +1,6 @@
 package org.jetbrains.research.groups.ml_methods.refactoring.detection.tools;
 
+import gr.uom.java.xmi.UMLOperation;
 import gr.uom.java.xmi.diff.MoveOperationRefactoring;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -10,7 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.CommitDetectionFailed;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.CommitDetectionSuccess;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodRefactoring;
-import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodRefactoring.RefactoringFilePaths;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodRefactoring.MethodRefactoringInfo;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.MoveMethodRefactoring.MethodRefactoringInfo.RefactoringFilePaths;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionSuccess;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ErrorReporter;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ParsingUtils;
@@ -202,43 +204,14 @@ class RMiner extends DefaultBranchesDetectionTool {
                 List<MoveMethodRefactoring> commitRefactorings = new ArrayList<>();
                 for (MoveOperationRefactoring moveOperationRefactoring : moveOperationRefactorings) {
                     LOGGER.info("Refactoring: " + moveOperationRefactoring.toString());
-
-                    String targetClassQualifiedName = moveOperationRefactoring.getMovedOperation().getClassName();
-                    String originalClassQualifiedName = moveOperationRefactoring.getOriginalOperation().getClassName();
-                    String movedMethodName = moveOperationRefactoring.getMovedOperation().getName();
-                    String originalMethodName = moveOperationRefactoring.getOriginalOperation().getName();
-                    List<String> movedParamsClassesQualifiedNames =
-                            moveOperationRefactoring.getMovedOperation().getParametersWithoutReturnType().stream()
-                                    .map(umlParameter -> umlParameter.getType().toString())
-                                    .collect(Collectors.toList());
-                    List<String> originalParamsClassesQualifiedNames =
-                            moveOperationRefactoring.getOriginalOperation().getParametersWithoutReturnType().stream()
-                                    .map(umlParameter -> umlParameter.getType().toString())
-                                    .collect(Collectors.toList());
-                    RefactoringFilePaths refactoringFilePaths =
-                            new RefactoringFilePaths(
-                                    filePathsForRefactoringMapper.getOriginalBefore(moveOperationRefactoring),
-                                    filePathsForRefactoringMapper.getMovedBefore(moveOperationRefactoring).isPresent() ?
-                                            Paths.get(tmpDir, projectName)
-                                                    .relativize(filePathsForRefactoringMapper
-                                                            .getMovedBefore(moveOperationRefactoring).get()) :
-                                            null,
-                                    filePathsForRefactoringMapper.getOriginalAfter(moveOperationRefactoring).isPresent() ?
-                                            Paths.get(tmpDir, projectName)
-                                                    .relativize(filePathsForRefactoringMapper
-                                                            .getOriginalAfter(moveOperationRefactoring).get()) :
-                                            null,
-                                    filePathsForRefactoringMapper.getMovedAfter(moveOperationRefactoring)
-                            );
                     commitRefactorings.add(
                             new MoveMethodRefactoring(
-                                    targetClassQualifiedName,
-                                    originalClassQualifiedName,
-                                    originalMethodName,
-                                    movedMethodName,
-                                    originalParamsClassesQualifiedNames,
-                                    movedParamsClassesQualifiedNames,
-                                    refactoringFilePaths
+                                    getMethodRefactoringInfo(moveOperationRefactoring.getOriginalOperation(),
+                                            getOriginalRefactoringFilePaths(filePathsForRefactoringMapper,
+                                                    moveOperationRefactoring, downloadRepositoryPath)),
+                                    getMethodRefactoringInfo(moveOperationRefactoring.getMovedOperation(),
+                                            getMovedRefactoringFilePaths(filePathsForRefactoringMapper,
+                                                    moveOperationRefactoring, downloadRepositoryPath))
                             )
                     );
                 }
@@ -258,6 +231,51 @@ class RMiner extends DefaultBranchesDetectionTool {
         });
         FileUtils.deleteDirectory(downloadRepositoryPath.toFile());
         return new RepositoryDetectionSuccess(repositoryUrl, branch, commitDetectionSuccesses, commitDetectionFailures);
+    }
+
+    @NotNull
+    private MethodRefactoringInfo getMethodRefactoringInfo(@NotNull UMLOperation movedOperation,
+                                                           @NotNull RefactoringFilePaths movedRefactoringFilePaths) {
+        String classQualifiedName = movedOperation.getClassName();
+        String methodName = movedOperation.getName();
+        String returnType = movedOperation.getReturnParameter() == null ?
+                null : movedOperation.getReturnParameter().getType().toString();
+        List<String> paramsClassesQualifiedNames = movedOperation.getParametersWithoutReturnType().stream()
+                .map(umlParameter -> umlParameter.getType().toString())
+                .collect(Collectors.toList());
+        int statementsCount = movedOperation.getBody().statementCount();
+        return new MethodRefactoringInfo(classQualifiedName, methodName, returnType,
+                paramsClassesQualifiedNames, movedRefactoringFilePaths, statementsCount);
+    }
+
+    @NotNull
+    private RefactoringFilePaths
+    getOriginalRefactoringFilePaths(@NotNull FilePathsForRefactoringMapper filePathsForRefactoringMapper,
+                                    @NotNull MoveOperationRefactoring moveOperationRefactoring,
+                                    @NotNull Path projectRootDir) {
+        return new RefactoringFilePaths(
+                filePathsForRefactoringMapper.getMovedBefore(moveOperationRefactoring).isPresent() ?
+                        projectRootDir
+                                .relativize(filePathsForRefactoringMapper
+                                        .getMovedBefore(moveOperationRefactoring).get()) :
+                        null,
+                filePathsForRefactoringMapper.getMovedAfter(moveOperationRefactoring)
+        );
+    }
+
+    @NotNull
+    private RefactoringFilePaths
+    getMovedRefactoringFilePaths(@NotNull FilePathsForRefactoringMapper filePathsForRefactoringMapper,
+                                 @NotNull MoveOperationRefactoring moveOperationRefactoring,
+                                 @NotNull Path projectRootDir) {
+        return new RefactoringFilePaths(
+                filePathsForRefactoringMapper.getOriginalBefore(moveOperationRefactoring),
+                filePathsForRefactoringMapper.getOriginalAfter(moveOperationRefactoring).isPresent() ?
+                        projectRootDir
+                                .relativize(filePathsForRefactoringMapper
+                                        .getOriginalAfter(moveOperationRefactoring).get()) :
+                        null
+        );
     }
 
     private static class FilePathsForRefactoringMapper {
