@@ -31,6 +31,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.refactoringminer.api.RefactoringType.*;
 
@@ -119,9 +120,8 @@ public class RMiner extends DefaultBranchesDetectionTool {
                 repository,
                 commitId,
                 refactoring -> {
-                    try {
-                        return Files.walk(repository.getWorkTree().toPath())
-                                .filter(path ->
+                    try (Stream<Path> stream = Files.walk(repository.getWorkTree().toPath())) {
+                        return stream.filter(path ->
                                         path.endsWith(Paths.get(isOriginal ?
                                                 ParsingUtils.getPathFromClassQualifiedName(
                                                         refactoring.getOriginalOperation().getClassName(),
