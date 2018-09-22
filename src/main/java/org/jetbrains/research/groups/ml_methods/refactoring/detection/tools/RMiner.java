@@ -34,15 +34,16 @@ import java.util.stream.Collectors;
 
 import static org.refactoringminer.api.RefactoringType.*;
 
-class RMiner extends DefaultBranchesDetectionTool {
+public class RMiner extends DefaultBranchesDetectionTool {
     @NotNull
     private static final Logger LOGGER = Logger.getLogger(RMiner.class);
+
     @NotNull
-    private static final RefactoringType[] interestingRefactoringsTypes = {
-            MOVE_OPERATION,
-            PULL_UP_OPERATION,
-            PUSH_DOWN_OPERATION
-    };
+    private final RefactoringType[] interestingRefactoringsTypes;
+
+    public RMiner(final @NotNull RefactoringType ... interestingRefactoringsTypes) {
+        this.interestingRefactoringsTypes = interestingRefactoringsTypes;
+    }
 
     @NotNull
     private static FilePathsForRefactoringMapper

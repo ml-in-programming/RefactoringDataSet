@@ -4,8 +4,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoriesDetectionResults;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionResult;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.results.RepositoryDetectionResultCombiner;
+import org.jetbrains.research.groups.ml_methods.refactoring.detection.tools.RMiner;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.tools.RefactoringDetectionTool;
-import org.jetbrains.research.groups.ml_methods.refactoring.detection.tools.RefactoringDetectionToolFactory;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.ErrorReporter;
 import org.jetbrains.research.groups.ml_methods.refactoring.detection.utils.RepositoriesReader;
 
@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import static java.lang.System.exit;
+import static org.refactoringminer.api.RefactoringType.MOVE_OPERATION;
 
 public class RefactoringDetectionApplication {
     @NotNull
@@ -43,7 +44,7 @@ public class RefactoringDetectionApplication {
         RefactoringDetectionTool refactoringDetectionTool = null;
         switch (detectionToolName) {
             case "RMiner":
-                refactoringDetectionTool = RefactoringDetectionToolFactory.createRMiner();
+                refactoringDetectionTool = new RMiner(MOVE_OPERATION);
                 break;
             default:
                 System.out.println("No such tool. Try again.");
