@@ -1,0 +1,8 @@
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.kohsuke', name: 'github-api', version: '1.93'
+    compile group: 'org.jetbrains', name: 'annotations', version: '13.0'
+}
