@@ -251,7 +251,7 @@ public class RMiner extends DefaultBranchesDetectionTool {
 
     @NotNull
     private RefactoringFilePaths
-    getOriginalRefactoringFilePaths(@NotNull FilePathsForRefactoringMapper filePathsForRefactoringMapper,
+    getMovedRefactoringFilePaths(@NotNull FilePathsForRefactoringMapper filePathsForRefactoringMapper,
                                     @NotNull MoveOperationRefactoring moveOperationRefactoring,
                                     @NotNull Path projectRootDir) {
         return new RefactoringFilePaths(
@@ -266,7 +266,7 @@ public class RMiner extends DefaultBranchesDetectionTool {
 
     @NotNull
     private RefactoringFilePaths
-    getMovedRefactoringFilePaths(@NotNull FilePathsForRefactoringMapper filePathsForRefactoringMapper,
+    getOriginalRefactoringFilePaths(@NotNull FilePathsForRefactoringMapper filePathsForRefactoringMapper,
                                  @NotNull MoveOperationRefactoring moveOperationRefactoring,
                                  @NotNull Path projectRootDir) {
         return new RefactoringFilePaths(
