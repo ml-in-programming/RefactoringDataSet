@@ -15,8 +15,10 @@ import java.util.Collections;
 public abstract class RepositoryDetectionResult {
     @NotNull
     private static final Gson JSON_CONVERTER = new GsonBuilder().setPrettyPrinting().create();
+
     @NotNull
     private final URL repository;
+
     @Nullable
     private String branch;
 
@@ -33,6 +35,11 @@ public abstract class RepositoryDetectionResult {
     @NotNull
     public URL getRepository() {
         return repository;
+    }
+
+    @Nullable
+    public String getBranch() {
+        return branch;
     }
 
     @Override

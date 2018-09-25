@@ -10,5 +10,10 @@ public abstract class CommitDetectionResult {
         this.commitHash = commitHash;
     }
 
+    @NotNull
+    public String getCommitHash() {
+        return commitHash;
+    }
+
     public abstract boolean isSuccess();
 }

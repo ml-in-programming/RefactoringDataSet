@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MoveMethodRefactoring {
     @NotNull
@@ -16,6 +17,16 @@ public class MoveMethodRefactoring {
                                  @NotNull MethodRefactoringInfo movedMethodInfo) {
         this.originalMethodInfo = originalMethodInfo;
         this.movedMethodInfo = movedMethodInfo;
+    }
+
+    @NotNull
+    public MethodRefactoringInfo getOriginalMethodInfo() {
+        return originalMethodInfo;
+    }
+
+    @NotNull
+    public MethodRefactoringInfo getMovedMethodInfo() {
+        return movedMethodInfo;
     }
 
     public static class MethodRefactoringInfo {
@@ -45,6 +56,44 @@ public class MoveMethodRefactoring {
             this.originalStatementsCount = originalStatementsCount;
         }
 
+        @NotNull
+        public String getClassQualifiedName() {
+            return classQualifiedName;
+        }
+
+        @NotNull
+        public String getMethodName() {
+            return methodName;
+        }
+
+        @Nullable
+        public String getReturnType() {
+            return returnType;
+        }
+
+        @NotNull
+        public List<String> getParamsClassesSimpleNames() {
+            return paramsClassesSimpleNames;
+        }
+
+        @NotNull
+        public RefactoringFilePaths getRefactoringFilePaths() {
+            return refactoringFilePaths;
+        }
+
+        public int getOriginalStatementsCount() {
+            return originalStatementsCount;
+        }
+
+        public @NotNull String toShortString() {
+            return classQualifiedName +
+                    "." +
+                    methodName +
+                    "(" +
+                    paramsClassesSimpleNames.stream().collect(Collectors.joining(", ")) +
+                    ")";
+        }
+
         public static class RefactoringFilePaths {
             @Nullable
             private final String filePathBefore;
@@ -56,6 +105,20 @@ public class MoveMethodRefactoring {
                 this.filePathBefore = filePathBefore == null ? null : filePathBefore.toString();
                 this.filePathAfter = filePathAfter == null ? null : filePathAfter.toString();
             }
+
+            @Nullable
+            public String getFilePathBefore() {
+                return filePathBefore;
+            }
+
+            @Nullable
+            public String getFilePathAfter() {
+                return filePathAfter;
+            }
         }
+    }
+
+    public @NotNull String toShortString() {
+        return originalMethodInfo.toShortString() + " -> " + movedMethodInfo.toShortString();
     }
 }
