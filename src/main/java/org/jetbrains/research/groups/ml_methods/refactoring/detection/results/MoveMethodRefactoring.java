@@ -32,14 +32,21 @@ public class MoveMethodRefactoring {
     public static class MethodRefactoringInfo {
         @NotNull
         private final String classQualifiedName;
+
         @NotNull
         private final String methodName;
+
         @Nullable
         private final String returnType;
+
         @NotNull
         private final List<String> paramsClassesSimpleNames;
+
         @NotNull
         private final RefactoringFilePaths refactoringFilePaths;
+
+        private final boolean isStatic;
+
         private final int originalStatementsCount;
 
         public MethodRefactoringInfo(@NotNull String classQualifiedName,
@@ -47,12 +54,14 @@ public class MoveMethodRefactoring {
                                      @Nullable String returnType,
                                      @NotNull List<String> paramsClassesSimpleNames,
                                      @NotNull RefactoringFilePaths refactoringFilePaths,
+                                     boolean isStatic,
                                      int originalStatementsCount) {
             this.classQualifiedName = classQualifiedName;
             this.methodName = methodName;
             this.returnType = returnType;
             this.paramsClassesSimpleNames = paramsClassesSimpleNames;
             this.refactoringFilePaths = refactoringFilePaths;
+            this.isStatic = isStatic;
             this.originalStatementsCount = originalStatementsCount;
         }
 
@@ -79,6 +88,10 @@ public class MoveMethodRefactoring {
         @NotNull
         public RefactoringFilePaths getRefactoringFilePaths() {
             return refactoringFilePaths;
+        }
+
+        public boolean isStatic() {
+            return isStatic;
         }
 
         public int getOriginalStatementsCount() {

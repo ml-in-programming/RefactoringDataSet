@@ -6,7 +6,9 @@ public abstract class CommitDetectionResult {
     @NotNull
     private final String commitHash;
 
-    public CommitDetectionResult(@NotNull String commitHash) {
+    public CommitDetectionResult(
+        final @NotNull String commitHash
+    ) {
         this.commitHash = commitHash;
     }
 

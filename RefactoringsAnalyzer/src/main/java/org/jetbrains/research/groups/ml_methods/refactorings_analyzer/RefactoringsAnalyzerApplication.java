@@ -90,7 +90,8 @@ public class RefactoringsAnalyzerApplication {
             .and(new TestsFilter())
             .and(new NewTargetClassFilter())
             .and(new RemovedOldClassFilter())
-            .and(new GettersFilter());
+            .and(new GettersFilter())
+            .and(new StaticMethodsFilter());
 
         commitsWithRefactorings =
             commitsWithRefactorings.stream()
@@ -223,6 +224,20 @@ public class RefactoringsAnalyzerApplication {
             return "void".equals(methodInfo.getReturnType()) ||
                 !methodInfo.getParamsClassesSimpleNames().isEmpty() ||
                 methodInfo.getOriginalStatementsCount() > 1;
+        }
+    }
+
+    private static class StaticMethodsFilter implements Predicate<MoveMethodRefactoring> {
+        @Override
+        public boolean test(final @NotNull MoveMethodRefactoring moveMethodRefactoring) {
+            return test(moveMethodRefactoring.getOriginalMethodInfo()) &&
+                    test(moveMethodRefactoring.getMovedMethodInfo());
+        }
+
+        private boolean test(
+            final @NotNull MoveMethodRefactoring.MethodRefactoringInfo methodInfo
+        ) {
+            return !methodInfo.isStatic();
         }
     }
 }

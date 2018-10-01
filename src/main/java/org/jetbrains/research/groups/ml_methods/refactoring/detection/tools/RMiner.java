@@ -4,6 +4,7 @@ import gr.uom.java.xmi.UMLOperation;
 import gr.uom.java.xmi.diff.MoveOperationRefactoring;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.eclipse.jgit.diff.HistogramDiff;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -23,6 +24,7 @@ import org.refactoringminer.api.RefactoringType;
 import org.refactoringminer.rm1.GitHistoryRefactoringMinerImpl;
 import org.refactoringminer.util.GitServiceImpl;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -173,6 +175,12 @@ public class RMiner extends DefaultBranchesDetectionTool {
 
         String tmpDir = System.getProperty("java.io.tmpdir");
         Path downloadRepositoryPath = Paths.get(tmpDir, projectName);
+
+        File directory = downloadRepositoryPath.toFile();
+        if (directory.exists()) {
+            FileUtils.deleteDirectory(directory);
+        }
+
         Repository repository = gitService.cloneIfNotExists(
                 downloadRepositoryPath.toAbsolutePath().toString(),
                 repositoryUrl.toString());
@@ -216,11 +224,12 @@ public class RMiner extends DefaultBranchesDetectionTool {
                             )
                     );
                 }
+
                 commitDetectionSuccesses.add(
-                        new CommitDetectionSuccess(
-                                commitData.getId().getName(),
-                                commitRefactorings
-                        )
+                    new CommitDetectionSuccess(
+                        commitData.getId().getName(),
+                        commitRefactorings
+                    )
                 );
                 processedNewCommit();
             }
@@ -246,7 +255,7 @@ public class RMiner extends DefaultBranchesDetectionTool {
                 .collect(Collectors.toList());
         int statementsCount = movedOperation.getBody().statementCount();
         return new MethodRefactoringInfo(classQualifiedName, methodName, returnType,
-                paramsClassesQualifiedNames, movedRefactoringFilePaths, statementsCount);
+                paramsClassesQualifiedNames, movedRefactoringFilePaths, movedOperation.isStatic(), statementsCount);
     }
 
     @NotNull

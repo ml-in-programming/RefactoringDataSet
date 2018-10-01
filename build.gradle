@@ -14,6 +14,8 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.jetbrains', name: 'annotations', version: '13.0'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
     compile 'org.eclipse.jgit:org.eclipse.jgit:4.7.0.201704051617-r'
     compile 'com.jcabi:jcabi-github:0.17'
     compile 'org.slf4j:slf4j-log4j12:1.7.7'
