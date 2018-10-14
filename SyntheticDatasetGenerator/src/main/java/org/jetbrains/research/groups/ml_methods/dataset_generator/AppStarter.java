@@ -6,28 +6,20 @@ import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ApplicationStarter;
 import com.intellij.openapi.application.ex.ApplicationEx;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Computable;
-import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.*;
-import com.intellij.refactoring.BaseRefactoringProcessor;
-import com.intellij.refactoring.JavaRefactoringFactory;
-import com.intellij.refactoring.MoveMembersRefactoring;
-import com.intellij.refactoring.Refactoring;
-import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog;
 import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodHandler;
 import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodProcessor;
-import com.intellij.usageView.UsageInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.exceptions.UsagesConflictsException;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.*;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.AnnotationTypesFilter;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.InterfacesFilter;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.TestsFilter;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.methods.*;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -86,11 +78,16 @@ public class AppStarter implements ApplicationStarter {
     }
 
     private void doStuff(final @NotNull Project project) {
-        Application application = ApplicationManager.getApplication();
-
         List<PsiJavaFile> javaFiles = ExtractingUtils.extractJavaFiles(project);
-        List<PsiClass> classes = ExtractingUtils.extractClasses(javaFiles);
-        List<PsiMethod> methods = ExtractingUtils.extractMethods(javaFiles);
+
+        List<PsiClass> classes = ExtractingUtils.extractClasses(javaFiles)
+            .stream()
+            .filter(new InterfacesFilter())
+            .filter(new AnnotationTypesFilter())
+            .filter(new TestsFilter())
+            .collect(Collectors.toList());
+
+        List<PsiMethod> methods = ExtractingUtils.extractMethods(classes);
 
         Set<PsiClass> allInterestingClasses = new HashSet<>(classes);
 
@@ -98,19 +95,19 @@ public class AppStarter implements ApplicationStarter {
         System.out.println("Total number of classes: " + classes.size());
         System.out.println("Total number of method: " + methods.size());
 
-        List<PsiMethod> filteredMethods = application.runReadAction(
-            (Computable<List<PsiMethod>>) () ->
-                methods.stream()
-                    .filter(new AbstractMethodsFilter())
-                    .filter(new StaticMethodsFilter())
-                    .filter(new GettersFilter())
-                    .filter(new NoTargetsMethodsFilter(allInterestingClasses))
-                    .filter(new OverridingMethodsFilter())
-                    .filter(new OverriddenMethodsFilter())
-                    .collect(Collectors.toList())
-        );
+        List<PsiMethod> filteredMethods =
+            methods.stream()
+                .filter(new ConstructorsFilter())
+                .filter(new AbstractMethodsFilter())
+                .filter(new StaticMethodsFilter())
+                .filter(new GettersFilter())
+                .filter(new NoTargetsMethodsFilter(allInterestingClasses))
+                .filter(new OverridingMethodsFilter())
+                .filter(new OverriddenMethodsFilter())
+                .collect(Collectors.toList());
 
-        // todo: tests, ctors.
+        // todo: setters
+        // todo: methods that work with private part of their class
 
         System.out.println("Number of methods after filtration: " + filteredMethods.size());
 

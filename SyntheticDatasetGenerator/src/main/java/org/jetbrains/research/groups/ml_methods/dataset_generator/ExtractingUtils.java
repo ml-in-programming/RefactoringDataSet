@@ -6,6 +6,7 @@ import com.intellij.psi.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,10 +50,7 @@ public class ExtractingUtils {
             @Override
             public void visitClass(final @NotNull PsiClass aClass) {
                 super.visitClass(aClass);
-
-                if (!aClass.isInterface() && !aClass.isAnnotationType()) {
-                    classes.add(aClass);
-                }
+                classes.add(aClass);
             }
         }.visitElement(javaFile);
 
@@ -68,27 +66,16 @@ public class ExtractingUtils {
     }
 
     public static @NotNull List<PsiMethod> extractMethods(
-        final @NotNull PsiJavaFile javaFile
+        final @NotNull PsiClass psiClass
     ) {
-        List<PsiMethod> methods = new ArrayList<>();
-
-        new JavaRecursiveElementVisitor() {
-            @Override
-            public void visitMethod(final @NotNull PsiMethod method) {
-                super.visitMethod(method);
-
-                methods.add(method);
-            }
-        }.visitElement(javaFile);
-
-        return methods;
+        return Arrays.stream(psiClass.getMethods()).collect(Collectors.toList());
     }
 
     public static @NotNull List<PsiMethod> extractMethods(
-        final @NotNull List<PsiJavaFile> javaFiles
+        final @NotNull List<PsiClass> classes
     ) {
-        return javaFiles.stream()
-            .flatMap(file -> extractMethods(file).stream())
+        return classes.stream()
+            .flatMap(aClass -> extractMethods(aClass).stream())
             .collect(Collectors.toList());
     }
 }

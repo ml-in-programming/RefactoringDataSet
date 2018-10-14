@@ -1,4 +1,4 @@
-package org.jetbrains.research.groups.ml_methods.dataset_generator.filters;
+package org.jetbrains.research.groups.ml_methods.dataset_generator.filters.methods;
 
 import com.intellij.psi.PsiMethod;
 import org.jetbrains.annotations.NotNull;
