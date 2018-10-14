@@ -23,10 +23,7 @@ import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodProces
 import com.intellij.usageView.UsageInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.exceptions.UsagesConflictsException;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.AbstractMethodsFilter;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.GettersFilter;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.NoTargetsMethodsFilter;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.StaticMethodsFilter;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.*;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -95,7 +92,7 @@ public class AppStarter implements ApplicationStarter {
         List<PsiClass> classes = ExtractingUtils.extractClasses(javaFiles);
         List<PsiMethod> methods = ExtractingUtils.extractMethods(javaFiles);
 
-        Set<PsiClass> allClasses = new HashSet<>(classes);
+        Set<PsiClass> allInterestingClasses = new HashSet<>(classes);
 
         System.out.println("Total number of java files: " + javaFiles.size());
         System.out.println("Total number of classes: " + classes.size());
@@ -107,7 +104,8 @@ public class AppStarter implements ApplicationStarter {
                     // .filter(new AbstractMethodsFilter())
                     // .filter(new StaticMethodsFilter())
                     // .filter(new GettersFilter())
-                    .filter(new NoTargetsMethodsFilter(allClasses))
+                    // .filter(new NoTargetsMethodsFilter(allInterestingClasses))
+                    // .filter(new OverridingMethodsFilter())
                     .collect(Collectors.toList())
         );
 

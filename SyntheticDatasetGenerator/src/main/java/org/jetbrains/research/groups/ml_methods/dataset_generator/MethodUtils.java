@@ -99,7 +99,7 @@ public class MethodUtils {
 
     public static @NotNull List<PsiClass> possibleTargets(
         final @NotNull PsiMethod method,
-        final @NotNull Set<PsiClass> allClasses
+        final @NotNull Set<PsiClass> allInterestingClasses
     ) {
         List<PsiClass> targets = new ArrayList<>();
 
@@ -112,7 +112,7 @@ public class MethodUtils {
             PsiClassType classType = (PsiClassType) type;
             PsiClass actualClass = classType.resolve();
 
-            if (allClasses.contains(actualClass)) {
+            if (allInterestingClasses.contains(actualClass)) {
                 targets.add(actualClass);
             }
         }
