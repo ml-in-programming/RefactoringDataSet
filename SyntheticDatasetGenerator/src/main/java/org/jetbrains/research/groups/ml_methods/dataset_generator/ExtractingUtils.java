@@ -53,7 +53,9 @@ public class ExtractingUtils {
             public void visitClass(final @NotNull PsiClass aClass) {
                 super.visitClass(aClass);
 
-                classes.add(smartPointerManager.createSmartPsiElementPointer(aClass));
+                if (!aClass.isInterface() && !aClass.isAnnotationType() && !aClass.isEnum()) {
+                    classes.add(smartPointerManager.createSmartPsiElementPointer(aClass));
+                }
             }
         }.visitElement(javaFile);
 
