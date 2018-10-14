@@ -40,21 +40,18 @@ public class ExtractingUtils {
         return javaFiles;
     }
 
-    public static @NotNull List<SmartPsiElementPointer<PsiClass>> extractClasses(
+    public static @NotNull List<PsiClass> extractClasses(
         final @NotNull PsiJavaFile javaFile
     ) {
-        List<SmartPsiElementPointer<PsiClass>> classes = new ArrayList<>();
-
-        final SmartPointerManager smartPointerManager =
-                SmartPointerManager.getInstance(javaFile.getProject());
+        List<PsiClass> classes = new ArrayList<>();
 
         new JavaRecursiveElementVisitor() {
             @Override
             public void visitClass(final @NotNull PsiClass aClass) {
                 super.visitClass(aClass);
 
-                if (!aClass.isInterface() && !aClass.isAnnotationType() && !aClass.isEnum()) {
-                    classes.add(smartPointerManager.createSmartPsiElementPointer(aClass));
+                if (!aClass.isInterface() && !aClass.isAnnotationType()) {
+                    classes.add(aClass);
                 }
             }
         }.visitElement(javaFile);
@@ -62,7 +59,7 @@ public class ExtractingUtils {
         return classes;
     }
 
-    public static @NotNull List<SmartPsiElementPointer<PsiClass>> extractClasses(
+    public static @NotNull List<PsiClass> extractClasses(
         final @NotNull List<PsiJavaFile> javaFiles
     ) {
         return javaFiles.stream()
@@ -70,27 +67,24 @@ public class ExtractingUtils {
             .collect(Collectors.toList());
     }
 
-    public static @NotNull List<SmartPsiElementPointer<PsiMethod>> extractMethods(
+    public static @NotNull List<PsiMethod> extractMethods(
         final @NotNull PsiJavaFile javaFile
     ) {
-        List<SmartPsiElementPointer<PsiMethod>> methods = new ArrayList<>();
-
-        final SmartPointerManager smartPointerManager =
-                SmartPointerManager.getInstance(javaFile.getProject());
+        List<PsiMethod> methods = new ArrayList<>();
 
         new JavaRecursiveElementVisitor() {
             @Override
             public void visitMethod(final @NotNull PsiMethod method) {
                 super.visitMethod(method);
 
-                methods.add(smartPointerManager.createSmartPsiElementPointer(method));
+                methods.add(method);
             }
         }.visitElement(javaFile);
 
         return methods;
     }
 
-    public static @NotNull List<SmartPsiElementPointer<PsiMethod>> extractMethods(
+    public static @NotNull List<PsiMethod> extractMethods(
         final @NotNull List<PsiJavaFile> javaFiles
     ) {
         return javaFiles.stream()

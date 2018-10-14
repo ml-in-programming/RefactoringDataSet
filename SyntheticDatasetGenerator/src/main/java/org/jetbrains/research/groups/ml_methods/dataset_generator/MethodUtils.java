@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Optional;
+import java.util.*;
 
 public class MethodUtils {
     private static final @NotNull Logger LOGGER = Logger.getLogger(MethodUtils.class);
@@ -95,5 +95,28 @@ public class MethodUtils {
         }
 
         return className + '.' + method.getName();
+    }
+
+    public static @NotNull List<PsiClass> possibleTargets(
+        final @NotNull PsiMethod method,
+        final @NotNull Set<PsiClass> allClasses
+    ) {
+        List<PsiClass> targets = new ArrayList<>();
+
+        for (PsiParameter parameter : method.getParameterList().getParameters()) {
+            PsiType type = parameter.getType();
+            if (!(type instanceof PsiClassType)) {
+                continue;
+            }
+
+            PsiClassType classType = (PsiClassType) type;
+            PsiClass actualClass = classType.resolve();
+
+            if (allClasses.contains(actualClass)) {
+                targets.add(actualClass);
+            }
+        }
+
+        return targets;
     }
 }

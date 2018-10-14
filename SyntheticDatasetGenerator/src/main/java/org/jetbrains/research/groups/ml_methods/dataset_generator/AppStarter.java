@@ -23,15 +23,15 @@ import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodProces
 import com.intellij.usageView.UsageInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.exceptions.UsagesConflictsException;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.AbstractMethodsFilter;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.GettersFilter;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.NoTargetsMethodsFilter;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.StaticMethodsFilter;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AppStarter implements ApplicationStarter {
@@ -79,7 +79,7 @@ public class AppStarter implements ApplicationStarter {
             PatchProjectUtil.patchProject(project);
 
             System.out.println("Project " + projectFolderPath + " is opened");
-            doStuff(project);
+            application.runReadAction(() -> doStuff(project));
         } catch (Throwable e) {
             System.out.println("Exception occurred: " + e);
             e.printStackTrace();
@@ -88,36 +88,28 @@ public class AppStarter implements ApplicationStarter {
         application.exit(true, true);
     }
 
-    private void doStuff(final @NotNull Project project) throws UsagesConflictsException {
+    private void doStuff(final @NotNull Project project) {
         Application application = ApplicationManager.getApplication();
 
-        List<PsiJavaFile> javaFiles =
-            application.runReadAction(
-                (Computable<List<PsiJavaFile>>)
-                    () -> ExtractingUtils.extractJavaFiles(project)
-            );
+        List<PsiJavaFile> javaFiles = ExtractingUtils.extractJavaFiles(project);
+        List<PsiClass> classes = ExtractingUtils.extractClasses(javaFiles);
+        List<PsiMethod> methods = ExtractingUtils.extractMethods(javaFiles);
 
-        List<SmartPsiElementPointer<PsiClass>> classes =
-            application.runReadAction(
-                (Computable<List<SmartPsiElementPointer<PsiClass>>>)
-                    () -> ExtractingUtils.extractClasses(javaFiles)
-            );
-
-        List<SmartPsiElementPointer<PsiMethod>> methods =
-            application.runReadAction(
-                (Computable<List<SmartPsiElementPointer<PsiMethod>>>)
-                    () -> ExtractingUtils.extractMethods(javaFiles)
-            );
+        Set<PsiClass> allClasses = new HashSet<>(classes);
 
         System.out.println("Total number of java files: " + javaFiles.size());
         System.out.println("Total number of classes: " + classes.size());
         System.out.println("Total number of method: " + methods.size());
 
-        List<PsiMethod> filteredMethods = methods.stream()
-            .map(SmartPsiElementPointer::getElement)
-            // .filter(new StaticMethodsFilter())
-            .filter(new GettersFilter())
-            .collect(Collectors.toList());
+        List<PsiMethod> filteredMethods = application.runReadAction(
+            (Computable<List<PsiMethod>>) () ->
+                methods.stream()
+                    // .filter(new AbstractMethodsFilter())
+                    // .filter(new StaticMethodsFilter())
+                    // .filter(new GettersFilter())
+                    .filter(new NoTargetsMethodsFilter(allClasses))
+                    .collect(Collectors.toList())
+        );
 
         System.out.println("Number of methods after filtration: " + filteredMethods.size());
 
