@@ -101,13 +101,16 @@ public class AppStarter implements ApplicationStarter {
         List<PsiMethod> filteredMethods = application.runReadAction(
             (Computable<List<PsiMethod>>) () ->
                 methods.stream()
-                    // .filter(new AbstractMethodsFilter())
-                    // .filter(new StaticMethodsFilter())
-                    // .filter(new GettersFilter())
-                    // .filter(new NoTargetsMethodsFilter(allInterestingClasses))
-                    // .filter(new OverridingMethodsFilter())
+                    .filter(new AbstractMethodsFilter())
+                    .filter(new StaticMethodsFilter())
+                    .filter(new GettersFilter())
+                    .filter(new NoTargetsMethodsFilter(allInterestingClasses))
+                    .filter(new OverridingMethodsFilter())
+                    .filter(new OverriddenMethodsFilter())
                     .collect(Collectors.toList())
         );
+
+        // todo: tests, ctors.
 
         System.out.println("Number of methods after filtration: " + filteredMethods.size());
 
