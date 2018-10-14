@@ -1,0 +1,27 @@
+plugins {
+    id "org.jetbrains.intellij" version "0.2.17"
+}
+
+repositories {
+    mavenCentral()
+}
+
+intellij {
+    version 'IC-2017.1'
+    pluginName 'project-transformer'
+}
+
+apply plugin: 'idea'
+
+task runConsole(dependsOn: runIde) {}
+
+gradle.taskGraph.whenReady { graph ->
+    if (graph.hasTask(runConsole)) {
+        runIde.args 'generate-dataset', "$projectFolder"
+        runIde.jvmArgs '-Djava.awt.headless=true'
+    }
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-log4j12:1.7.7'
+}
