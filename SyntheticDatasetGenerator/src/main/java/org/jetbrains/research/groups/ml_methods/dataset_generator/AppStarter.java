@@ -2,12 +2,10 @@ package org.jetbrains.research.groups.ml_methods.dataset_generator;
 
 import com.intellij.ide.impl.PatchProjectUtil;
 import com.intellij.ide.impl.ProjectUtil;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ApplicationStarter;
 import com.intellij.openapi.application.ex.ApplicationEx;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.*;
 import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodHandler;
@@ -22,8 +20,6 @@ import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.method
 import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static org.jetbrains.research.groups.ml_methods.dataset_generator.MethodUtils.whoseSetter;
 
 public class AppStarter implements ApplicationStarter {
     private String projectFolderPath = "";
@@ -107,6 +103,7 @@ public class AppStarter implements ApplicationStarter {
                 .filter(new NoTargetsMethodsFilter(allInterestingClasses))
                 .filter(new OverridingMethodsFilter())
                 .filter(new OverriddenMethodsFilter())
+                .filter(new PrivateMethodsCallersFilter())
                 .collect(Collectors.toList());
 
         // todo: methods that work with private part of their class
