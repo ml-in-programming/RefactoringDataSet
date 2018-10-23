@@ -23,6 +23,8 @@ import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.MethodUtils.whoseSetter;
+
 public class AppStarter implements ApplicationStarter {
     private String projectFolderPath = "";
 
@@ -101,13 +103,14 @@ public class AppStarter implements ApplicationStarter {
                 .filter(new AbstractMethodsFilter())
                 .filter(new StaticMethodsFilter())
                 .filter(new GettersFilter())
+                .filter(new SettersFilter())
                 .filter(new NoTargetsMethodsFilter(allInterestingClasses))
                 .filter(new OverridingMethodsFilter())
                 .filter(new OverriddenMethodsFilter())
                 .collect(Collectors.toList());
 
-        // todo: setters
         // todo: methods that work with private part of their class
+        // todo: getters and setters in this filter should be public!
 
         System.out.println("Number of methods after filtration: " + filteredMethods.size());
 

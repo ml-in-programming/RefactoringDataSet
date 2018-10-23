@@ -5,6 +5,7 @@ import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -16,6 +17,66 @@ public class MethodUtils {
     }
 
     private MethodUtils() { }
+
+    public static @NotNull Optional<PsiField> whoseSetter(final @NotNull PsiMethod method) {
+        if (method.isConstructor()) {
+            return Optional.empty();
+        }
+
+        if (method.getParameterList().getParametersCount() != 1) {
+            return Optional.empty();
+        }
+
+        PsiParameter parameter = method.getParameterList().getParameters()[0];
+        PsiType parameterType = parameter.getType();
+        // todo: need to check that parameter type is not just a subclass of actual field type
+
+        PsiCodeBlock body = method.getBody();
+        if (body == null) {
+            return Optional.empty();
+        }
+
+        PsiStatement[] statements = body.getStatements();
+        if (statements.length != 1) {
+            return Optional.empty();
+        }
+
+        PsiStatement theStatement = statements[0];
+        if (!(theStatement instanceof PsiExpressionStatement)) {
+            return Optional.empty();
+        }
+
+        PsiExpression expression = ((PsiExpressionStatement) theStatement).getExpression();
+        if (!(expression instanceof PsiAssignmentExpression)) {
+            return Optional.empty();
+        }
+
+        PsiAssignmentExpression assignmentExpression = (PsiAssignmentExpression) expression;
+        PsiExpression leftExpression = assignmentExpression.getLExpression();
+        PsiExpression rightExpression = assignmentExpression.getRExpression();
+
+        if (!(leftExpression instanceof PsiReferenceExpression)) {
+            return Optional.empty();
+        }
+
+        PsiField field = getReferencedField((PsiReferenceExpression) leftExpression);
+        if (field == null) {
+            return Optional.empty();
+        }
+
+        if (!(rightExpression instanceof PsiReferenceExpression)) {
+            return Optional.empty();
+        }
+
+        PsiReferenceExpression referenceExpression = (PsiReferenceExpression) rightExpression;
+        JavaResolveResult resolveResult = referenceExpression.advancedResolve(false);
+
+        if (resolveResult.getElement() != parameter) {
+            return Optional.empty();
+        }
+
+        return Optional.of(field);
+    }
 
     public static @NotNull Optional<PsiField> whoseGetter(final @NotNull PsiMethod method) {
         if (method.getParameterList().getParametersCount() != 0) {
@@ -44,28 +105,10 @@ public class MethodUtils {
             return Optional.empty();
         }
 
-        PsiReferenceExpression referenceExpression = (PsiReferenceExpression) expression;
-
-        if (referenceExpression.isQualified()) {
-            PsiExpression qualifierExpression = referenceExpression.getQualifierExpression();
-            if (!(qualifierExpression instanceof PsiThisExpression)) {
-                return Optional.empty();
-            }
-        }
-
-        JavaResolveResult resolveResult = referenceExpression.advancedResolve(false);
-
-        PsiElement referencedElement = resolveResult.getElement();
-        if (referencedElement == null) {
-            LOGGER.error("Getter like method but failed to resolve reference! " + fullyQualifiedName(method));
+        PsiField field = getReferencedField((PsiReferenceExpression) expression);
+        if (field == null) {
             return Optional.empty();
         }
-
-        if (!(referencedElement instanceof PsiField)) {
-            return Optional.empty();
-        }
-
-        PsiField field = (PsiField) referencedElement;
 
         PsiClass fieldClass = field.getContainingClass();
         if (fieldClass == null || !fieldClass.equals(method.getContainingClass())) { // what if it's just a super class?
@@ -118,5 +161,29 @@ public class MethodUtils {
         }
 
         return targets;
+    }
+
+    private static @Nullable PsiField getReferencedField(
+        final @NotNull PsiReferenceExpression referenceExpression
+    ) {
+        if (referenceExpression.isQualified()) {
+            PsiExpression qualifierExpression = referenceExpression.getQualifierExpression();
+            if (!(qualifierExpression instanceof PsiThisExpression)) {
+                return null;
+            }
+        }
+
+        JavaResolveResult resolveResult = referenceExpression.advancedResolve(false);
+
+        PsiElement referencedElement = resolveResult.getElement();
+        if (referencedElement == null) {
+            return null;
+        }
+
+        if (!(referencedElement instanceof PsiField)) {
+            return null;
+        }
+
+        return (PsiField) referencedElement;
     }
 }
