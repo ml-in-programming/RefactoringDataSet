@@ -15,11 +15,14 @@ import org.jetbrains.research.groups.ml_methods.dataset_generator.exceptions.Usa
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.AnnotationTypesFilter;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.InterfacesFilter;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.TestsFilter;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.TypeParametersFilter;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.methods.*;
 
 import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.MethodUtils.fullyQualifiedName;
 
 public class AppStarter implements ApplicationStarter {
     private String projectFolderPath = "";
@@ -80,6 +83,7 @@ public class AppStarter implements ApplicationStarter {
 
         List<PsiClass> classes = ExtractingUtils.extractClasses(javaFiles)
             .stream()
+            .filter(new TypeParametersFilter())
             .filter(new InterfacesFilter())
             .filter(new AnnotationTypesFilter())
             .filter(new TestsFilter())
@@ -104,10 +108,20 @@ public class AppStarter implements ApplicationStarter {
                 .filter(new OverridingMethodsFilter())
                 .filter(new OverriddenMethodsFilter())
                 .filter(new PrivateMethodsCallersFilter())
+                .filter(new PrivateFieldAccessorsFilter())
+                //.filter(new EmptyMethodsFilter())
+                .peek(it -> {
+                    System.out.println(fullyQualifiedName(it));
+                    System.out.println(it.getText());
+                    System.out.println('\n');
+                })
                 .collect(Collectors.toList());
 
         // todo: methods that work with private part of their class
         // todo: getters and setters in this filter should be public!
+
+        // todo: empty methods
+        // todo: classes that are stored inside 'test' or 'tests' directory
 
         System.out.println("Number of methods after filtration: " + filteredMethods.size());
 
