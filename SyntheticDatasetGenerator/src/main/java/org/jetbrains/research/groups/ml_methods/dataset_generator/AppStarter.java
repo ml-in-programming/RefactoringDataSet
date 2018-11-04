@@ -139,14 +139,16 @@ public class AppStarter implements ApplicationStarter {
                 .filter(new PrivateFieldAccessorsFilter(fieldsWithGetter, fieldsWithSetter))
                 .filter(new EmptyMethodsFilter())
                 .filter(it -> it.getBody().getStatements().length == 1)
-                .peek(it -> {
-                    System.out.println(fullyQualifiedName(it));
-                    System.out.println(it.getText());
-                    System.out.println('\n');
-                })
+                .filter(new SimpleDelegationsFilter().negate()) // !!!
                 .collect(Collectors.toList());
 
         System.out.println("Number of methods after filtration: " + filteredMethods.size());
+
+        filteredMethods.forEach(it -> {
+            System.out.println(fullyQualifiedName(it));
+            System.out.println(it.getText());
+            System.out.println('\n');
+        });
 
 //        SmartPsiElementPointer<PsiMethod> method =
 //            methods.stream().filter(it -> it.getElement().getName().equals("aMethod")).findAny().get();
