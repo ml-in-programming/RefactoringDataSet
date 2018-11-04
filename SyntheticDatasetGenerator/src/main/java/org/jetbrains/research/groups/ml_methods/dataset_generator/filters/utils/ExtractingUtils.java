@@ -1,4 +1,4 @@
-package org.jetbrains.research.groups.ml_methods.dataset_generator;
+package org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class ExtractingUtils {
     private ExtractingUtils() { }
 
-    public static @NotNull List<PsiJavaFile> extractJavaFiles(final @NotNull Project project) {
+    public static @NotNull List<PsiJavaFile> extractAllJavaFiles(final @NotNull Project project) {
         List<PsiJavaFile> javaFiles = new ArrayList<>();
 
         ProjectFileIndex.SERVICE.getInstance(project).iterateContent(
@@ -39,6 +39,29 @@ public class ExtractingUtils {
         );
 
         return javaFiles;
+    }
+
+    public static @NotNull List<PsiJavaFile> extractSourceJavaFiles(
+        final @NotNull Project project
+    ) {
+        /*
+        Possible alternative
+
+        Module[] modules = ModuleManager.getInstance(project).getModules();
+
+        for (Module module : modules) {
+            VirtualFile[] srcRoots =
+                ModuleRootManager.getInstance(module).orderEntries().getAllSourceRoots();
+
+            for (VirtualFile root : srcRoots) {
+                // ...
+            }
+        }*/
+
+        ProjectFileIndex projectFileIndex = ProjectFileIndex.SERVICE.getInstance(project);
+        return extractAllJavaFiles(project).stream()
+                .filter(it -> projectFileIndex.isInSource(it.getVirtualFile()))
+                .collect(Collectors.toList());
     }
 
     public static @NotNull List<PsiClass> extractClasses(

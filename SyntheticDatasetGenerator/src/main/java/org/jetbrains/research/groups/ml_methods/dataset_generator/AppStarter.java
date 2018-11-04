@@ -17,12 +17,17 @@ import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classe
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.TestsFilter;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.TypeParametersFilter;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.methods.*;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.ExtractingUtils;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.exceptions.UnsupportedDirectoriesLayoutException;
 
 import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.jetbrains.research.groups.ml_methods.dataset_generator.MethodUtils.fullyQualifiedName;
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils.fullyQualifiedName;
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils.whoseGetter;
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils.whoseSetter;
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.PreprocessingUtils.addAllPossibleSourceRoots;
 
 public class AppStarter implements ApplicationStarter {
     private String projectFolderPath = "";
@@ -69,6 +74,15 @@ public class AppStarter implements ApplicationStarter {
             PatchProjectUtil.patchProject(project);
 
             System.out.println("Project " + projectFolderPath + " is opened");
+
+            application.runWriteAction(() -> {
+                try {
+                    addAllPossibleSourceRoots(project);
+                } catch (UnsupportedDirectoriesLayoutException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
             application.runReadAction(() -> doStuff(project));
         } catch (Throwable e) {
             System.out.println("Exception occurred: " + e);
@@ -79,9 +93,10 @@ public class AppStarter implements ApplicationStarter {
     }
 
     private void doStuff(final @NotNull Project project) {
-        List<PsiJavaFile> javaFiles = ExtractingUtils.extractJavaFiles(project);
+        List<PsiJavaFile> allJavaFiles = ExtractingUtils.extractAllJavaFiles(project);
+        List<PsiJavaFile> sourceJavaFiles = ExtractingUtils.extractSourceJavaFiles(project);
 
-        List<PsiClass> classes = ExtractingUtils.extractClasses(javaFiles)
+        List<PsiClass> classes = ExtractingUtils.extractClasses(allJavaFiles)
             .stream()
             .filter(new TypeParametersFilter())
             .filter(new InterfacesFilter())
@@ -93,9 +108,22 @@ public class AppStarter implements ApplicationStarter {
 
         Set<PsiClass> allInterestingClasses = new HashSet<>(classes);
 
-        System.out.println("Total number of java files: " + javaFiles.size());
+        System.out.println("Total number of java files: " + allJavaFiles.size());
+        System.out.println("Total number of source java files: " + sourceJavaFiles.size());
         System.out.println("Total number of classes: " + classes.size());
         System.out.println("Total number of method: " + methods.size());
+
+        Set<PsiField> fieldsWithGetter = new HashSet<>();
+        Set<PsiField> fieldsWithSetter = new HashSet<>();
+
+        methods.forEach(it -> {
+            if (!it.hasModifierProperty(PsiModifier.PUBLIC)) {
+                return;
+            }
+
+            whoseGetter(it).ifPresent(fieldsWithGetter::add);
+            whoseSetter(it).ifPresent(fieldsWithSetter::add);
+        });
 
         List<PsiMethod> filteredMethods =
             methods.stream()
@@ -108,20 +136,15 @@ public class AppStarter implements ApplicationStarter {
                 .filter(new OverridingMethodsFilter())
                 .filter(new OverriddenMethodsFilter())
                 .filter(new PrivateMethodsCallersFilter())
-                .filter(new PrivateFieldAccessorsFilter())
-                //.filter(new EmptyMethodsFilter())
+                .filter(new PrivateFieldAccessorsFilter(fieldsWithGetter, fieldsWithSetter))
+                .filter(new EmptyMethodsFilter())
+                .filter(it -> it.getBody().getStatements().length == 1)
                 .peek(it -> {
                     System.out.println(fullyQualifiedName(it));
                     System.out.println(it.getText());
                     System.out.println('\n');
                 })
                 .collect(Collectors.toList());
-
-        // todo: methods that work with private part of their class
-        // todo: getters and setters in this filter should be public!
-
-        // todo: empty methods
-        // todo: classes that are stored inside 'test' or 'tests' directory
 
         System.out.println("Number of methods after filtration: " + filteredMethods.size());
 

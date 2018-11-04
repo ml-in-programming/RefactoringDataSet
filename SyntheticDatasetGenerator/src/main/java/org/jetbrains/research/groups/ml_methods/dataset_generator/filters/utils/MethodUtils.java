@@ -1,4 +1,4 @@
-package org.jetbrains.research.groups.ml_methods.dataset_generator;
+package org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils;
 
 import com.intellij.psi.*;
 import org.apache.log4j.ConsoleAppender;
@@ -155,7 +155,11 @@ public class MethodUtils {
             PsiClassType classType = (PsiClassType) type;
             PsiClass actualClass = classType.resolve();
 
-            if (allInterestingClasses.contains(actualClass)) {
+            if (
+                actualClass != null &&
+                allInterestingClasses.contains(actualClass) &&
+                !actualClass.equals(method.getContainingClass())
+            ) {
                 targets.add(actualClass);
             }
         }

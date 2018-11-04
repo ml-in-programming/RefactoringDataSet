@@ -2,7 +2,7 @@ package org.jetbrains.research.groups.ml_methods.dataset_generator.filters.metho
 
 import com.intellij.psi.PsiMethod;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.MethodUtils;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils;
 
 import java.util.function.Predicate;
 
