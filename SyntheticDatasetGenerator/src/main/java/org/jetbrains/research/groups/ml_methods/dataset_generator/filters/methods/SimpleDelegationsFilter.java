@@ -5,9 +5,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils.getSingleStatementOf;
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils.isConstExpression;
 
 public class SimpleDelegationsFilter implements Predicate<PsiMethod> {
     @Override
@@ -16,35 +20,29 @@ public class SimpleDelegationsFilter implements Predicate<PsiMethod> {
             Arrays.stream(psiMethod.getParameterList().getParameters())
                 .collect(Collectors.toSet());
 
-        PsiCodeBlock body = psiMethod.getBody();
-        if (body == null) {
+        Optional<PsiStatement> optionalStatement = getSingleStatementOf(psiMethod);
+        if (!optionalStatement.isPresent()) {
             return true;
         }
 
-        PsiStatement[] statements = body.getStatements();
-        if (statements.length != 1) {
-            return true;
-        }
+        PsiStatement theStatement = optionalStatement.get();
 
-        PsiStatement theStatement = statements[0];
+        PsiExpression expression;
         if (theStatement instanceof PsiReturnStatement) {
             PsiReturnStatement returnStatement = (PsiReturnStatement) theStatement;
-            PsiExpression expression = returnStatement.getReturnValue();
-
-            if (!(expression instanceof PsiMethodCallExpression)) {
-                return true;
-            }
-
-            return testMethodCall((PsiMethodCallExpression) expression, parameters);
+            expression = returnStatement.getReturnValue();
+        } else if (theStatement instanceof PsiExpressionStatement) {
+            expression = ((PsiExpressionStatement) theStatement).getExpression();
+        } else {
+            return true;
         }
 
-        if (theStatement instanceof PsiExpressionStatement) {
-            PsiExpression expression = ((PsiExpressionStatement) theStatement).getExpression();
-            if (!(expression instanceof PsiMethodCallExpression)) {
-                return true;
-            }
-
+        if (expression instanceof PsiMethodCallExpression) {
             return testMethodCall((PsiMethodCallExpression) expression, parameters);
+        } else if (expression instanceof PsiNewExpression) {
+            PsiNewExpression newExpression = (PsiNewExpression) expression;
+
+            return testArguments(newExpression.getArgumentList().getExpressions(), parameters);
         }
 
         return true;
@@ -61,8 +59,15 @@ public class SimpleDelegationsFilter implements Predicate<PsiMethod> {
             return true;
         }
 
-        for (PsiExpression argument : methodCall.getArgumentList().getExpressions()) {
-            if (!isParameter(argument, parameters)) {
+        return testArguments(methodCall.getArgumentList().getExpressions(), parameters);
+    }
+
+    private boolean testArguments(
+        final @NotNull PsiExpression[] argumentExpressions,
+        final @NotNull Set<PsiParameter> parameters
+    ) {
+        for (PsiExpression argument : argumentExpressions) {
+            if (!isParameter(argument, parameters) && !(isConstExpression(argument))) {
                 return true;
             }
         }
@@ -85,7 +90,9 @@ public class SimpleDelegationsFilter implements Predicate<PsiMethod> {
         PsiReferenceExpression referenceExpression = (PsiReferenceExpression) qualifierExpression;
         JavaResolveResult resolveResult = referenceExpression.advancedResolve(false);
 
-        return parameters.contains(resolveResult.getElement());
+        PsiElement element = resolveResult.getElement();
+
+        return element instanceof PsiClass || parameters.contains(element);
     }
 
     private boolean isParameter(

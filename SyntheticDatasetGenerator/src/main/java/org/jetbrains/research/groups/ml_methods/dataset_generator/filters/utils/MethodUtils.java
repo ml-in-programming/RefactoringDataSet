@@ -18,6 +18,28 @@ public class MethodUtils {
 
     private MethodUtils() { }
 
+    public static boolean isConstExpression(final @NotNull PsiExpression expression) {
+        return expression instanceof PsiLiteralExpression ||
+               expression instanceof PsiThisExpression ||
+               expression instanceof PsiClassObjectAccessExpression;
+    }
+
+    public static @NotNull Optional<PsiStatement> getSingleStatementOf(
+        final @NotNull PsiMethod method
+    ) {
+        PsiCodeBlock body = method.getBody();
+        if (body == null) {
+            return Optional.empty();
+        }
+
+        PsiStatement[] statements = body.getStatements();
+        if (statements.length != 1) {
+            return Optional.empty();
+        }
+
+        return Optional.of(statements[0]);
+    }
+
     public static @NotNull Optional<PsiField> whoseSetter(final @NotNull PsiMethod method) {
         if (method.isConstructor()) {
             return Optional.empty();

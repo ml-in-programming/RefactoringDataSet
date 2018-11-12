@@ -1,15 +1,36 @@
 package org.jetbrains.research.groups.ml_methods.dataset_generator.filters.methods;
 
-import com.intellij.psi.PsiCodeBlock;
-import com.intellij.psi.PsiMethod;
+import com.intellij.psi.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;
+
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils.isConstExpression;
 
 public class EmptyMethodsFilter implements Predicate<PsiMethod> {
     @Override
     public boolean test(final @NotNull PsiMethod psiMethod) {
         PsiCodeBlock codeBlock = psiMethod.getBody();
-        return codeBlock == null || codeBlock.getStatements().length != 0;
+        if (codeBlock == null) {
+            return false;
+        }
+
+        PsiStatement[] statements = codeBlock.getStatements();
+        if (statements.length == 0) {
+            return false;
+        }
+
+        if (statements.length > 1) {
+            return true;
+        }
+
+        PsiStatement theStatement = statements[0];
+
+        if (!(theStatement instanceof PsiReturnStatement)) {
+            return true;
+        }
+
+        PsiReturnStatement returnStatement = (PsiReturnStatement) theStatement;
+        return !isConstExpression(returnStatement.getReturnValue());
     }
 }

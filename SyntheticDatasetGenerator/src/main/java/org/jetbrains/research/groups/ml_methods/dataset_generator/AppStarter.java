@@ -138,8 +138,7 @@ public class AppStarter implements ApplicationStarter {
                 .filter(new PrivateMethodsCallersFilter())
                 .filter(new PrivateFieldAccessorsFilter(fieldsWithGetter, fieldsWithSetter))
                 .filter(new EmptyMethodsFilter())
-                .filter(it -> it.getBody().getStatements().length == 1)
-                .filter(new SimpleDelegationsFilter().negate()) // !!!
+                .filter(new SimpleDelegationsFilter())
                 .collect(Collectors.toList());
 
         System.out.println("Number of methods after filtration: " + filteredMethods.size());
