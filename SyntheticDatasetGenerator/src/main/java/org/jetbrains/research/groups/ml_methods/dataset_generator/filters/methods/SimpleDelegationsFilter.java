@@ -3,6 +3,7 @@ package org.jetbrains.research.groups.ml_methods.dataset_generator.filters.metho
 import com.intellij.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -67,7 +68,11 @@ public class SimpleDelegationsFilter implements Predicate<PsiMethod> {
         final @NotNull Set<PsiParameter> parameters
     ) {
         for (PsiExpression argument : argumentExpressions) {
-            if (!isParameter(argument, parameters) && !(isConstExpression(argument))) {
+            if (
+                !isParameter(argument, parameters) &&
+                !isConstExpression(argument) &&
+                !isField(argument)
+            ) {
                 return true;
             }
         }
@@ -75,11 +80,15 @@ public class SimpleDelegationsFilter implements Predicate<PsiMethod> {
         return false;
     }
 
+    private boolean isTrivialQualifier(final @Nullable PsiExpression qualifierExpression) {
+        return qualifierExpression == null || qualifierExpression instanceof PsiThisExpression;
+    }
+
     private boolean isSimpleQualifier(
         final @Nullable PsiExpression qualifierExpression,
         final @NotNull Set<PsiParameter> parameters
     ) {
-        if (qualifierExpression == null || qualifierExpression instanceof PsiThisExpression) {
+        if (isTrivialQualifier(qualifierExpression)) {
             return true;
         }
 
@@ -88,11 +97,16 @@ public class SimpleDelegationsFilter implements Predicate<PsiMethod> {
         }
 
         PsiReferenceExpression referenceExpression = (PsiReferenceExpression) qualifierExpression;
+        if (!isTrivialQualifier(referenceExpression.getQualifierExpression())) {
+            return false;
+        }
+
         JavaResolveResult resolveResult = referenceExpression.advancedResolve(false);
 
         PsiElement element = resolveResult.getElement();
-
-        return element instanceof PsiClass || parameters.contains(element);
+        return element instanceof PsiClass ||
+                parameters.contains(element) ||
+                element instanceof PsiField;
     }
 
     private boolean isParameter(
@@ -107,5 +121,20 @@ public class SimpleDelegationsFilter implements Predicate<PsiMethod> {
         JavaResolveResult resolveResult = referenceExpression.advancedResolve(false);
 
         return parameters.contains(resolveResult.getElement());
+    }
+
+    private boolean isField(final @NotNull PsiExpression expression) {
+        if (!(expression instanceof PsiReferenceExpression)) {
+            return false;
+        }
+
+        PsiReferenceExpression referenceExpression = (PsiReferenceExpression) expression;
+        if (!isTrivialQualifier(referenceExpression.getQualifierExpression())) {
+            return false;
+        }
+
+        JavaResolveResult resolveResult = referenceExpression.advancedResolve(false);
+
+        return resolveResult.getElement() instanceof PsiField;
     }
 }

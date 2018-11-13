@@ -21,7 +21,8 @@ public class MethodUtils {
     public static boolean isConstExpression(final @NotNull PsiExpression expression) {
         return expression instanceof PsiLiteralExpression ||
                expression instanceof PsiThisExpression ||
-               expression instanceof PsiClassObjectAccessExpression;
+               expression instanceof PsiClassObjectAccessExpression ||
+               expression instanceof PsiMethodReferenceExpression;
     }
 
     public static @NotNull Optional<PsiStatement> getSingleStatementOf(
