@@ -55,7 +55,7 @@ public class TestsFilter implements Predicate<PsiClass> {
 
         while (directory != null) {
             String dirName = directory.getName().toLowerCase();
-            if (dirName.equals("test") || dirName.equals("tests")) {
+            if (dirName.equals("test") || dirName.equals("tests") || dirName.equals("jmh")) {
                 return false;
             }
 
