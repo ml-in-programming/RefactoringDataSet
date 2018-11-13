@@ -7,6 +7,7 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiJavaFile;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.JavaFileUtils.getDirectoryWithRootPackageFor;
@@ -51,7 +52,13 @@ public class TestsFilter implements Predicate<PsiClass> {
     }
 
     private boolean testFile(final @NotNull PsiJavaFile file) {
-        PsiDirectory directory = getDirectoryWithRootPackageFor(file);
+        Optional<PsiDirectory> optionalDirectory = getDirectoryWithRootPackageFor(file);
+
+        if (!optionalDirectory.isPresent()) {
+            return false;
+        }
+
+        PsiDirectory directory = optionalDirectory.get();
 
         while (directory != null) {
             String dirName = directory.getName().toLowerCase();

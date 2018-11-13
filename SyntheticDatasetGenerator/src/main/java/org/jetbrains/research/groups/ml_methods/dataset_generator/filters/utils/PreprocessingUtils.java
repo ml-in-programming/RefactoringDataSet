@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.exceptions.UnsupportedDirectoriesLayoutException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,8 @@ public class PreprocessingUtils {
 
         Set<PsiDirectory> javaDirectories = notSourceFiles.stream()
             .map(JavaFileUtils::getDirectoryWithRootPackageFor)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
             .collect(Collectors.toSet());
 
         for (PsiDirectory directory : javaDirectories) {
@@ -61,7 +64,6 @@ public class PreprocessingUtils {
                     break;
 
                 default:
-                    throw new UnsupportedDirectoriesLayoutException(directory);
             }
         }
     }

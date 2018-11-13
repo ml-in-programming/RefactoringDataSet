@@ -5,10 +5,12 @@ import com.intellij.psi.PsiJavaFile;
 import org.apache.commons.lang.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
+
 public class JavaFileUtils {
     private JavaFileUtils() {}
 
-    public static @NotNull PsiDirectory getDirectoryWithRootPackageFor(final @NotNull PsiJavaFile file) {
+    public static @NotNull Optional<PsiDirectory> getDirectoryWithRootPackageFor(final @NotNull PsiJavaFile file) {
         String packageName = file.getPackageName();
         String[] packageSequence;
 
@@ -27,15 +29,15 @@ public class JavaFileUtils {
 
         for (String packagePart : packageSequence) {
             if (!packagePart.equals(directory.getName())) {
-                throw new IllegalStateException("Directories structure doesn't match with package");
+                return Optional.empty();
             }
 
             directory = directory.getParentDirectory();
             if (directory == null) {
-                throw new IllegalStateException("Directories structure doesn't match with package");
+                return Optional.empty();
             }
         }
 
-        return directory;
+        return Optional.of(directory);
     }
 }
