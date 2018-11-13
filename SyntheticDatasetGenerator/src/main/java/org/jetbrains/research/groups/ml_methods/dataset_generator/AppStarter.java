@@ -12,10 +12,7 @@ import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodHandle
 import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodProcessor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.exceptions.UsagesConflictsException;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.AnnotationTypesFilter;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.InterfacesFilter;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.TestsFilter;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.TypeParametersFilter;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.*;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.methods.*;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.ExtractingUtils;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.exceptions.UnsupportedDirectoriesLayoutException;
@@ -102,6 +99,7 @@ public class AppStarter implements ApplicationStarter {
             .filter(new InterfacesFilter())
             .filter(new AnnotationTypesFilter())
             .filter(new TestsFilter())
+            .filter(new BuildersFilter())
             .collect(Collectors.toList());
 
         List<PsiMethod> methods = ExtractingUtils.extractMethods(classes);
