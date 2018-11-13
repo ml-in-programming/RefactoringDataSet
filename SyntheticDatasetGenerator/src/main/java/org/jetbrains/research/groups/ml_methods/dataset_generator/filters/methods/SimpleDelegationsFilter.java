@@ -41,9 +41,11 @@ public class SimpleDelegationsFilter implements Predicate<PsiMethod> {
         if (expression instanceof PsiMethodCallExpression) {
             return testMethodCall((PsiMethodCallExpression) expression, parameters);
         } else if (expression instanceof PsiNewExpression) {
-            PsiNewExpression newExpression = (PsiNewExpression) expression;
+            return false;
 
-            return testArguments(newExpression.getArgumentList().getExpressions(), parameters);
+            // Part of alternative version with more detailed check
+            // PsiNewExpression newExpression = (PsiNewExpression) expression;
+            // return testArguments(newExpression.getArgumentList().getExpressions(), parameters);
         }
 
         return true;
@@ -56,11 +58,14 @@ public class SimpleDelegationsFilter implements Predicate<PsiMethod> {
         PsiExpression qualifierExpression =
             methodCall.getMethodExpression().getQualifierExpression();
 
-        if (!isSimpleQualifier(qualifierExpression, parameters)) {
+        return !isSimpleQualifier(qualifierExpression, parameters);
+        // Part of alternative version with more detailed check
+        /*if (!isSimpleQualifier(qualifierExpression, parameters)) {
             return true;
         }
 
         return testArguments(methodCall.getArgumentList().getExpressions(), parameters);
+        */
     }
 
     private boolean testArguments(
@@ -101,12 +106,17 @@ public class SimpleDelegationsFilter implements Predicate<PsiMethod> {
             return false;
         }
 
-        JavaResolveResult resolveResult = referenceExpression.advancedResolve(false);
+        return true;
+
+        // Part of alternative version with more detailed check
+        /*JavaResolveResult resolveResult = referenceExpression.advancedResolve(false);
 
         PsiElement element = resolveResult.getElement();
+
+        // todo: might be null. If class is String and it can't be resolved
         return element instanceof PsiClass ||
                 parameters.contains(element) ||
-                element instanceof PsiField;
+                element instanceof PsiField;*/
     }
 
     private boolean isParameter(
