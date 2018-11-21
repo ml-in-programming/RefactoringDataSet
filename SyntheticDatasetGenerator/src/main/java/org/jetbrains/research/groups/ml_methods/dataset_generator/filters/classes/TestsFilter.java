@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.JavaFileUtils.getDirectoryWithRootPackageFor;
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.JavaFileUtils.getDirectoryWithRootPackageFor;
 
 public class TestsFilter implements Predicate<PsiClass> {
     @Override

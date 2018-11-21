@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils.getSingleStatementOf;
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.MethodUtils.getSingleStatementOf;
 
 public class ExceptionsThrowersFilter implements Predicate<PsiMethod> {
     @Override

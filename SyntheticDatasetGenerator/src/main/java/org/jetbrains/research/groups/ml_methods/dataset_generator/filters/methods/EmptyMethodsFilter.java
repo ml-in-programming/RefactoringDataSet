@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;
 
-import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils.isConstExpression;
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.MethodUtils.isConstExpression;
 
 public class EmptyMethodsFilter implements Predicate<PsiMethod> {
     @Override

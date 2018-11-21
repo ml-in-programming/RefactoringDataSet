@@ -1,16 +1,15 @@
-package org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils;
+package org.jetbrains.research.groups.ml_methods.dataset_generator.utils;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
-import com.intellij.openapi.roots.TestSourcesFilter;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiJavaFile;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.exceptions.UnsupportedDirectoriesLayoutException;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.utils.exceptions.UnsupportedDirectoriesLayoutException;
 
 import java.util.List;
 import java.util.Optional;

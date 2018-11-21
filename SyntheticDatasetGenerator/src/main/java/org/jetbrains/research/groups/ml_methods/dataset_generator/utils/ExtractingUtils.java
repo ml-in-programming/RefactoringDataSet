@@ -1,4 +1,4 @@
-package org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils;
+package org.jetbrains.research.groups.ml_methods.dataset_generator.utils;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;

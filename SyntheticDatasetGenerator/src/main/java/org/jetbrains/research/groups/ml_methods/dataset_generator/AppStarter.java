@@ -14,17 +14,17 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.exceptions.UsagesConflictsException;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.*;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.methods.*;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.ExtractingUtils;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.exceptions.UnsupportedDirectoriesLayoutException;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.utils.ExtractingUtils;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.utils.exceptions.UnsupportedDirectoriesLayoutException;
 
 import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils.fullyQualifiedName;
-import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils.whoseGetter;
-import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils.whoseSetter;
-import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.PreprocessingUtils.addAllPossibleSourceRoots;
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.MethodUtils.fullyQualifiedName;
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.MethodUtils.whoseGetter;
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.MethodUtils.whoseSetter;
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.PreprocessingUtils.addAllPossibleSourceRoots;
 
 public class AppStarter implements ApplicationStarter {
     private String projectFolderPath = "";

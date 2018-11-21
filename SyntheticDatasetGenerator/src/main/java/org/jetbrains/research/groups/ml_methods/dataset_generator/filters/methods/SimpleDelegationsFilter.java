@@ -3,7 +3,6 @@ package org.jetbrains.research.groups.ml_methods.dataset_generator.filters.metho
 import com.intellij.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -11,8 +10,8 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils.getSingleStatementOf;
-import static org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils.MethodUtils.isConstExpression;
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.MethodUtils.getSingleStatementOf;
+import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.MethodUtils.isConstExpression;
 
 public class SimpleDelegationsFilter implements Predicate<PsiMethod> {
     @Override

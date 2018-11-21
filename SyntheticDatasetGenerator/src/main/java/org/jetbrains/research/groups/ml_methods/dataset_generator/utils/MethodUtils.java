@@ -1,4 +1,4 @@
-package org.jetbrains.research.groups.ml_methods.dataset_generator.filters.utils;
+package org.jetbrains.research.groups.ml_methods.dataset_generator.utils;
 
 import com.intellij.psi.*;
 import org.apache.log4j.ConsoleAppender;
