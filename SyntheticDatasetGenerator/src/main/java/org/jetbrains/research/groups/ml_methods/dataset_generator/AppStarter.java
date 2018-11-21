@@ -90,59 +90,15 @@ public class AppStarter implements ApplicationStarter {
     }
 
     private void doStuff(final @NotNull Project project) {
-        List<PsiJavaFile> allJavaFiles = ExtractingUtils.extractAllJavaFiles(project);
-        List<PsiJavaFile> sourceJavaFiles = ExtractingUtils.extractSourceJavaFiles(project);
+        ProjectInfo projectInfo = new ProjectInfo(project);
 
-        List<PsiClass> classes = ExtractingUtils.extractClasses(allJavaFiles)
-            .stream()
-            .filter(new TypeParametersFilter())
-            .filter(new InterfacesFilter())
-            .filter(new AnnotationTypesFilter())
-            .filter(new TestsFilter())
-            .filter(new BuildersFilter())
-            .collect(Collectors.toList());
+        System.out.println("Total number of java files: " + projectInfo.getAllJavaFiles().size());
+        System.out.println("Total number of source java files: " + projectInfo.getSourceJavaFiles().size());
+        System.out.println("Total number of classes: " + projectInfo.getClasses().size());
+        System.out.println("Total number of method: " + projectInfo.getMethods().size());
+        System.out.println("Number of methods after filtration: " + projectInfo.getFilteredMethods().size());
 
-        List<PsiMethod> methods = ExtractingUtils.extractMethods(classes);
-
-        Set<PsiClass> allInterestingClasses = new HashSet<>(classes);
-
-        System.out.println("Total number of java files: " + allJavaFiles.size());
-        System.out.println("Total number of source java files: " + sourceJavaFiles.size());
-        System.out.println("Total number of classes: " + classes.size());
-        System.out.println("Total number of method: " + methods.size());
-
-        Set<PsiField> fieldsWithGetter = new HashSet<>();
-        Set<PsiField> fieldsWithSetter = new HashSet<>();
-
-        methods.forEach(it -> {
-            if (!it.hasModifierProperty(PsiModifier.PUBLIC)) {
-                return;
-            }
-
-            whoseGetter(it).ifPresent(fieldsWithGetter::add);
-            whoseSetter(it).ifPresent(fieldsWithSetter::add);
-        });
-
-        List<PsiMethod> filteredMethods =
-            methods.stream()
-                .filter(new ConstructorsFilter())
-                .filter(new AbstractMethodsFilter())
-                .filter(new StaticMethodsFilter())
-                .filter(new GettersFilter())
-                .filter(new SettersFilter())
-                .filter(new NoTargetsMethodsFilter(allInterestingClasses))
-                .filter(new OverridingMethodsFilter())
-                .filter(new OverriddenMethodsFilter())
-                .filter(new PrivateMethodsCallersFilter())
-                .filter(new PrivateFieldAccessorsFilter(fieldsWithGetter, fieldsWithSetter))
-                .filter(new EmptyMethodsFilter())
-                .filter(new ExceptionsThrowersFilter())
-                .filter(new SimpleDelegationsFilter())
-                .collect(Collectors.toList());
-
-        System.out.println("Number of methods after filtration: " + filteredMethods.size());
-
-        filteredMethods.forEach(it -> {
+        projectInfo.getFilteredMethods().forEach(it -> {
             System.out.println(fullyQualifiedName(it));
             System.out.println(it.getText());
             System.out.println('\n');

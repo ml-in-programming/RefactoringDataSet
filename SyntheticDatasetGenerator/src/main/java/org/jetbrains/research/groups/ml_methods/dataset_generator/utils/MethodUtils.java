@@ -163,33 +163,6 @@ public class MethodUtils {
         return className + '.' + method.getName();
     }
 
-    public static @NotNull List<PsiClass> possibleTargets(
-        final @NotNull PsiMethod method,
-        final @NotNull Set<PsiClass> allInterestingClasses
-    ) {
-        List<PsiClass> targets = new ArrayList<>();
-
-        for (PsiParameter parameter : method.getParameterList().getParameters()) {
-            PsiType type = parameter.getType();
-            if (!(type instanceof PsiClassType)) {
-                continue;
-            }
-
-            PsiClassType classType = (PsiClassType) type;
-            PsiClass actualClass = classType.resolve();
-
-            if (
-                actualClass != null &&
-                allInterestingClasses.contains(actualClass) &&
-                !actualClass.equals(method.getContainingClass())
-            ) {
-                targets.add(actualClass);
-            }
-        }
-
-        return targets;
-    }
-
     private static @Nullable PsiField getReferencedField(
         final @NotNull PsiReferenceExpression referenceExpression
     ) {
