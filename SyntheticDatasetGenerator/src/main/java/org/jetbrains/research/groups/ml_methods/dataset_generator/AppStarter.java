@@ -16,8 +16,10 @@ import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classe
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.methods.*;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.utils.ExtractingUtils;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.utils.exceptions.UnsupportedDirectoriesLayoutException;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.writer.CsvWriter;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -80,7 +82,13 @@ public class AppStarter implements ApplicationStarter {
                 }
             });
 
-            application.runReadAction(() -> doStuff(project));
+            application.runReadAction(() -> {
+                try {
+                    doStuff(project);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         } catch (Throwable e) {
             System.out.println("Exception occurred: " + e);
             e.printStackTrace();
@@ -89,7 +97,7 @@ public class AppStarter implements ApplicationStarter {
         application.exit(true, true);
     }
 
-    private void doStuff(final @NotNull Project project) {
+    private void doStuff(final @NotNull Project project) throws IOException {
         ProjectInfo projectInfo = new ProjectInfo(project);
 
         System.out.println("Total number of java files: " + projectInfo.getAllJavaFiles().size());
@@ -103,6 +111,14 @@ public class AppStarter implements ApplicationStarter {
             System.out.println(it.getText());
             System.out.println('\n');
         });
+
+        try (CsvWriter csvWriter = new CsvWriter("/home/ivan/out.csv")) {
+            FeaturesExtractor extractor = new FeaturesExtractor(csvWriter, projectInfo);
+
+            for (PsiMethod method : projectInfo.getFilteredMethods()) {
+                extractor.extractFeatures(method);
+            }
+        }
 
 //        SmartPsiElementPointer<PsiMethod> method =
 //            methods.stream().filter(it -> it.getElement().getName().equals("aMethod")).findAny().get();

@@ -12,13 +12,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static java.nio.file.StandardOpenOption.CREATE;
 import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.MethodUtils.fullyQualifiedName;
 
 public class CsvWriter implements Closeable {
     private final @NotNull CSVPrinter csvPrinter;
 
     public CsvWriter(final @NotNull String pathToFile) throws IOException {
-        BufferedWriter writer = Files.newBufferedWriter(Paths.get(pathToFile));
+        BufferedWriter writer = Files.newBufferedWriter(Paths.get(pathToFile), CREATE);
 
         try {
             csvPrinter = new CSVPrinter(
