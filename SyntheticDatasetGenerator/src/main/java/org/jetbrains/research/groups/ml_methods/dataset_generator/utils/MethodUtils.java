@@ -186,4 +186,38 @@ public class MethodUtils {
 
         return (PsiField) referencedElement;
     }
+
+    public static @NotNull Optional<PsiField> referencedNonPublicField(
+        final @NotNull PsiReferenceExpression expression
+    ) {
+        JavaResolveResult resolveResult = expression.advancedResolve(false);
+        PsiElement referencedElement = resolveResult.getElement();
+        if (referencedElement == null) {
+            return Optional.empty();
+        }
+
+        if (!(referencedElement instanceof PsiField)) {
+            return Optional.empty();
+        }
+
+        PsiField field = (PsiField) referencedElement;
+
+        if (field.hasModifierProperty(PsiModifier.PUBLIC)) {
+            return Optional.empty();
+        }
+
+        return Optional.of(field);
+    }
+
+    public static boolean isInLeftSideOfAssignment(
+        final @NotNull PsiReferenceExpression expression
+    ) {
+        PsiElement parent = expression.getParent();
+        if (!(parent instanceof PsiAssignmentExpression)) {
+            return false;
+        }
+
+        PsiAssignmentExpression assignment = (PsiAssignmentExpression) parent;
+        return expression.equals(assignment.getLExpression());
+    }
 }

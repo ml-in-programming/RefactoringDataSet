@@ -5,18 +5,17 @@ import com.intellij.ide.impl.ProjectUtil;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ApplicationStarter;
 import com.intellij.openapi.application.ex.ApplicationEx;
+import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.*;
 import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodHandler;
 import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodProcessor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.exceptions.UsagesConflictsException;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.classes.*;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.methods.*;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.utils.ExtractingUtils;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.rewriter.MethodRewriter;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.utils.exceptions.UnsupportedDirectoriesLayoutException;
-import org.jetbrains.research.groups.ml_methods.dataset_generator.writer.CsvWriter;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,8 +23,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.MethodUtils.fullyQualifiedName;
-import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.MethodUtils.whoseGetter;
-import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.MethodUtils.whoseSetter;
 import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.PreprocessingUtils.addAllPossibleSourceRoots;
 
 public class AppStarter implements ApplicationStarter {
@@ -82,13 +79,7 @@ public class AppStarter implements ApplicationStarter {
                 }
             });
 
-            application.runReadAction(() -> {
-                try {
-                    doStuff(project);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+            doStuff(project);
         } catch (Throwable e) {
             System.out.println("Exception occurred: " + e);
             e.printStackTrace();
@@ -98,27 +89,38 @@ public class AppStarter implements ApplicationStarter {
     }
 
     private void doStuff(final @NotNull Project project) throws IOException {
-        ProjectInfo projectInfo = new ProjectInfo(project);
+        ProjectInfo projectInfo = ApplicationManager.getApplication().runReadAction(
+            (Computable<ProjectInfo>) () -> {
+                ProjectInfo info = new ProjectInfo(project);
 
-        System.out.println("Total number of java files: " + projectInfo.getAllJavaFiles().size());
-        System.out.println("Total number of source java files: " + projectInfo.getSourceJavaFiles().size());
-        System.out.println("Total number of classes: " + projectInfo.getClasses().size());
-        System.out.println("Total number of method: " + projectInfo.getMethods().size());
-        System.out.println("Number of methods after filtration: " + projectInfo.getFilteredMethods().size());
+                System.out.println("Total number of java files: " + info.getAllJavaFiles().size());
+                System.out.println("Total number of source java files: " + info.getSourceJavaFiles().size());
+                System.out.println("Total number of classes: " + info.getClasses().size());
+                System.out.println("Total number of method: " + info.getMethods().size());
+                System.out.println("Number of methods after filtration: " + info.getMethodsAfterFiltration().size());
 
-        projectInfo.getFilteredMethods().forEach(it -> {
-            System.out.println(fullyQualifiedName(it));
-            System.out.println(it.getText());
-            System.out.println('\n');
+                return info;
+            }
+        );
+
+        MethodRewriter rewriter = new MethodRewriter(projectInfo);
+        projectInfo.getMethodsAfterFiltration().forEach(it -> {
+            WriteCommandAction.runWriteCommandAction(project, () -> rewriter.rewrite(it));
+
+            ApplicationManager.getApplication().runReadAction(() -> {
+                System.out.println(fullyQualifiedName(it));
+                System.out.println(it.getText());
+                System.out.println('\n');
+            });
         });
 
-        try (CsvWriter csvWriter = new CsvWriter("/home/ivan/out.csv")) {
-            FeaturesExtractor extractor = new FeaturesExtractor(csvWriter, projectInfo);
-
-            for (PsiMethod method : projectInfo.getFilteredMethods()) {
-                extractor.extractFeatures(method);
-            }
-        }
+//        try (CsvWriter csvWriter = new CsvWriter("/home/ivan/out.csv")) {
+//            FeaturesExtractor extractor = new FeaturesExtractor(csvWriter, projectInfo);
+//
+//            for (PsiMethod method : projectInfo.getMethodsAfterFiltration()) {
+//                extractor.extractFeatures(method);
+//            }
+//        }
 
 //        SmartPsiElementPointer<PsiMethod> method =
 //            methods.stream().filter(it -> it.getElement().getName().equals("aMethod")).findAny().get();
