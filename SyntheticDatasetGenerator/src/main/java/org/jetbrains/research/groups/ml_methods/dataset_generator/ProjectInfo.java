@@ -63,19 +63,19 @@ public class ProjectInfo {
 
         methodsAfterFiltration =
             methods.stream()
-//                .filter(new ConstructorsFilter())
-//                .filter(new AbstractMethodsFilter())
-//                .filter(new StaticMethodsFilter())
+                .filter(new ConstructorsFilter())
+                .filter(new AbstractMethodsFilter())
+                .filter(new StaticMethodsFilter())
                 .filter(new GettersFilter())
                 .filter(new SettersFilter())
-//                .filter(new NoTargetsMethodsFilter(this))
-//                .filter(new OverridingMethodsFilter())
-//                .filter(new OverriddenMethodsFilter())
-//                .filter(new PrivateMethodsCallersFilter())
+                .filter(new NoTargetsMethodsFilter(this))
+                .filter(new OverridingMethodsFilter())
+                .filter(new OverriddenMethodsFilter())
+                .filter(new PrivateMethodsCallersFilter())
                 .filter(new PrivateFieldAccessorsFilter(this))
-//                .filter(new EmptyMethodsFilter())
-//                .filter(new ExceptionsThrowersFilter())
-//                .filter(new SimpleDelegationsFilter())
+                .filter(new EmptyMethodsFilter())
+                .filter(new ExceptionsThrowersFilter())
+                .filter(new SimpleDelegationsFilter())
                 .collect(Collectors.toList());
     }
 

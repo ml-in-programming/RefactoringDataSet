@@ -17,7 +17,7 @@ task runConsole(dependsOn: runIde) {}
 
 gradle.taskGraph.whenReady { graph ->
     if (graph.hasTask(runConsole)) {
-        runIde.args 'generate-dataset', "$projectFolder"
+        runIde.args 'generate-dataset', "$projectFolder", "$outputDir"
         runIde.jvmArgs '-Djava.awt.headless=true'
     }
 }
@@ -26,4 +26,6 @@ dependencies {
     compile 'org.slf4j:slf4j-log4j12:1.7.7'
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
     compile group: 'org.apache.commons', name: 'commons-csv', version: '1.6'
+
+    compile files('lib/JavaExtractor-0.0.1-SNAPSHOT.jar')
 }

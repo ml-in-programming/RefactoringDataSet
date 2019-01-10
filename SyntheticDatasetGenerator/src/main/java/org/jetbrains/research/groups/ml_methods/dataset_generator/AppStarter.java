@@ -8,6 +8,7 @@ import com.intellij.openapi.application.ex.ApplicationEx;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Computable;
+import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.*;
 import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodHandler;
@@ -19,6 +20,8 @@ import org.jetbrains.research.groups.ml_methods.dataset_generator.utils.exceptio
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -28,6 +31,8 @@ import static org.jetbrains.research.groups.ml_methods.dataset_generator.utils.P
 public class AppStarter implements ApplicationStarter {
     private String projectFolderPath = "";
 
+    private Path outputDir;
+
     @Override
     public String getCommandName() {
         return "generate-dataset";
@@ -35,13 +40,16 @@ public class AppStarter implements ApplicationStarter {
 
     @Override
     public void premain(String[] args) {
-        if (args == null || args.length != 2) {
+        if (args == null || args.length != 3) {
             System.err.println("Invalid number of arguments!");
             System.exit(1);
             return;
         }
 
         projectFolderPath = new File(args[1]).getAbsolutePath().replace(File.separatorChar, '/');
+
+        Path tmp = Paths.get(projectFolderPath);
+        outputDir = Paths.get(args[2]).resolve(tmp.getName(tmp.getNameCount() - 1));
     }
 
     @Override
@@ -79,7 +87,7 @@ public class AppStarter implements ApplicationStarter {
                 }
             });
 
-            doStuff(project);
+            doStuff(project, outputDir);
         } catch (Throwable e) {
             System.out.println("Exception occurred: " + e);
             e.printStackTrace();
@@ -88,7 +96,8 @@ public class AppStarter implements ApplicationStarter {
         application.exit(true, true);
     }
 
-    private void doStuff(final @NotNull Project project) throws IOException {
+    private void doStuff(final @NotNull Project project, final @NotNull Path outputDir) throws Exception {
+        final Ref<Exception> exceptionRef = new Ref<>(null);
         ProjectInfo projectInfo = ApplicationManager.getApplication().runReadAction(
             (Computable<ProjectInfo>) () -> {
                 ProjectInfo info = new ProjectInfo(project);
@@ -96,23 +105,33 @@ public class AppStarter implements ApplicationStarter {
                 System.out.println("Total number of java files: " + info.getAllJavaFiles().size());
                 System.out.println("Total number of source java files: " + info.getSourceJavaFiles().size());
                 System.out.println("Total number of classes: " + info.getClasses().size());
-                System.out.println("Total number of method: " + info.getMethods().size());
+                System.out.println("Total number of methods: " + info.getMethods().size());
                 System.out.println("Number of methods after filtration: " + info.getMethodsAfterFiltration().size());
+
+                try {
+                    new PathContextExtractor(info).extract(outputDir);
+                } catch (Exception e) {
+                    exceptionRef.set(e);
+                }
 
                 return info;
             }
         );
 
-        MethodRewriter rewriter = new MethodRewriter(projectInfo);
+        if (!exceptionRef.isNull()) {
+            throw exceptionRef.get();
+        }
+
+        /*MethodRewriter rewriter = new MethodRewriter(projectInfo);
         projectInfo.getMethodsAfterFiltration().forEach(it -> {
-            WriteCommandAction.runWriteCommandAction(project, () -> rewriter.rewrite(it));
+            // WriteCommandAction.runWriteCommandAction(project, () -> rewriter.rewrite(it));
 
             ApplicationManager.getApplication().runReadAction(() -> {
                 System.out.println(fullyQualifiedName(it));
                 System.out.println(it.getText());
                 System.out.println('\n');
             });
-        });
+        });*/
 
 //        try (CsvWriter csvWriter = new CsvWriter("/home/ivan/out.csv")) {
 //            FeaturesExtractor extractor = new FeaturesExtractor(csvWriter, projectInfo);
