@@ -13,10 +13,10 @@ intellij {
 
 apply plugin: 'idea'
 
-task runConsole(dependsOn: runIde) {}
+task runDatasetGeneration(dependsOn: runIde) {}
 
 gradle.taskGraph.whenReady { graph ->
-    if (graph.hasTask(runConsole)) {
+    if (graph.hasTask(runDatasetGeneration)) {
         runIde.args 'generate-dataset', "$projectFolder", "$outputDir"
         runIde.jvmArgs '-Djava.awt.headless=true'
     }
