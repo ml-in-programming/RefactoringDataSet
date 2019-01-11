@@ -77,6 +77,7 @@ public class ProjectInfo {
                 .filter(new EmptyMethodsFilter())
                 .filter(new ExceptionsThrowersFilter())
                 .filter(new SimpleDelegationsFilter())
+                .filter(new SingleMethodFilter())
                 .collect(Collectors.toList());
     }
 
