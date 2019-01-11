@@ -13,6 +13,9 @@ import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.*;
 import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodHandler;
 import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodProcessor;
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.exceptions.UsagesConflictsException;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.rewriter.MethodRewriter;
@@ -32,6 +35,8 @@ public class AppStarter implements ApplicationStarter {
     private String projectFolderPath = "";
 
     private Path outputDir;
+
+    private static final @NotNull Logger log = Logger.getLogger(AppStarter.class);
 
     @Override
     public String getCommandName() {
@@ -54,6 +59,14 @@ public class AppStarter implements ApplicationStarter {
 
     @Override
     public void main(String[] args) {
+        String logFileName = outputDir.resolve("log").toString();
+
+        try {
+            log.addAppender(new FileAppender(new PatternLayout("%d [%p] %m%n"), logFileName));
+        } catch (IOException e) {
+            System.err.println("Failed to open log file: " + logFileName);
+        }
+
         ApplicationEx application = (ApplicationEx) ApplicationManager.getApplication();
 
         try {
@@ -65,7 +78,7 @@ public class AppStarter implements ApplicationStarter {
             );
 
             if (project == null) {
-                System.out.println("Unable to open project: " + projectFolderPath);
+                log.error("Unable to open project: " + projectFolderPath);
                 System.exit(1);
                 return;
             }
@@ -77,7 +90,7 @@ public class AppStarter implements ApplicationStarter {
 
             PatchProjectUtil.patchProject(project);
 
-            System.out.println("Project " + projectFolderPath + " is opened");
+            log.info("Project " + projectFolderPath + " is opened");
 
             application.runWriteAction(() -> {
                 try {
@@ -89,8 +102,10 @@ public class AppStarter implements ApplicationStarter {
 
             doStuff(project, outputDir);
         } catch (Throwable e) {
-            System.out.println("Exception occurred: " + e);
-            e.printStackTrace();
+            log.error("Exception occurred: " + e.getMessage() + " [" + e + "]");
+            for (StackTraceElement element : e.getStackTrace()) {
+                log.error(element);
+            }
         }
 
         application.exit(true, true);
@@ -102,11 +117,11 @@ public class AppStarter implements ApplicationStarter {
             (Computable<ProjectInfo>) () -> {
                 ProjectInfo info = new ProjectInfo(project);
 
-                System.out.println("Total number of java files: " + info.getAllJavaFiles().size());
-                System.out.println("Total number of source java files: " + info.getSourceJavaFiles().size());
-                System.out.println("Total number of classes: " + info.getClasses().size());
-                System.out.println("Total number of methods: " + info.getMethods().size());
-                System.out.println("Number of methods after filtration: " + info.getMethodsAfterFiltration().size());
+                log.info("Total number of java files: " + info.getAllJavaFiles().size());
+                log.info("Total number of source java files: " + info.getSourceJavaFiles().size());
+                log.info("Total number of classes: " + info.getClasses().size());
+                log.info("Total number of methods: " + info.getMethods().size());
+                log.info("Number of methods after filtration: " + info.getMethodsAfterFiltration().size());
 
                 try {
                     new PathContextExtractor(info).extract(outputDir);
