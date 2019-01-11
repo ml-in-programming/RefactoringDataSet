@@ -6,6 +6,7 @@ import JavaExtractor.ExtractFeaturesTask;
 import JavaExtractor.FeaturesEntities.ProgramFeatures;
 import com.github.javaparser.ParseException;
 import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMember;
 import com.intellij.psi.PsiMethod;
 import org.apache.commons.csv.CSVFormat;
@@ -18,6 +19,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -92,7 +94,9 @@ public class PathContextExtractor {
                     csvPrinter.printRecord(
                         methodId,
                         MethodUtils.fullyQualifiedName(method),
-                        pathContext
+                        pathContext,
+                        getPathToContainingFile(method),
+                        method.getNode().getStartOffset()
                     );
 
                     idOfMethod.put(method, methodId);
@@ -124,7 +128,9 @@ public class PathContextExtractor {
                 csvPrinter.printRecord(
                     classId,
                     clazz.getQualifiedName(),
-                    idsOfMethods.stream().map(Object::toString).collect(Collectors.joining(" "))
+                    idsOfMethods.stream().map(Object::toString).collect(Collectors.joining(" ")),
+                    getPathToContainingFile(clazz),
+                    clazz.getNode().getStartOffset()
                 );
 
                 idOfClass.put(clazz, classId);
@@ -162,5 +168,11 @@ public class PathContextExtractor {
         return Common.splitToSubtokens(method.getName())
             .stream()
             .collect(Collectors.joining(Common.internalSeparator));
+    }
+
+    private @NotNull Path getPathToContainingFile(final @NotNull PsiElement element) {
+        return Paths.get(projectInfo.getProject().getBasePath()).relativize(
+            Paths.get(element.getContainingFile().getVirtualFile().getCanonicalPath())
+        );
     }
 }
