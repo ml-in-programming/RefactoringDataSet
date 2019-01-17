@@ -74,7 +74,7 @@ public class PathContextExtractor {
 
                 String pathContext = extractTask.featuresToString(methodsContexts);
                 if (pathContext.isEmpty()) {
-                    throw new UnexpectedEmptyContext();
+                    throw new UnexpectedEmptyContext(MethodUtils.fullyQualifiedName(method));
                 }
 
                 csvPrinter.printRecord(
