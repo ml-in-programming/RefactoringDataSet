@@ -7,11 +7,11 @@ import JavaExtractor.FeaturesEntities.ProgramFeatures;
 import com.github.javaparser.ParseException;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiMember;
 import com.intellij.psi.PsiMethod;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.exceptions.UnexpectedEmptyContext;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.utils.MethodUtils;
 import org.kohsuke.args4j.CmdLineException;
 
@@ -20,9 +20,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
@@ -37,42 +37,25 @@ public class PathContextExtractor {
 
     private static final int MAX_PATH_WIDTH = 2;
 
-    final @NotNull ProjectInfo projectInfo;
+    final @NotNull Dataset dataset;
 
-    public PathContextExtractor(final @NotNull ProjectInfo projectInfo) {
-        this.projectInfo = projectInfo;
+    public PathContextExtractor(final @NotNull Dataset dataset) {
+        this.dataset = dataset;
     }
 
     public void extract(
         final @NotNull Path targetDir
-    ) throws IOException, ParseException, CmdLineException {
+    ) throws IOException, ParseException, CmdLineException, UnexpectedEmptyContext {
         targetDir.toFile().mkdirs();
-
-        Set<PsiClass> classes =
-            Stream.concat(
-                projectInfo.getMethodsAfterFiltration()
-                    .stream()
-                    .flatMap(it -> projectInfo.possibleTargets(it).stream()),
-                projectInfo.getMethodsAfterFiltration()
-                    .stream()
-                    .map(PsiMember::getContainingClass)
-            ).collect(Collectors.toSet());
-
-        Set<PsiMethod> methods =
-            classes.stream()
-                .flatMap(it -> Arrays.stream(it.getMethods()))
-                .collect(Collectors.toSet());
-
-        Map<PsiMethod, Integer> idOfMethod = new HashMap<>();
-
-        Map<PsiClass, Integer> idOfClass = new HashMap<>();
 
         try (
             BufferedWriter writer = Files.newBufferedWriter(targetDir.resolve(METHODS_FILE_NAME), CREATE_NEW);
             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.RFC4180)
         ) {
-            int methodId = 0;
-            for (PsiMethod method : methods) {
+            List<PsiMethod> methods = dataset.getMethods();
+            for (int methodId = 0; methodId < methods.size(); methodId++) {
+                PsiMethod method = methods.get(methodId);
+
                 CommandLineValues cmdValues = new CommandLineValues(
                     "--max_path_length", Integer.toString(MAX_PATH_LENGTH),
                     "--max_path_width", Integer.toString(MAX_PATH_WIDTH)
@@ -90,19 +73,17 @@ public class PathContextExtractor {
                 );
 
                 String pathContext = extractTask.featuresToString(methodsContexts);
-                if (!pathContext.isEmpty()) {
-                    csvPrinter.printRecord(
-                        methodId,
-                        MethodUtils.fullyQualifiedName(method),
-                        pathContext,
-                        getPathToContainingFile(method),
-                        method.getNode().getStartOffset()
-                    );
-
-                    idOfMethod.put(method, methodId);
-
-                    methodId++;
+                if (pathContext.isEmpty()) {
+                    throw new UnexpectedEmptyContext();
                 }
+
+                csvPrinter.printRecord(
+                    methodId,
+                    MethodUtils.fullyQualifiedName(method),
+                    pathContext,
+                    getPathToContainingFile(method),
+                    method.getNode().getStartOffset()
+                );
             }
         }
 
@@ -110,31 +91,17 @@ public class PathContextExtractor {
             BufferedWriter writer = Files.newBufferedWriter(targetDir.resolve(CLASSES_FILE_NAME), CREATE_NEW);
             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.RFC4180)
         ) {
-            int classId = 0;
-            for (PsiClass clazz : classes) {
-                List<Integer> idsOfMethods = new ArrayList<>();
-                for (PsiMethod method : clazz.getMethods()) {
-                    if (!idOfMethod.containsKey(method)) {
-                        continue;
-                    }
-
-                    idsOfMethods.add(idOfMethod.get(method));
-                }
-
-                if (idsOfMethods.isEmpty()) {
-                    continue;
-                }
+            List<PsiClass> classes = dataset.getClasses();
+            for (int classId = 0; classId < classes.size(); classId++) {
+                PsiClass clazz = classes.get(classId);
 
                 csvPrinter.printRecord(
                     classId,
                     clazz.getQualifiedName(),
-                    idsOfMethods.stream().map(Object::toString).collect(Collectors.joining(" ")),
+                    dataset.getIdsOfMethodsIn(clazz).stream().map(Object::toString).collect(Collectors.joining(" ")),
                     getPathToContainingFile(clazz),
                     clazz.getNode().getStartOffset()
                 );
-
-                idOfClass.put(clazz, classId);
-                classId++;
             }
         }
 
@@ -142,24 +109,12 @@ public class PathContextExtractor {
             BufferedWriter writer = Files.newBufferedWriter(targetDir.resolve(POINTS_FILE_NAME), CREATE_NEW);
             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.RFC4180)
         ) {
-            for (PsiMethod method : projectInfo.getMethodsAfterFiltration()) {
+            for (Dataset.Point point : dataset.getPoints()) {
                 csvPrinter.printRecord(
-                    idOfMethod.get(method),
-                    idOfClass.get(method.getContainingClass()),
-                    1
+                    point.getMethodId(),
+                    point.getClassId(),
+                    point.getLabel()
                 );
-
-                for (PsiClass target : projectInfo.possibleTargets(method)) {
-                    if (!idOfClass.containsKey(target)) {
-                        continue;
-                    }
-
-                    csvPrinter.printRecord(
-                        idOfMethod.get(method),
-                        idOfClass.get(target),
-                        0
-                    );
-                }
             }
         }
     }
@@ -171,7 +126,7 @@ public class PathContextExtractor {
     }
 
     private @NotNull Path getPathToContainingFile(final @NotNull PsiElement element) {
-        return Paths.get(projectInfo.getProject().getBasePath()).relativize(
+        return Paths.get(element.getProject().getBasePath()).relativize(
             Paths.get(element.getContainingFile().getVirtualFile().getCanonicalPath())
         );
     }

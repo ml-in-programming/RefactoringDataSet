@@ -124,7 +124,7 @@ public class AppStarter implements ApplicationStarter {
                 log.info("Number of methods after filtration: " + info.getMethodsAfterFiltration().size());
 
                 try {
-                    new PathContextExtractor(info).extract(outputDir);
+                    new PathContextExtractor(new Dataset(info)).extract(outputDir);
                 } catch (Exception e) {
                     exceptionRef.set(e);
                 }
