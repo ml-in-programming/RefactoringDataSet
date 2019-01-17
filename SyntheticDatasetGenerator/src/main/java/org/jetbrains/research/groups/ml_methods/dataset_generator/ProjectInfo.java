@@ -121,8 +121,8 @@ public class ProjectInfo {
         return fieldToSetter;
     }
 
-    public @NotNull List<PsiClass> possibleTargets(final @NotNull PsiMethod method) {
-        List<PsiClass> targets = new ArrayList<>();
+    public @NotNull Set<PsiClass> possibleTargets(final @NotNull PsiMethod method) {
+        Set<PsiClass> targets = new HashSet<>();
 
         for (PsiParameter parameter : method.getParameterList().getParameters()) {
             PsiType type = parameter.getType();
