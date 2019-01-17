@@ -4,6 +4,7 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiMember;
 import com.intellij.psi.PsiMethod;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.methods.ConstructorsFilter;
 import org.jetbrains.research.groups.ml_methods.dataset_generator.filters.methods.EmptyMethodsFilter;
 
 import java.util.*;
@@ -38,6 +39,7 @@ public class Dataset {
             allClasses.stream()
                 .flatMap(it -> Arrays.stream(it.getMethods()))
                 .filter(new EmptyMethodsFilter())
+                .filter(new ConstructorsFilter())
                 .collect(Collectors.toSet());
 
         Map<PsiClass, Integer> idOfClass = new HashMap<>();
